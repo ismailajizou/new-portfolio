@@ -1,37 +1,68 @@
-import Link from "next/link";
+import Navbar from "@/components/navigation/navbar";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { Button } from "@/components/ui/button";
+import ParticlesBg from "@/components/ui/particles-bg";
+import TextRevealByWord from "@/components/ui/text-reveal";
+import WordRotate from "@/components/ui/word-rotate";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
+    <div>
+      <Navbar />
+
+      <section className="relative">
+        <ParticlesBg />
+        <div className="container relative my-6 flex flex-col-reverse items-center justify-between gap-8 py-10 md:flex-row md:py-24 lg:py-32">
+          <div className="relative space-y-4 text-center md:text-left">
+            <p className="text-xl">Hi 👋, I&apos;m</p>
+            <p className="bg-gradient-to-r from-sky-500 via-blue-700 to-purple-500 bg-clip-text text-7xl font-bold tracking-widest text-transparent">
+              Ismail AJIZOU
+            </p>
+            <p className="text-lg md:text-xl">
+              A passionate software Developer with an interest in
+            </p>
+            {/* <p className="text-2xl font-semibold">Full Stack Developer</p> */}
+            <WordRotate
+              className="text-2xl font-semibold"
+              words={[
+                "Full Stack Development",
+                "Frontend Development",
+                "Backend Development",
+              ]}
+            />
+            <div className="flex justify-center gap-4 md:justify-start">
+              <Button className="min-w-48">Get in touch</Button>
+              <Button className="min-w-48" variant={"secondary"}>
+                Resume
+              </Button>
             </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+          </div>
+          <div className="relative h-60 w-60 overflow-hidden rounded-full md:h-96 md:w-96">
+            <BorderBeam borderWidth={3} />
+
+            <Image
+              src="/assets/hero.JPG"
+              className="h-full w-full object-cover"
+              width={500}
+              height={500}
+              alt="Hero"
+              priority
+            />
+          </div>
         </div>
-      </div>
-    </main>
+      </section>
+
+      <section className="container relative my-6 py-10 md:py-24 lg:py-32">
+        <TextRevealByWord
+          className="text-center"
+          text="I am a passionate software developer with an interest in Full Stack
+            Development. I have experience in building web applications using
+            modern technologies like React, Next.js, and Node.js. I am also
+            familiar with the agile methodology and have experience working in
+            teams."
+        />
+      </section>
+    </div>
   );
 }
