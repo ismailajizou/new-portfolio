@@ -8,7 +8,7 @@ import {
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import { Button } from "../ui/button";
-import { HomeIcon, SquareUserIcon, SquareUserRoundIcon } from "lucide-react";
+import { FileStackIcon, HomeIcon, MessagesSquareIcon, MousePointer2Icon, SquareUserIcon, SquareUserRoundIcon } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -21,9 +21,9 @@ export default function Navbar() {
           {[
             { label: "Home", href: "/docs", icon: HomeIcon },
             { label: "About", href: "/blog", icon: SquareUserIcon },
-            { label: "Projects", href: "/community", icon: SquareUserIcon },
-            { label: "Testemonials", href: "/community", icon: SquareUserIcon },
-            { label: "Contact", href: "/community", icon: SquareUserIcon },
+            { label: "Projects", href: "/community", icon: FileStackIcon },
+            { label: "Testemonials", href: "/community", icon: MessagesSquareIcon },
+            { label: "Contact", href: "/community", icon: MousePointer2Icon },
           ].map((item) => (
             <NavigationMenuItem key={item.label}>
               <Link href={item.href} passHref legacyBehavior>

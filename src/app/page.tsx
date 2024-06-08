@@ -56,11 +56,10 @@ export default function HomePage() {
       <section className="container relative my-6 py-10 md:py-24 lg:py-32">
         <TextRevealByWord
           className="text-center"
-          text="I am a passionate software developer with an interest in Full Stack
-            Development. I have experience in building web applications using
-            modern technologies like React, Next.js, and Node.js. I am also
-            familiar with the agile methodology and have experience working in
-            teams."
+          text="Hey there! I'm Ismail Ajizou, a Full Stack Developer hailing from Morocco . 
+          My coding journey began at the age of 15, and I've been hooked ever since! With over 5 years of experience, I've mastered JavaScript, React.js, and web development.
+          My career has taken me to exciting roles, where I've dived deep into several technologies, and enjoyed mentoring some awesome teams. 
+          I thrive on innovation, collaboration, and the occasional cup of strong Moroccan tea."
         />
       </section>
     </div>

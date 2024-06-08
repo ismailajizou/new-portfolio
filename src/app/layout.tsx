@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="dark">{children}</body>
+      <body className="dark scroll-smooth">{children}</body>
     </html>
   );
 }
