@@ -1,7 +1,8 @@
 import Navbar from "@/components/navigation/navbar";
+import Timeline from "@/components/timeline";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
-import ParticlesBg from "@/components/ui/particles-bg";
+// import ParticlesBg from "@/components/ui/particles-bg";
 import TextRevealByWord from "@/components/ui/text-reveal";
 import WordRotate from "@/components/ui/word-rotate";
 import Image from "next/image";
@@ -12,7 +13,7 @@ export default function HomePage() {
       <Navbar />
 
       <section className="relative">
-        <ParticlesBg />
+        {/* <ParticlesBg /> */}
         <div className="container relative my-6 flex flex-col-reverse items-center justify-between gap-8 py-10 md:flex-row md:py-24 lg:py-32">
           <div className="relative space-y-4 text-center md:text-left">
             <p className="text-xl">Hi 👋, I&apos;m</p>
@@ -60,6 +61,30 @@ export default function HomePage() {
           My coding journey began at the age of 15, and I've been hooked ever since! With over 5 years of experience, I've mastered JavaScript, React.js, and web development.
           My career has taken me to exciting roles, where I've dived deep into several technologies, and enjoyed mentoring some awesome teams. 
           I thrive on innovation, collaboration, and the occasional cup of strong Moroccan tea."
+        />
+      </section>
+      <section className="container relative my-6 py-10 md:py-24 lg:py-32">
+        <Timeline
+          items={[
+            {
+              title: "Started Coding",
+              date: "2015",
+              description:
+                "I started coding at the age of 15, and I've been hooked ever since!",
+            },
+            {
+              title: "CS Degree",
+              date: "2022",
+              description:
+                "I graduated from the University of Morocco with a degree in Computer Science.",
+            },
+            {
+              title: "Full Stack Developer - Intern",
+              date: "2022",
+              description:
+                "I graduated from high school and started my journey as a developer.",
+            },
+          ]}
         />
       </section>
     </div>
