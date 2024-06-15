@@ -1,6 +1,5 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
 import {
   Cloud,
@@ -80,7 +79,7 @@ export default function IconCloud({ iconSlugs }: DynamicCloudProps) {
   }, [data]);
 
   return (
-    // @ts-ignore
+    // @ts-expect-error - `children` is required
     <Cloud {...cloudProps}>
       <>{renderedIcons}</>
     </Cloud>
