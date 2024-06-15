@@ -7,6 +7,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import Image from "next/image";
 import { type FC, type ReactNode, useRef } from "react";
 
 interface TextRevealByWordProps {
@@ -14,7 +15,7 @@ interface TextRevealByWordProps {
   className?: string;
 }
 
-export const TextRevealByWord: FC<TextRevealByWordProps> = ({
+export const RevealSection: FC<TextRevealByWordProps> = ({
   text,
   className,
 }) => {
@@ -25,17 +26,38 @@ export const TextRevealByWord: FC<TextRevealByWordProps> = ({
   });
   const words = text.split(" ");
 
+  const grayscale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["grayscale(100%)", "grayscale(0%)"],
+  );
+
   return (
     <div ref={targetRef} className={cn("relative z-0 h-[200vh]", className)}>
       <div
         className={
-          "sticky top-0 mx-auto flex h-[50%] max-w-6xl items-center bg-transparent px-[1rem] py-[5rem]"
+          "sticky top-0 mx-auto grid md:grid-cols-3 justify-items-center md:justify-items-start h-[50%] w-full items-center justify-center gap-4 bg-transparent px-[1rem] py-[5rem]"
         }
       >
+        <motion.div
+          className="relative h-60 w-60 overflow-hidden rounded-full md:h-96 md:w-96"
+          style={{
+            filter: grayscale,
+          }}
+        >
+          <Image
+            src="/assets/hero.JPG"
+            className="h-full w-full object-cover"
+            width={900}
+            height={900}
+            alt="Hero"
+            priority
+          />
+        </motion.div>
+
         <p
-          ref={targetRef}
           className={
-            "flex flex-wrap p-5 text-center text-2xl font-bold text-black/20 dark:text-white/20 md:p-8 md:text-3xl lg:p-10 lg:text-4xl xl:text-5xl"
+            "flex flex-wrap p-5 text-center justify-center md:justify-start md:col-span-2 text-lg font-bold text-black/20 dark:text-white/20 md:p-8 md:text-xl lg:p-10 lg:text-2xl xl:text-2xl"
           }
         >
           {words.map((word, i) => {
@@ -62,7 +84,7 @@ interface WordProps {
 const Word: FC<WordProps> = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1]);
   return (
-    <span className="xl:lg-3 relative mx-1 lg:mx-2.5">
+    <span className="relative mx-1 lg:mx-2.5">
       <span className={"absolute opacity-30"}>{children}</span>
       <motion.span
         style={{ opacity: opacity }}
@@ -74,4 +96,4 @@ const Word: FC<WordProps> = ({ children, progress, range }) => {
   );
 };
 
-export default TextRevealByWord;
+export default RevealSection;

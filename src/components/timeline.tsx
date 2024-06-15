@@ -31,7 +31,6 @@ export default function Timeline({ items }: TimelineProps) {
     scrollYProgress,
     [0, 0.2, 0.4, 0.6, 0.8, 1],
     [
-      // give me 6 colors from blue to purple in hex
       "#3b82f6",
       "#6366f1",
       "#8b5cf6",
@@ -41,7 +40,7 @@ export default function Timeline({ items }: TimelineProps) {
     ],
   );
   return (
-    <div ref={targetRef} className="relative h-[300vh]">
+    <div ref={targetRef} className="relative h-[200vh]">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex gap-36">
           {items.map((item, i) => {
@@ -66,7 +65,7 @@ export default function Timeline({ items }: TimelineProps) {
 
         {/* // add a timeline line */}
         <motion.div
-          className="absolute left-0 top-[calc(50%+10rem)] h-1"
+          className="absolute left-0 top-[calc(50%+2rem)] h-1"
           style={{ width: lineWidth, backgroundColor: lineColor }}
         />
       </div>
@@ -84,17 +83,17 @@ export const TimelineEvent = ({
   className?: string;
   scrollYProgress: MotionValue<number>;
 }) => {
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   return (
     <motion.div
       style={{ opacity }}
-      className={cn("flex w-96 flex-col justify-stretch gap-8", className)}
+      className={cn("flex w-96 flex-col justify-stretch gap-24", className)}
     >
       <div className="rounded-md bg-blue-900 px-6 py-4 text-center">
-        <h4 className="text-lg font-bold">{title}</h4>
-        <p className="text-sm">{description}</p>
+        <h4 className="text-xl font-bold">{title}</h4>
+        <p className="text-md">{description}</p>
       </div>
-      <p className="text-center text-sm">{date}</p>
+      <p className="text-center text-3xl font-bold">{date}</p>
     </motion.div>
   );
 };
