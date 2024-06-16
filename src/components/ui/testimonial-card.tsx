@@ -1,4 +1,13 @@
 import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./card";
+
+import { QuoteIcon } from "lucide-react";
 
 interface Testimonial {
   name: string;
@@ -10,26 +19,30 @@ interface Testimonial {
 
 export default function TestimonialCard({}: Testimonial) {
   return (
-    <div className="max-w-sm rounded-lg bg-primary p-6 text-secondary shadow-lg">
-      <div className="flex items-center">
-        <Image
-          src="/assets/hero.JPG"
-          alt="Hero"
-          width={48}
-          height={48}
-          className="h-12 w-12 rounded-full"
-        />
-        <div className="ml-4">
-          <h4 className="text-lg font-bold">John Doe</h4>
-          <p className="">CEO, Company</p>
+    <Card className="relative max-w-sm backdrop-blur-[2px] bg-gray-800/10">
+      <QuoteIcon className="absolute right-4 top-4 transform text-gray-500" />
+
+      <CardHeader className="flex flex-row items-center gap-4">
+        <div>
+          <Image
+            src="/assets/hero.JPG"
+            alt="Hero"
+            width={48}
+            height={48}
+            className="h-12 w-12 rounded-full object-cover"
+          />
         </div>
-      </div>
-      <p className="mt-4 text-muted">
+        <div>
+          <CardTitle>John Doe</CardTitle>
+          <CardDescription>CEO, Company</CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent>
         <blockquote>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
           tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
         </blockquote>
-      </p>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
