@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-// import { useForm } from "react-hook-form";
-// import { zodResolver } from "@hookform/resolvers/zod";
+import { useCallback, useEffect, useState } from "react";
 import { z } from "zod";
+import { motion } from "framer-motion";
+type InferAsTuple = [unknown, ...unknown[]]
 const STEPS = [
   {
     prompt: "What is your name ?",
@@ -25,7 +25,7 @@ const STEPS = [
     input: "confirm",
     validator: z.boolean(),
   },
-];
+] satisfies InferAsTuple;
 
 const FIELDS = {
   name: 0,
@@ -48,9 +48,11 @@ type Line = {
 
 const ContactTerminal = () => {
   // this is a terminal like contact form
+  const [input, setInput] = useState<string>("");
+  const [cursor, setCursor] = useState<number>(0);
   const [lines, setLines] = useState<Line[]>([
     {
-      text: STEPS[0]!.prompt,
+      text: STEPS[0].prompt,
       level: "prompt",
     },
   ]);
@@ -60,8 +62,7 @@ const ContactTerminal = () => {
     email: "",
     message: "",
   });
-
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (step === STEPS.length - 1) {
       // send the message
       console.log(fields);
@@ -94,19 +95,57 @@ const ContactTerminal = () => {
       { text: STEPS[step + 1]!.prompt, level: "prompt" },
     ]);
     setStep(step + 1);
-  };
+  }, [step, fields, lines]);
+  const handleTyping = useCallback(
+    (e: KeyboardEvent) => {
+      console.log(e.key);
+      if (e.key === "Enter") {
+        handleNext();
+        return;
+      }
+      if (e.key === "Backspace") {
+        if (cursor > 0) {
+          setInput((prev) => prev.slice(0, cursor - 1) + prev.slice(cursor));
+          setCursor((prev) => prev - 1);
+        }
+        return;
+      }
+      if (e.key === "ArrowLeft") {
+        if (cursor > 0) {
+          setCursor((prev) => prev - 1);
+        }
+        return;
+      }
+      if (e.key === "ArrowRight") {
+        if (cursor < input.length) {
+          setCursor((prev) => prev + 1);
+        }
+        return;
+      }
+      if (e.key === "Home") {
+        setCursor(0);
+        return;
+      }
+      if (e.key === "End") {
+        setCursor(input.length);
+        return;
+      }
+      setInput((prev) => prev.slice(0, cursor) + e.key + prev.slice(cursor));
+      setCursor((prev) => prev + 1);
+    },
+    [cursor, handleNext, input],
+  );
+  useEffect(() => {
+    document.addEventListener("keydown", handleTyping);
+    return () => {
+      document.removeEventListener("keydown", handleTyping);
+    };
+  }, [handleTyping]);
 
   return (
     <div className="mx-auto max-w-3xl overflow-hidden rounded-md border-2 border-card bg-card font-mono">
-      <div className="grid w-full grid-cols-3 items-center bg-gray-800 px-4 py-2">
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full bg-red-500"></div>
-          <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
-          <div className="h-3 w-3 rounded-full bg-green-500"></div>
-        </div>
-        <p className="justify-self-center">contact.me</p>
-      </div>
-      <div className="h-96 bg-gray-800/20 px-4 py-2 backdrop-blur-sm overflow-y-scroll">
+      <TitleBar />
+      <div className="h-96 overflow-y-scroll bg-gray-800/20 px-4 py-2 backdrop-blur-sm">
         <p>
           Welcome to my contact terminal. Please fill out the form below to get
           in touch with me.
@@ -121,52 +160,44 @@ const ContactTerminal = () => {
               {line.text}
             </p>
           ))}
-          {STEPS[step].input === "text" && (
-            <input
-              type="text"
-              value={fields[Object.keys(FIELDS)[step] as keyof Fields]}
-              // on pressing enter key go to next step
-              onKeyDown={(e) => e.key === "Enter" && handleNext()}
-              onChange={(e) =>
-                setFields({
-                  ...fields,
-                  [Object.keys(FIELDS)[step] as keyof Fields]: e.target.value,
-                })
-              }
-              className="w-full bg-transparent caret-green-500 focus:outline-none"
-              autoFocus
-            />
-          )}
-          {STEPS[step].input === "textarea" && (
-            <textarea
-              value={fields[Object.keys(FIELDS)[step] as keyof Fields]}
-              onKeyDown={(e) => e.key === "Enter" && handleNext()}
-              onChange={(e) =>
-                setFields({
-                  ...fields,
-                  [Object.keys(FIELDS)[step] as keyof Fields]: e.target.value,
-                })
-              }
-              className="w-full bg-transparent caret-green-500 focus:outline-none h-24 resize-none"
-              autoFocus
-            />
-          )}
-          {STEPS[step].input === "confirm" && (
-            <button
-              onClick={() =>
-                setFields({
-                  ...fields,
-                  [Object.keys(FIELDS)[step] as keyof Fields]: "true",
-                })
-              }
-              className="rounded-md bg-green-500 p-2"
-            >
-              Yes
-            </button>
-          )}
+          <div className="flex w-full flex-wrap">
+            <p className="text-green-500">$ </p>
+            {input.split("").map((char, i) =>
+              i === cursor ? (
+                <span
+                  key={i}
+                  className="animate-caret duration-1 h-5 w-2.5 bg-green-500 text-gray-800"
+                >
+                   {char === " " ? "\u00A0" : char}
+                </span>
+              ) : (
+                <span key={i} className="text-gray-100">
+                   {char === " " ? "\u00A0" : char}
+                </span>
+              ),
+            )}
+            {cursor === input.length && (
+              <span className="animate-caret duration-1 h-5 w-2.5 bg-green-500"/>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
+function TitleBar({ title }: { title?: string }) {
+  return (
+    <div className="grid w-full grid-cols-3 items-center bg-gray-800 px-4 py-2">
+      <div className="flex items-center gap-2">
+        <div className="h-3 w-3 rounded-full bg-red-500"></div>
+        <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+        <div className="h-3 w-3 rounded-full bg-green-500"></div>
+      </div>
+      <p className="justify-self-center">
+        {title ?? "Terminal"}
+      </p>
+    </div>
+  );
+}
 export default ContactTerminal;

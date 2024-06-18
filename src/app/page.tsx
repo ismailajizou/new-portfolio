@@ -20,6 +20,12 @@ export default function HomePage() {
 
       <section className="relative">
         {/* <ParticlesBg /> */}
+        {
+          // show only on prod
+          process.env.NODE_ENV === "production" && (
+            <ParticlesBg />
+          )
+        }
         <div className="container relative my-6 flex flex-col-reverse items-center justify-between gap-8 py-10 md:flex-row md:py-24 lg:py-32">
           <div className="relative space-y-4 text-center md:text-left">
             <p className="text-xl">Hi 👋, I&apos;m</p>
@@ -97,7 +103,12 @@ export default function HomePage() {
         <h2 className="text-center text-4xl font-bold">Technical Skills</h2>
 
         <div>
-          <IconCloud iconSlugs={TECHNICAL_SKILLS} />
+          {
+            // show only on prod
+            process.env.NODE_ENV === "production" && (
+              <IconCloud iconSlugs={TECHNICAL_SKILLS} />
+            )
+          }
         </div>
       </Section>
       <Section>
@@ -137,7 +148,7 @@ export default function HomePage() {
       </Section>
 
       <Section>
-       <ContactTerminal />
+        <ContactTerminal />
       </Section>
     </div>
   );
