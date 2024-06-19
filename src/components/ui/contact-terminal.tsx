@@ -128,7 +128,7 @@ const useTyping = ({
         setCursor((prev) => prev + e.key.length);
       }
     },
-    [cursor, handleNext, input, moveLeft, moveRight, resetInput],
+    [cursor, focus, handleNext, input, moveLeft, moveRight, resetInput],
   );
   useEffect(() => {
     document.addEventListener("keydown", handleTyping);
@@ -160,15 +160,47 @@ const useTyping = ({
   };
 };
 
+const commands = [
+  {
+    name: "contact",
+    description: "Contact me",
+    usage: "contact",
+    execute: ({ handleContact }: { handleContact: () => void }) => {
+      handleContact();
+    },
+  },
+  {
+    name: "help",
+    description: "List all available commands",
+    usage: "help",
+    execute: () => {
+      commands.forEach((command) => {
+        console.log(`- ${command.name}: ${command.description}`);
+      });
+    },
+  },
+  {
+    name: "clear",
+    description: "Clear the terminal",
+    usage: "clear",
+    execute: ({ reset }: { reset: () => void }) => {
+      reset();
+    },
+  },
+  {
+    name: "whoami",
+    description: "Get information about the user",
+    usage: "whoami",
+    execute: ({ printLine }: { printLine: (line: string) => void }) => {
+      printLine("Ismail Ajizou");
+    },
+  },
+];
+
 const ContactTerminal = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
-
-  const [lines, setLines] = useState<Line[]>([
-    {
-      text: STEPS[0].prompt,
-      level: "prompt",
-    },
-  ]);
+  const [isContact, setIsContact] = useState(false);
+  const [lines, setLines] = useState<Line[]>([]);
   const [step, setStep] = useState(0);
   const [fields, setFields] = useState<Fields>({
     name: "",
@@ -176,12 +208,54 @@ const ContactTerminal = () => {
     message: "",
   });
 
-  const handleNext = (input: string) => {
-    // if (step === STEPS.length - 1) {
-    //   console.log(fields);
-    //   return;
-    // }
+  const handleContact = (input: string) => {
+    if (input === "") return;
+    if (!isContact) {
+      if (input === "clear") {
+        setLines([]);
+        resetInput();
+        return;
+      }
+      if (input === "help") {
+        const conmmads: string[] = [];
+        commands.forEach((command) => {
+          conmmads.push(`- ${command.name}: ${command.description}`);
+        });
+        setLines([
+          ...lines,
+          { text: "help", level: "prompt" },
+          { text: "Available commands:", level: "info" },
+          ...conmmads.map((text): Line => ({ text, level: "info" })),
+        ]);
+        return;
+      }
+      if (input === "whoami") {
+        setLines([
+          ...lines,
+          { text: "whoami", level: "prompt" },
+          { text: "Ismail Ajizou", level: "info" },
+        ]);
+        return;
+      }
 
+      if (input === "contact") {
+        setIsContact(true);
+        setLines([
+          ...lines,
+          { text: "contact", level: "prompt" },
+          { text: STEPS[0].prompt, level: "prompt" },
+        ]);
+        return;
+      }
+      setLines([
+        ...lines,
+        {
+          text: `Unknown command: ${input}`,
+          level: "error",
+        },
+      ]);
+      return;
+    }
     const valid = STEPS[step]!.validator.safeParse(input.trim());
     if (!valid.success) {
       setFields({
@@ -206,6 +280,14 @@ const ContactTerminal = () => {
           level: "info",
         },
       ]);
+      setStep(0);
+      setIsContact(false);
+      setFields({
+        name: "",
+        email: "",
+        message: "",
+      });
+      resetInput();
       return;
     }
     if (step === STEPS.length - 1 && input.trim().toLowerCase() === "y") {
@@ -234,17 +316,18 @@ const ContactTerminal = () => {
     setStep(step + 1);
   };
   const { input, cursor, isFocused, resetInput } = useTyping({
-    handleNext,
+    handleNext: handleContact,
     terminalRef,
   });
 
-  const {mutate} = useMutation({
+  const { mutate } = useMutation({
     mutationFn: contact,
     onSuccess: (data) => {
       setLines([
+        { text: "contact", level: "prompt" },
         { text: data.message, level: "success" },
-        { text: STEPS[0].prompt, level: "prompt" },
       ]);
+      setIsContact(false);
       setStep(0);
       setFields({
         name: "",
@@ -255,9 +338,11 @@ const ContactTerminal = () => {
     },
     onError: (error) => {
       setLines([
+        { text: "contact", level: "prompt" },
         { text: error.message, level: "error" },
         { text: STEPS[0].prompt, level: "prompt" },
       ]);
+      setIsContact(false);
       setStep(0);
       setFields({
         name: "",
@@ -279,8 +364,8 @@ const ContactTerminal = () => {
           Welcome to my contact terminal. Please fill out the form below to get
           in touch with me.
         </p>
-        
-        <div className="border-t border-gray-300 my-2 border-dashed"></div>
+
+        <div className="my-2 border-t border-dashed border-gray-300"></div>
         <div>
           {lines.map((line, i) => (
             <p key={i} className={LEVELS[line.level]}>
