@@ -364,6 +364,11 @@ const ContactTerminal = () => {
           Welcome to my contact terminal. Please fill out the form below to get
           in touch with me.
         </p>
+        <p>
+          Type <span className="text-green-500">help</span> to list all
+          available commands, or <span className="text-green-500">contact</span>{" "}
+          to contact me .
+        </p>
 
         <div className="my-2 border-t border-dashed border-gray-300"></div>
         <div>
