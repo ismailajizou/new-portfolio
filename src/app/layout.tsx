@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
+import { Providers } from "./providers";
 
 export const metadata = {
   title: "Create T3 App",
@@ -15,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="dark scroll-smooth">{children}</body>
+      <body className="dark scroll-smooth">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

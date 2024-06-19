@@ -1,6 +1,14 @@
 "use client";
 
-import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { contact } from "@/app/_actions/contact";
+import { useMutation } from "@tanstack/react-query";
+import {
+  type RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { z } from "zod";
 type InferAsTuple = [unknown, ...unknown[]];
 const STEPS = [
@@ -142,12 +150,13 @@ const useTyping = ({
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [terminalRef]);
 
   return {
     input,
     cursor,
     isFocused: focus,
+    resetInput,
   };
 };
 
@@ -168,10 +177,10 @@ const ContactTerminal = () => {
   });
 
   const handleNext = (input: string) => {
-    if (step === STEPS.length - 1) {
-      console.log(fields);
-      return;
-    }
+    // if (step === STEPS.length - 1) {
+    //   console.log(fields);
+    //   return;
+    // }
 
     const valid = STEPS[step]!.validator.safeParse(input.trim());
     if (!valid.success) {
@@ -189,7 +198,7 @@ const ContactTerminal = () => {
       ]);
       return;
     }
-    if (step === STEPS.length - 2 && input.trim().toLowerCase() !== "y") {
+    if (step === STEPS.length - 1 && input.trim().toLowerCase() !== "y") {
       setLines([
         ...lines,
         {
@@ -199,7 +208,7 @@ const ContactTerminal = () => {
       ]);
       return;
     }
-    if (step === STEPS.length - 2 && input.trim().toLowerCase() === "y") {
+    if (step === STEPS.length - 1 && input.trim().toLowerCase() === "y") {
       setLines([
         ...lines,
         {
@@ -207,6 +216,7 @@ const ContactTerminal = () => {
           level: "info",
         },
       ]);
+      mutate(fields);
       return;
     }
     setFields({
@@ -223,7 +233,40 @@ const ContactTerminal = () => {
     ]);
     setStep(step + 1);
   };
-  const { input, cursor, isFocused } = useTyping({ handleNext, terminalRef });
+  const { input, cursor, isFocused, resetInput } = useTyping({
+    handleNext,
+    terminalRef,
+  });
+
+  const {mutate} = useMutation({
+    mutationFn: contact,
+    onSuccess: (data) => {
+      setLines([
+        { text: data.message, level: "success" },
+        { text: STEPS[0].prompt, level: "prompt" },
+      ]);
+      setStep(0);
+      setFields({
+        name: "",
+        email: "",
+        message: "",
+      });
+      resetInput();
+    },
+    onError: (error) => {
+      setLines([
+        { text: error.message, level: "error" },
+        { text: STEPS[0].prompt, level: "prompt" },
+      ]);
+      setStep(0);
+      setFields({
+        name: "",
+        email: "",
+        message: "",
+      });
+      resetInput();
+    },
+  });
 
   return (
     <div
@@ -236,7 +279,8 @@ const ContactTerminal = () => {
           Welcome to my contact terminal. Please fill out the form below to get
           in touch with me.
         </p>
-        <p>{"-".repeat(80)}</p>
+        
+        <div className="border-t border-gray-300 my-2 border-dashed"></div>
         <div>
           {lines.map((line, i) => (
             <p key={i} className={LEVELS[line.level]}>
