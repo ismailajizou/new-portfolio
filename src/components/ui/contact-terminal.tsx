@@ -2,7 +2,8 @@
 
 import { contact } from "@/app/_actions/contact";
 import { useMutation } from "@tanstack/react-query";
-import {
+import React, {
+  Dispatch,
   type RefObject,
   useCallback,
   useEffect,
@@ -10,6 +11,8 @@ import {
   useState,
 } from "react";
 import { z } from "zod";
+import { isMobile } from "react-device-detect";
+
 type InferAsTuple = [unknown, ...unknown[]];
 const STEPS = [
   {
@@ -58,9 +61,11 @@ type Line = {
 const useTyping = ({
   handleNext,
   terminalRef,
+  mobileInputRef,
 }: {
   handleNext: (input: string) => void;
   terminalRef: RefObject<HTMLElement>;
+  mobileInputRef: RefObject<HTMLInputElement>;
 }) => {
   const [focus, setFocus] = useState(false);
   const [cursor, setCursor] = useState<number>(0);
@@ -140,50 +145,60 @@ const useTyping = ({
   useEffect(() => {
     // manage focus inside the terminal
     const handleClick = (e: MouseEvent) => {
-      if (terminalRef.current?.contains(e.target as Node)) {
-        setFocus(true);
-      } else {
-        setFocus(false);
-      }
+      setFocus(terminalRef.current?.contains(e.target as Node) ?? false);
     };
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
     };
   }, [terminalRef]);
+  useEffect(() => {
+    if (terminalRef.current !== null && mobileInputRef.current !== null) {
+      terminalRef.current.onclick = () => {
+        mobileInputRef.current?.focus();
+      };
+    }
+  }, [mobileInputRef, terminalRef]);
 
   return {
     input,
     cursor,
     isFocused: focus,
     resetInput,
+    setInput,
+    setCursor,
   };
 };
 
-const commands = [
-  {
-    name: "contact",
-    description: "Contact me",
-    usage: "contact",
-    execute: ({ handleContact }: { handleContact: () => void }) => {
-      handleContact();
-    },
-  },
+interface ICommadeParams {
+  reset: () => void;
+  setLines: Dispatch<React.SetStateAction<Line[]>>;
+}
+
+const COMMANDS = [
   {
     name: "help",
     description: "List all available commands",
     usage: "help",
-    execute: () => {
-      commands.forEach((command) => {
-        console.log(`- ${command.name}: ${command.description}`);
+    execute: ({ setLines }: ICommadeParams) => {
+      const conmmads: string[] = [];
+      COMMANDS.forEach((command) => {
+        conmmads.push(`- ${command.name}: ${command.description}`);
       });
+      setLines((l) => [
+        ...l,
+        { text: "help", level: "prompt" },
+        { text: "Available commands:", level: "info" },
+        ...conmmads.map((text): Line => ({ text, level: "info" })),
+      ]);
     },
   },
   {
     name: "clear",
     description: "Clear the terminal",
     usage: "clear",
-    execute: ({ reset }: { reset: () => void }) => {
+    execute: ({ reset, setLines }: ICommadeParams) => {
+      setLines([]);
       reset();
     },
   },
@@ -191,14 +206,34 @@ const commands = [
     name: "whoami",
     description: "Get information about the user",
     usage: "whoami",
-    execute: ({ printLine }: { printLine: (line: string) => void }) => {
-      printLine("Ismail Ajizou");
+    execute: ({ setLines }: ICommadeParams) => {
+      setLines((l) => [
+        ...l,
+        { text: "whoami", level: "prompt" },
+        { text: "Ismail Ajizou", level: "info" },
+      ]);
     },
   },
-];
+] as const;
 
-const ContactTerminal = () => {
+export const useScrollToBottom = ({
+  changesToWatch,
+  wrapperRef,
+}: {
+  changesToWatch: unknown[];
+  wrapperRef: RefObject<HTMLDivElement>;
+}) => {
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+    // eslint-disable-next-line no-param-reassign
+    wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight;
+  }, [changesToWatch, wrapperRef]);
+};
+
+const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
+  const [isMobileDevice, setIsMobileDevice] = useState(true);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const mobileInputRef = useRef<HTMLInputElement>(null);
   const [isContact, setIsContact] = useState(false);
   const [lines, setLines] = useState<Line[]>([]);
   const [step, setStep] = useState(0);
@@ -208,36 +243,12 @@ const ContactTerminal = () => {
     message: "",
   });
 
-  const handleContact = (input: string) => {
+  const handleCommands = (input: string) => {
     if (input === "") return;
+    // when the user type a commands and the terminal is not in the contact mode
+    // we execute the command
+    // If the command is contact we switch to the contact mode
     if (!isContact) {
-      if (input === "clear") {
-        setLines([]);
-        resetInput();
-        return;
-      }
-      if (input === "help") {
-        const conmmads: string[] = [];
-        commands.forEach((command) => {
-          conmmads.push(`- ${command.name}: ${command.description}`);
-        });
-        setLines([
-          ...lines,
-          { text: "help", level: "prompt" },
-          { text: "Available commands:", level: "info" },
-          ...conmmads.map((text): Line => ({ text, level: "info" })),
-        ]);
-        return;
-      }
-      if (input === "whoami") {
-        setLines([
-          ...lines,
-          { text: "whoami", level: "prompt" },
-          { text: "Ismail Ajizou", level: "info" },
-        ]);
-        return;
-      }
-
       if (input === "contact") {
         setIsContact(true);
         setLines([
@@ -247,15 +258,29 @@ const ContactTerminal = () => {
         ]);
         return;
       }
-      setLines([
-        ...lines,
-        {
-          text: `Unknown command: ${input}`,
-          level: "error",
-        },
-      ]);
+      const command = COMMANDS.find((command) => command.name === input);
+      if (!command) {
+        setLines([
+          ...lines,
+          {
+            text: input,
+            level: "prompt",
+          },
+          {
+            text: `Unknown command: ${input}`,
+            level: "error",
+          },
+        ]);
+        return;
+      }
+      command.execute({
+        setLines,
+        reset: resetInput,
+      });
       return;
     }
+    // If the terminal is in the contact mode we handle the contact form
+    // We validate the input and move to the next step
     const valid = STEPS[step]!.validator.safeParse(input.trim());
     if (!valid.success) {
       setFields({
@@ -298,7 +323,7 @@ const ContactTerminal = () => {
           level: "info",
         },
       ]);
-      mutate(fields);
+      contactMe(fields);
       return;
     }
     setFields({
@@ -313,14 +338,21 @@ const ContactTerminal = () => {
       },
       { text: STEPS[step + 1]!.prompt, level: "prompt" },
     ]);
-    setStep(step + 1);
+    setStep((s) => s + 1);
   };
-  const { input, cursor, isFocused, resetInput } = useTyping({
-    handleNext: handleContact,
-    terminalRef,
-  });
 
-  const { mutate } = useMutation({
+  const { input, cursor, isFocused, resetInput, setInput, setCursor } =
+    useTyping({
+      handleNext: handleCommands,
+      terminalRef,
+      mobileInputRef,
+    });
+
+  useEffect(() => {
+    setIsMobileDevice(isMobile);
+  }, []);
+
+  const { mutate: contactMe } = useMutation({
     mutationFn: contact,
     onSuccess: (data) => {
       setLines([
@@ -353,23 +385,39 @@ const ContactTerminal = () => {
     },
   });
 
+  // handle mobile
+  const mobileInput = isMobileDevice ? (
+    <div className="absolute top-0 -z-50 bg-transparent opacity-0">
+      <input
+        type="text"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        value={input}
+        className="pointer-events-none"
+        onChange={(e) => {
+          setInput(e.target.value);
+          setCursor(e.target.value.length);
+        }}
+        ref={mobileInputRef}
+      />
+    </div>
+  ) : null;
+
   return (
     <div
       ref={terminalRef}
       className="mx-auto max-w-3xl overflow-hidden rounded-md border-2 border-card bg-card font-mono shadow-md"
     >
-      <TitleBar />
+      <TitleBar title={title} />
       <div className="h-96 overflow-y-scroll bg-gray-800/20 px-4 py-2 backdrop-blur-sm">
         <p>
-          Welcome to my contact terminal. Please fill out the form below to get
-          in touch with me.
+          Welcome to my terminal, type{" "}
+          <span className="text-green-500">contact</span> to contact me, or{" "}
+          <span className="text-green-500">help</span> to list all available
+          commands.
         </p>
-        <p>
-          Type <span className="text-green-500">help</span> to list all
-          available commands, or <span className="text-green-500">contact</span>{" "}
-          to contact me .
-        </p>
-
         <div className="my-2 border-t border-dashed border-gray-300"></div>
         <div>
           {lines.map((line, i) => (
@@ -380,7 +428,8 @@ const ContactTerminal = () => {
               {line.text}
             </p>
           ))}
-          <div className="flex w-full flex-wrap">
+          <div className="relative flex w-full flex-wrap">
+            {mobileInput}
             <p className="text-green-500">${SPACE_CHAR}</p>
             {input.split("").map((char, i) =>
               isFocused && i === cursor ? (
@@ -403,7 +452,7 @@ const ContactTerminal = () => {
   );
 };
 
-function TitleBar({ title }: { title?: string }) {
+function TitleBar({ title }: { title: string }) {
   return (
     <div className="grid w-full grid-cols-3 items-center bg-gray-800 px-4 py-2">
       <div className="flex items-center gap-2">
@@ -411,7 +460,7 @@ function TitleBar({ title }: { title?: string }) {
         <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
         <div className="h-3 w-3 rounded-full bg-green-500"></div>
       </div>
-      <p className="justify-self-center">{title ?? "Terminal"}</p>
+      <p className="justify-self-center">{title}</p>
     </div>
   );
 }
