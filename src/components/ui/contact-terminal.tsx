@@ -160,6 +160,7 @@ const useTyping = ({
     }
   }, [mobileInputRef, terminalRef]);
 
+
   return {
     input,
     cursor,
@@ -220,12 +221,11 @@ export const useScrollToBottom = ({
   changesToWatch,
   wrapperRef,
 }: {
-  changesToWatch: unknown[];
-  wrapperRef: RefObject<HTMLDivElement>;
+  changesToWatch: unknown
+  wrapperRef: RefObject<HTMLElement>
 }) => {
   useEffect(() => {
     if (!wrapperRef.current) return;
-    // eslint-disable-next-line no-param-reassign
     wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight;
   }, [changesToWatch, wrapperRef]);
 };
@@ -233,6 +233,7 @@ export const useScrollToBottom = ({
 const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
   const [isMobileDevice, setIsMobileDevice] = useState(true);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const editorAreaRef = useRef<HTMLDivElement>(null);
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const [isContact, setIsContact] = useState(false);
   const [lines, setLines] = useState<Line[]>([]);
@@ -242,6 +243,11 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
     email: "",
     message: "",
   });
+
+  useScrollToBottom({
+    changesToWatch: lines,
+    wrapperRef: editorAreaRef,
+  })
 
   const handleCommands = (input: string) => {
     if (input === "") return;
@@ -411,7 +417,7 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
       className="mx-auto max-w-3xl overflow-hidden rounded-md border-2 border-card bg-card font-mono shadow-md"
     >
       <TitleBar title={title} />
-      <div className="h-96 overflow-y-scroll bg-gray-800/20 px-4 py-2 backdrop-blur-sm">
+      <div className="h-96 overflow-y-scroll bg-gray-800/20 px-4 py-2 backdrop-blur-sm" ref={editorAreaRef}>
         <p>
           Welcome to my terminal, type{" "}
           <span className="text-green-500">contact</span> to contact me, or{" "}
