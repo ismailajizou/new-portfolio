@@ -21,7 +21,10 @@ export const contact = async (contact: Contact) => {
 
     return {
       message: "Your message has been sent successfully",
-      data: letter.toJSON(),
+      data: {
+        ...letter.toJSON(),
+        _id: letter._id.toString(),
+      },
     };
   } catch (error) {
     throw new Error("Failed to send message");

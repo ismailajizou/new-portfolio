@@ -2,7 +2,10 @@
 
 import connectMongo from "@/db/connection";
 import Testimonial from "@/db/models/testimonial";
-import { testimonialSchema, type TTestimonial } from "@/validators/testimonials";
+import {
+  testimonialSchema,
+  type TTestimonial,
+} from "@/validators/testimonials";
 
 export const writeTestimonial = async (data: TTestimonial) => {
   try {
@@ -14,10 +17,14 @@ export const writeTestimonial = async (data: TTestimonial) => {
       company,
       text,
       image,
+      status: "PENDING",
     });
     return {
       message: "Testimonial created successfully",
-      data: testimonial.toJSON(),
+      data: {
+        ...testimonial.toJSON(),
+        _id: testimonial._id.toString(),
+      },
     };
   } catch (error) {
     throw new Error("Failed to create testimonial");
