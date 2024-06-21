@@ -1,4 +1,6 @@
+import Footer from "@/components/footer/default-footer";
 import Navbar from "@/components/navigation/navbar";
+import TestimonialForm from "@/components/testimonial/form-modal";
 import Timeline from "@/components/timeline";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
@@ -12,6 +14,7 @@ import TestimonialCard from "@/components/ui/testimonial-card";
 import WordRotate from "@/components/ui/word-rotate";
 import { TECHNICAL_SKILLS } from "@/lib/constants";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -22,9 +25,7 @@ export default function HomePage() {
         {/* <ParticlesBg /> */}
         {
           // show only on prod
-          process.env.NODE_ENV === "production" && (
-            <ParticlesBg />
-          )
+          process.env.NODE_ENV === "production" && <ParticlesBg />
         }
         <div className="container relative my-6 flex flex-col-reverse items-center justify-between gap-8 py-10 md:flex-row md:py-24 lg:py-32">
           <div className="relative space-y-4 text-center md:text-left">
@@ -143,13 +144,15 @@ export default function HomePage() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
         </div>
         <div className="flex justify-center">
-          <Button>Write Me Something</Button>
+          <TestimonialForm />
         </div>
       </Section>
 
       <Section>
         <ContactTerminal />
       </Section>
+
+      <Footer />
     </div>
   );
 }

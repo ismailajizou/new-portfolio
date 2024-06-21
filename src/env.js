@@ -9,6 +9,11 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
     MONGO_URI: z.string(),
+    TWITTER_LINK: z.string(),
+    GITHUB_LINK: z.string(),
+    LINKEDIN_LINK: z.string(),
+    UPLOADTHING_SECRET: z.string(),
+    UPLOADTHING_APP_ID: z.string(),
   },
 
   /**
@@ -27,6 +32,11 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     MONGO_URI: process.env.MONGO_URI,
+    TWITTER_LINK: process.env.TWITTER_LINK,
+    GITHUB_LINK: process.env.GITHUB_LINK,
+    LINKEDIN_LINK: process.env.LINKEDIN_LINK,
+    UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
+    UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

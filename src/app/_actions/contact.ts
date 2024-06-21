@@ -13,8 +13,8 @@ const contactSchema = z.object({
 export type Contact = z.infer<typeof contactSchema>;
 
 export const contact = async (contact: Contact) => {
-  await connectMongo();
   try {
+    await connectMongo();
     const { email, message, name } = contactSchema.parse(contact);
 
     const letter = await Contact.create({ email, message, name });
