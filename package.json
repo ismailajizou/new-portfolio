@@ -7,22 +7,24 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "pwd:hash": "node ./src/hash.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
-    "@radix-ui/react-dialog": "^1.1.0",
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
-    "@radix-ui/react-navigation-menu": "^1.1.4",
-    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-navigation-menu": "^1.2.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^5.45.1",
-    "@tanstack/react-query-next-experimental": "^5.45.1",
+    "@tanstack/react-query-next-experimental": "^5.46.0",
     "@tsparticles/engine": "^3.4.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.4.0",
     "@uploadthing/react": "^6.6.0",
+    "argon2": "^0.40.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.11",
@@ -30,6 +32,7 @@
     "lucide-react": "^0.390.0",
     "mongoose": "^8.4.3",
     "next": "^14.2.4",
+    "next-auth": "5.0.0-beta.19",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-device-detect": "^2.2.3",
@@ -47,7 +50,7 @@
   "devDependencies": {
     "@tanstack/react-query-devtools": "^5.45.1",
     "@types/eslint": "^8.56.10",
-    "@types/node": "^20.14.5",
+    "@types/node": "^20.14.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
@@ -58,7 +61,7 @@
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   },
   "ct3aMetadata": {
     "initVersion": "7.34.0"

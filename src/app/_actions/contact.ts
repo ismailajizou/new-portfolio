@@ -1,7 +1,7 @@
 "use server";
 
-import connectMongo from "@/db/connection";
-import Contact from "@/db/models/contact";
+import connectMongo from "@/server/db";
+import Contact from "@/server/db/models/contact";
 import { z } from "zod";
 
 const contactSchema = z.object({

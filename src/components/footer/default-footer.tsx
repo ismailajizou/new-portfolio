@@ -5,17 +5,17 @@ import { env } from "@/env";
 const SOCIALS = [
   {
     name: "LinkedIn",
-    url: env.LINKEDIN_LINK,
+    url: env.NEXT_PUBLIC_LINKEDIN_LINK,
     icon: LuLinkedin,
   },
   {
     name: "GitHub",
-    url: env.GITHUB_LINK,
+    url: env.NEXT_PUBLIC_GITHUB_LINK,
     icon: LuGithub,
   },
   {
     name: "Twitter",
-    url: env.TWITTER_LINK,
+    url: env.NEXT_PUBLIC_TWITTER_LINK,
     icon: LuTwitter,
   },
 ];

@@ -9,11 +9,9 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
     MONGO_URI: z.string(),
-    TWITTER_LINK: z.string(),
-    GITHUB_LINK: z.string(),
-    LINKEDIN_LINK: z.string(),
     UPLOADTHING_SECRET: z.string(),
     UPLOADTHING_APP_ID: z.string(),
+    AUTH_SECRET: z.string(),
   },
 
   /**
@@ -22,7 +20,9 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_TWITTER_LINK: z.string(),
+    NEXT_PUBLIC_GITHUB_LINK: z.string(),
+    NEXT_PUBLIC_LINKEDIN_LINK: z.string(),
   },
 
   /**
@@ -32,12 +32,13 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     MONGO_URI: process.env.MONGO_URI,
-    TWITTER_LINK: process.env.TWITTER_LINK,
-    GITHUB_LINK: process.env.GITHUB_LINK,
-    LINKEDIN_LINK: process.env.LINKEDIN_LINK,
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
     UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+    AUTH_SECRET: process.env.AUTH_SECRET,
+
+    NEXT_PUBLIC_TWITTER_LINK: process.env.NEXT_PUBLIC_TWITTER_LINK,
+    NEXT_PUBLIC_GITHUB_LINK: process.env.NEXT_PUBLIC_GITHUB_LINK,
+    NEXT_PUBLIC_LINKEDIN_LINK: process.env.NEXT_PUBLIC_LINKEDIN_LINK,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

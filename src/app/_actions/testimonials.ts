@@ -1,7 +1,7 @@
 "use server";
 
-import connectMongo from "@/db/connection";
-import Testimonial from "@/db/models/testimonial";
+import connectMongo from "@/server/db";
+import Testimonial from "@/server/db/models/testimonial";
 import {
   testimonialSchema,
   type TTestimonial,
