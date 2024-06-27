@@ -6,6 +6,6 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
   if (!session?.user) {
     return redirect("/admin/login");
   }
-  return <div>{children}</div>;
+  return children;
 };
 export default AdminLayout;

@@ -1,9 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
-interface IContact {
+export interface IContact {
+  _id: string;
   name: string;
   email: string;
   message: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const contactSchema = new Schema<IContact>(
