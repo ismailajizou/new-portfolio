@@ -1,11 +1,14 @@
 "use server";
 
+import { auth } from "@/server/auth";
 import connectMongo from "@/server/db";
 import Testimonial from "@/server/db/models/testimonial";
+import { utapi } from "@/server/uploadthing";
 import {
   testimonialSchema,
   type TTestimonial,
 } from "@/validators/testimonials";
+import { revalidatePath } from "next/cache";
 
 export const writeTestimonial = async (data: TTestimonial) => {
   try {
@@ -29,4 +32,79 @@ export const writeTestimonial = async (data: TTestimonial) => {
   } catch (error) {
     throw new Error("Failed to create testimonial");
   }
+};
+
+export const publishTestimonial = async (id: string) => {
+  const session = await auth();
+  if (!session?.user) {
+    throw new Error("Unauthorized");
+  }
+  try {
+    await connectMongo();
+    const testimonial = await Testimonial.findByIdAndUpdate(
+      id,
+      { status: "APPROVED" },
+      { new: true },
+    );
+    if (!testimonial) {
+      throw new Error("Testimonial not found");
+    }
+    return {
+      message: "Testimonial published successfully",
+      data: {
+        ...testimonial.toJSON(),
+        _id: testimonial._id.toString(),
+      },
+    };
+  } catch (error) {
+    throw new Error("Failed to publish testimonial");
+  }
+};
+
+export const rejectTestimonial = async (id: string) => {
+  const session = await auth();
+  if (!session?.user) {
+    throw new Error("Unauthorized");
+  }
+  try {
+    await connectMongo();
+    const testimonial = await Testimonial.findByIdAndUpdate(
+      id,
+      { status: "REJECTED" },
+      { new: true },
+    );
+    if (!testimonial) {
+      throw new Error("Testimonial not found");
+    }
+    // return {
+    //   message: "Testimonial rejected successfully",
+    //   data: {
+    //     ...testimonial.toJSON(),
+    //     _id: testimonial._id.toString(),
+    //   },
+    // };
+  } catch (error) {
+    throw new Error("Failed to reject testimonial");
+  }
+  revalidatePath("/admin/testimonials");
+};
+
+export const deleteTestimonial = async (id: string) => {
+  const session = await auth();
+  if (!session?.user) {
+    throw new Error("Unauthorized");
+  }
+  try {
+    await connectMongo();
+    const testimonial = await Testimonial.findByIdAndDelete(id);
+    if (!testimonial) {
+      throw new Error("Testimonial not found");
+    }
+    if (testimonial.image) {
+      await utapi.deleteFiles(testimonial.image.split("/").at(-1)!);
+    }
+  } catch (error) {
+    throw new Error("Failed to delete testimonial");
+  }
+  revalidatePath("/admin/testimonials");
 };

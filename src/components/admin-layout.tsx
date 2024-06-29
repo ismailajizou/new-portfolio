@@ -13,9 +13,14 @@ import { TooltipProvider } from "./ui/tooltip";
 const AdminLayout = ({
   children,
   navCollapsedSize = 4,
+  numberOfTestimonials,
+  numberOfContacts,
 }: {
   children: React.ReactNode;
   navCollapsedSize?: number;
+  numberOfTestimonials: number;
+  numberOfContacts: number;
+
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -59,13 +64,13 @@ const AdminLayout = ({
               },
               {
                 title: "Inbox",
-                label: "128",
+                label: numberOfContacts.toString(),
                 icon: Inbox,
                 href: "/admin/contacts",
               },
               {
                 title: "Testimonials",
-                label: "9",
+                label: numberOfTestimonials.toString(),
                 icon: MessageSquare,
                 href: "/admin/testimonials",
               },

@@ -1,16 +1,21 @@
 import { formatDistanceToNow } from "date-fns";
 
 import { cn } from "@/lib/utils";
-import { type IContact } from "@/server/db/models/contact";
-import { ScrollArea } from "./scroll-area";
+import { type ITestimonial } from "@/server/db/models/testimonial";
+import { ScrollArea } from "../ui/scroll-area";
+import { Badge } from "../ui/badge";
 
 interface MailListProps {
-  items: IContact[];
-  selectedMail: IContact | null;
-  setSelected: (mail: IContact["_id"]) => void;
+  items: ITestimonial[];
+  selectedMail: ITestimonial | null;
+  setSelected: (mail: ITestimonial["_id"]) => void;
 }
 
-export function MailList({ items, selectedMail: mail, setSelected }: MailListProps) {
+export function TestimonialList({
+  items,
+  selectedMail: mail,
+  setSelected,
+}: MailListProps) {
   return (
     <ScrollArea className="h-ful">
       <div className="flex flex-col gap-2 p-4 pt-0">
@@ -27,9 +32,13 @@ export function MailList({ items, selectedMail: mail, setSelected }: MailListPro
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
                   <div className="font-semibold">{item.name}</div>
-                  {/* {!item.read && (
-                    <span className="flex h-2 w-2 rounded-full bg-blue-600" />
-                  )} */}
+                  {item?.status === "PENDING" ? (
+                    <Badge variant="default">Pending</Badge>
+                  ) : item?.status === "APPROVED" ? (
+                    <Badge variant="secondary">Published</Badge>
+                  ) : item?.status === "REJECTED" ? (
+                    <Badge variant="destructive">Rejected</Badge>
+                  ) : null}
                 </div>
                 <div
                   className={cn(
@@ -44,20 +53,11 @@ export function MailList({ items, selectedMail: mail, setSelected }: MailListPro
                   })}
                 </div>
               </div>
-              <div className="text-xs font-medium">{item.email}</div>
+              <div className="text-xs font-medium">{`${item.title} @${item.company}`}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
-              {item.message.substring(0, 300)}
+              {item.text.substring(0, 300)}
             </div>
-            {/* {item.labels.length ? (
-              <div className="flex items-center gap-2">
-                {item.labels.map((label) => (
-                  <Badge key={label} variant={getBadgeVariantFromLabel(label)}>
-                    {label}
-                  </Badge>
-                ))}
-              </div>
-            ) : null} */}
           </button>
         ))}
       </div>

@@ -2,6 +2,7 @@
 
 import connectMongo from "@/server/db";
 import Contact from "@/server/db/models/contact";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -30,3 +31,17 @@ export const contact = async (contact: Contact) => {
     throw new Error("Failed to send message");
   }
 };
+
+
+export const removeContact = async (id: string) => {
+  try {
+    await connectMongo();
+    const contact = await Contact.findByIdAndDelete(id);
+    if (!contact) {
+      throw new Error("Contact not found");
+    }
+  } catch (error) {
+    throw new Error("Failed to delete contact");
+  }
+  revalidatePath("/admin/contacts");
+}
