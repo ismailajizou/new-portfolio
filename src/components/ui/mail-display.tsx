@@ -1,34 +1,27 @@
-import { addDays, addHours, format, nextSaturday } from "date-fns";
+import { format } from "date-fns";
 import {
-  Archive,
-  ArchiveX,
-  Clock,
   Forward,
   MoreVertical,
   Reply,
   ReplyAll,
-  Trash2,
+  Trash2
 } from "lucide-react";
 
+import { removeContact } from "@/app/_actions/contact";
 import { type IContact } from "@/server/db/models/contact";
+import { useMutation } from "@tanstack/react-query";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Button } from "./button";
-import { Calendar } from "./calendar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
-import { Label } from "./label";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Separator } from "./separator";
-import { Switch } from "./switch";
 import { Textarea } from "./textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
-import { useMutation } from "@tanstack/react-query";
 import { useToast } from "./use-toast";
-import { removeContact } from "@/app/_actions/contact";
 
 interface MailDisplayProps {
   mail: IContact | null;

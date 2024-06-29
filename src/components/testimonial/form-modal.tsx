@@ -67,7 +67,7 @@ const TestimonialForm = () => {
   return (
     <Dialog open={isOpen} onOpenChange={(s) => setIsOpen(s)}>
       <DialogTrigger asChild>
-        <Button variant="outline">Write me something</Button>
+        <Button variant="default">Write me something</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

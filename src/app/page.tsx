@@ -13,10 +13,17 @@ import Section from "@/components/ui/section";
 import TestimonialCard from "@/components/ui/testimonial-card";
 import WordRotate from "@/components/ui/word-rotate";
 import { TECHNICAL_SKILLS } from "@/lib/constants";
+import connectMongo from "@/server/db";
+import Testimonial from "@/server/db/models/testimonial";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function HomePage() {
+export default async function HomePage() {
+  await connectMongo();
+  const data = await Testimonial.find({ status: "APPROVED" });
+  const testimonials = data.map((testimonial) => ({
+    ...testimonial.toJSON(),
+    _id: testimonial._id.toString(),
+  }));
   return (
     <div>
       <Navbar />
@@ -115,34 +122,28 @@ export default function HomePage() {
       <Section>
         <h2 className="mb-8 text-center text-4xl font-bold">Testimonials</h2>
 
-        <div className="relative mb-8">
-          <Marquee pauseOnHover>
-            {Array.from({ length: 10 }).map((_, i) => (
-              <TestimonialCard
-                key={i}
-                name="John Doe"
-                title="CEO, Company"
-                relation="Client"
-                quote="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
-                image="/assets/hero.JPG"
-              />
-            ))}
-          </Marquee>
-          <Marquee reverse pauseOnHover>
-            {Array.from({ length: 10 }).map((_, i) => (
-              <TestimonialCard
-                key={i}
-                name="John Doe"
-                title="CEO, Company"
-                relation="Client"
-                quote="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
-                image="/assets/hero.JPG"
-              />
-            ))}
-          </Marquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
-        </div>
+        {testimonials.length ? (
+          <div className="relative mb-8">
+            <Marquee pauseOnHover>
+              {testimonials.map((t) => (
+                <TestimonialCard key={t._id} testimonial={t} />
+              ))}
+            </Marquee>
+            <Marquee reverse pauseOnHover>
+              {testimonials.map((t) => (
+                <TestimonialCard key={t._id} testimonial={t} />
+              ))}
+            </Marquee>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center my-10">
+            <h3 className="text-center text-2xl font-bold">
+              No testimonials yet. Be the first to leave one!
+            </h3>
+          </div>
+        )}
         <div className="flex justify-center">
           <TestimonialForm />
         </div>
