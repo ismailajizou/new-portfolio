@@ -36,11 +36,11 @@ export const RevealSection: FC<TextRevealByWordProps> = ({
     <div ref={targetRef} className={cn("relative z-0 h-[200vh]", className)}>
       <div
         className={
-          "sticky top-0 mx-auto grid md:grid-cols-3 justify-items-center md:justify-items-start h-[50%] w-full items-center justify-center gap-4 bg-transparent px-[1rem] py-[5rem]"
+          "sticky top-0 mx-auto grid md:grid-cols-3 justify-items-center md:justify-items-start h-[50%] w-full items-center justify-center gap-4 bg-transparent md:px-[1rem] py-5 md:py-[5rem]"
         }
       >
         <motion.div
-          className="relative h-60 w-60 overflow-hidden rounded-full md:h-96 md:w-96"
+          className="relative h-52 w-52 overflow-hidden rounded-full md:h-96 md:w-96"
           style={{
             filter: grayscale,
           }}
@@ -57,7 +57,7 @@ export const RevealSection: FC<TextRevealByWordProps> = ({
 
         <p
           className={
-            "flex flex-wrap p-5 text-center justify-center md:justify-start md:col-span-2 text-lg font-bold text-black/20 dark:text-white/20 md:p-8 md:text-xl lg:p-10 lg:text-2xl xl:text-2xl"
+            "flex flex-wrap text-center justify-center md:justify-start md:col-span-2 text-lg font-bold text-black/20 dark:text-white/20 md:p-8 md:text-xl lg:p-10 lg:text-2xl xl:text-2xl"
           }
         >
           {words.map((word, i) => {

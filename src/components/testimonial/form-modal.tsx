@@ -7,7 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -69,7 +69,7 @@ const TestimonialForm = () => {
       <DialogTrigger asChild>
         <Button variant="default">Write me something</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md overflow-y-scroll max-h-full">
         <DialogHeader>
           <DialogTitle>Testimonial</DialogTitle>
         </DialogHeader>
@@ -80,20 +80,20 @@ const TestimonialForm = () => {
           >
             <FormField
               name="name"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Fullname</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field}/>
+                    <Input placeholder="John Doe" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <div className="grid md:grid-cols-2 md:gap-2">
+            <div className="grid gap-4 md:grid-cols-2 md:gap-2">
               <FormField
                 name="title"
-                render={({field}) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Job Title</FormLabel>
                     <FormControl>
@@ -105,7 +105,7 @@ const TestimonialForm = () => {
               />
               <FormField
                 name="company"
-                render={({field}) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Company</FormLabel>
                     <FormControl>
@@ -145,7 +145,7 @@ const TestimonialForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription className="text-sm text-right">
+                  <FormDescription className="text-right text-sm">
                     {testimonialBody.length}/300
                   </FormDescription>
                   <FormMessage />

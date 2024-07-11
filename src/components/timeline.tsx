@@ -57,7 +57,7 @@ export default function Timeline({ items }: TimelineProps) {
             scrollYProgress={scrollYProgress}
             {...{
               title: "And Beyond . . .",
-              date: "♾️",
+              date: "",
               description: "",
             }}
           />
@@ -87,13 +87,13 @@ export const TimelineEvent = ({
   return (
     <motion.div
       style={{ opacity }}
-      className={cn("flex w-96 flex-col justify-stretch gap-24", className)}
+      className={cn("flex w-64 md:w-96 flex-col justify-stretch gap-24", className)}
     >
       <div className="rounded-md bg-blue-900 px-6 py-4 text-center">
-        <h4 className="text-xl font-bold">{title}</h4>
-        <p className="text-md">{description}</p>
+        <h4 className="text-md md:text-xl font-bold">{title}</h4>
+        <p className="text-sm md:text-md">{description}</p>
       </div>
-      <p className="text-center text-3xl font-bold">{date}</p>
+      <p className="text-center text-xl md:text-3xl font-bold">{date}</p>
     </motion.div>
   );
 };

@@ -3,7 +3,7 @@
 import { contact } from "@/app/_actions/contact";
 import { useMutation } from "@tanstack/react-query";
 import React, {
-  Dispatch,
+  type Dispatch,
   type RefObject,
   useCallback,
   useEffect,
