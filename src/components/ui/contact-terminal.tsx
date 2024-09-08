@@ -80,12 +80,12 @@ const useTyping = ({
       setCursor((prev) => prev + 1);
     }
   }, [cursor, input.length]);
-  const moveStart = useCallback(() => {
-    setCursor(0);
-  }, []);
-  const moveEnd = useCallback(() => {
-    setCursor(input.length);
-  }, [input.length]);
+  // const moveStart = useCallback(() => {
+  //   setCursor(0);
+  // }, []);
+  // const moveEnd = useCallback(() => {
+  //   setCursor(input.length);
+  // }, [input.length]);
   const resetInput = useCallback(() => {
     setInput("");
     setCursor(0);

@@ -3,7 +3,6 @@ import TestimonialSection from "@/components/home-section/testimonial.section";
 import Navbar from "@/components/navigation/navbar";
 // import Timeline from "@/components/timeline";
 import { BorderBeam } from "@/components/ui/border-beam";
-import { Button } from "@/components/ui/button";
 import ContactTerminal from "@/components/ui/contact-terminal";
 import IconCloud from "@/components/ui/icon-cloud";
 import ParticlesBg from "@/components/ui/particles-bg";
@@ -11,11 +10,10 @@ import RevealSection from "@/components/ui/reveal-section";
 import Section from "@/components/ui/section";
 import { Timeline } from "@/components/ui/timeline";
 import WordRotate from "@/components/ui/word-rotate";
-import { TECHNICAL_SKILLS } from "@/lib/constants";
+import { CAREER_EVENTS, TECHNICAL_SKILLS } from "@/lib/constants";
 import connectMongo from "@/server/db";
 import Testimonial from "@/server/db/models/testimonial";
 import Image from "next/image";
-import { CAREER_EVENTS } from "@/lib/constants";
 import Link from "next/link";
 
 export default async function HomePage() {

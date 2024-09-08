@@ -1,4 +1,3 @@
-import Navbar from "@/components/navigation/admin-navbar";
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 
