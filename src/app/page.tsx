@@ -1,7 +1,7 @@
 import Footer from "@/components/footer/default-footer";
 import TestimonialSection from "@/components/home-section/testimonial.section";
 import Navbar from "@/components/navigation/navbar";
-import Timeline from "@/components/timeline";
+// import Timeline from "@/components/timeline";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
 import ContactTerminal from "@/components/ui/contact-terminal";
@@ -9,12 +9,14 @@ import IconCloud from "@/components/ui/icon-cloud";
 import ParticlesBg from "@/components/ui/particles-bg";
 import RevealSection from "@/components/ui/reveal-section";
 import Section from "@/components/ui/section";
+import { Timeline } from "@/components/ui/timeline";
 import WordRotate from "@/components/ui/word-rotate";
 import { TECHNICAL_SKILLS } from "@/lib/constants";
 import connectMongo from "@/server/db";
-import Testimonial, { ITestimonial } from "@/server/db/models/testimonial";
+import Testimonial from "@/server/db/models/testimonial";
 import Image from "next/image";
-
+import { CAREER_EVENTS } from "@/lib/constants";
+import Link from "next/link";
 
 export default async function HomePage() {
   await connectMongo();
@@ -27,7 +29,7 @@ export default async function HomePage() {
     <div className="">
       <Navbar />
 
-      <section className="relative">
+      <section className="relative" id="hero">
         {/* <ParticlesBg /> */}
         {/* {
           // show only on prod
@@ -53,10 +55,19 @@ export default async function HomePage() {
               ]}
             />
             <div className="flex justify-center gap-4 md:justify-start">
-              <Button className="md:min-w-48">Get in touch</Button>
-              <Button className="md:min-w-48" variant={"secondary"}>
+              <Link
+                href="#contact"
+                className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 md:min-w-48"
+              >
+                Get in touch
+              </Link>
+              <Link
+                className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground ring-offset-background transition-colors hover:bg-secondary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 md:min-w-48"
+                href="/resume/en.pdf"
+                target="_blank"
+              >
                 Resume
-              </Button>
+              </Link>
             </div>
           </div>
           <div className="relative h-60 w-60 overflow-hidden rounded-full md:h-96 md:w-96">
@@ -74,7 +85,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <Section>
+      <Section id="about">
         <h2 className="text-center text-2xl font-bold md:text-4xl">About Me</h2>
         <RevealSection
           className="text-center"
@@ -85,28 +96,7 @@ export default async function HomePage() {
         <h2 className="text-center text-2xl font-bold md:text-4xl">
           My Journey
         </h2>
-        <Timeline
-          items={[
-            {
-              title: "Started Coding",
-              date: "2015",
-              description:
-                "I started coding at the age of 15, and I've been hooked ever since!",
-            },
-            {
-              title: "CS Degree",
-              date: "2022",
-              description:
-                "I graduated from the University of Morocco with a degree in Computer Science.",
-            },
-            {
-              title: "Full Stack Developer - Intern",
-              date: "2022",
-              description:
-                "I graduated from high school and started my journey as a developer.",
-            },
-          ]}
-        />
+        <Timeline data={CAREER_EVENTS} />
       </Section>
 
       <Section>
@@ -116,14 +106,14 @@ export default async function HomePage() {
           {/* {
             // show only on prod
             process.env.NODE_ENV === "production" && ( */}
-              <IconCloud iconSlugs={TECHNICAL_SKILLS} />
-            {/* )
+          <IconCloud iconSlugs={TECHNICAL_SKILLS} />
+          {/* )
           } */}
         </div>
       </Section>
       <TestimonialSection testimonials={testimonials} />
 
-      <Section>
+      <Section id="contact">
         <ContactTerminal />
       </Section>
 

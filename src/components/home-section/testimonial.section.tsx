@@ -4,68 +4,26 @@ import Marquee from "../ui/marquee";
 import TestimonialCard from "../ui/testimonial-card";
 import TestimonialForm from "../testimonial/form-modal";
 import Section from "../ui/section";
-import { isMobile } from "react-device-detect";
 
-const MOCK_TESTIMONIALS: ITestimonial[] = [
-  {
-    _id: "1",
-    name: "John Doe",
-    company: "Google",
-    text: "Ismail is a great developer. He helped me with my project and I was very satisfied with the results.",
-    status: "APPROVED",
-    title: "Senior Developer",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    _id: "2",
-    name: "Jane Doe",
-    company: "Facebook",
-    text: "Ismail is a great developer. He helped me with my project and I was very satisfied with the results.",
-    status: "APPROVED",
-    title: "Senior Developer",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    _id: "3",
-    name: "John Doe",
-    company: "Google",
-    text: "Ismail is a great developer. He helped me with my project and I was very satisfied with the results.",
-    status: "APPROVED",
-    title: "Senior Developer",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    _id: "4",
-    name: "Jane Doe",
-    company: "Facebook",
-    text: "Ismail is a great developer. He helped me with my project and I was very satisfied with the results.",
-    status: "APPROVED",
-    title: "Senior Developer",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-];
+
 const TestimonialSection = ({
   testimonials,
 }: {
   testimonials: ITestimonial[];
 }) => {
   return (
-    <Section>
+    <Section id="testemonials">
       <h2 className="mb-8 text-center text-4xl font-bold">Testimonials</h2>
 
-      {MOCK_TESTIMONIALS.length ? (
+      {testimonials.length ? (
         <div className="relative mb-8">
           <Marquee pauseOnHover className="overflow-x-scroll md:overflow-x-hidden">
-            {MOCK_TESTIMONIALS.map((t) => (
+            {testimonials.map((t) => (
               <TestimonialCard key={t._id} testimonial={t} />
             ))}
           </Marquee>
           <Marquee className="overflow-x-scroll md:overflow-x-hidden" reverse pauseOnHover>
-            {MOCK_TESTIMONIALS.map((t) => (
+            {testimonials.map((t) => (
               <TestimonialCard key={t._id} testimonial={t} />
             ))}
           </Marquee>

@@ -1,5 +1,5 @@
 "use client";
-import { motion, type MotionProps } from "framer-motion";
+import { AnimatePresence, motion, type MotionProps } from "framer-motion";
 import { type LucideProps } from "lucide-react";
 import {
   type ComponentProps,
@@ -19,6 +19,25 @@ const Path = (props: ComponentProps<"path"> & MotionProps) => (
   />
 );
 
+const overlayVariants = {
+  closed: {
+    clipPath: 'circle(0% at 100% 100%)',
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 40
+    }
+  },
+  open: {
+    clipPath: 'circle(150% at 100% 100%)',
+    transition: {
+      type: "spring",
+      stiffness: 20,
+      restDelta: 2
+    }
+  }
+};
+
 const RoundedMenu = ({
   links,
 }: {
@@ -32,16 +51,32 @@ const RoundedMenu = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    // I want a rounded menu button that when clicked, the links are displayed as rounded buttons around the menu button
     <>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={overlayVariants}
+            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
+      </AnimatePresence>
       <motion.button
         onClick={() => setIsOpen((s) => !s)}
-        className="fixed bottom-4 right-4 flex items-center justify-center z-40 h-16 w-16 rounded-full bg-blue-500"
+        className="fixed bottom-4 right-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 md:hidden"
         animate={isOpen ? "open" : "closed"}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <svg width="23" height="23" viewBox="0 0 23 23" className="text-primary">
+        <svg
+          width="23"
+          height="23"
+          viewBox="0 0 23 23"
+          className="text-primary"
+        >
           <Path
             variants={{
               closed: { d: "M 2 2.5 L 20 2.5" },
@@ -67,7 +102,7 @@ const RoundedMenu = ({
       {links.map((link, index) => (
         <motion.button
           key={index}
-          className="fixed z-40 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500"
+          className="fixed z-40 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500 md:hidden"
           style={{
             right:
               200 * Math.cos(((index / (links.length - 1)) * 2 * Math.PI) / 4),
@@ -93,7 +128,7 @@ const RoundedMenu = ({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <link.icon className="h-4 w-4" />
+          <link.icon className="h-6 w-6" />
         </motion.button>
       ))}
     </>
