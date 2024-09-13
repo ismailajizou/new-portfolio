@@ -23,6 +23,7 @@ export const env = createEnv({
     NEXT_PUBLIC_TWITTER_LINK: z.string(),
     NEXT_PUBLIC_GITHUB_LINK: z.string(),
     NEXT_PUBLIC_LINKEDIN_LINK: z.string(),
+    NEXT_PUBLIC_URL: z.string(),
   },
 
   /**
@@ -39,6 +40,7 @@ export const env = createEnv({
     NEXT_PUBLIC_TWITTER_LINK: process.env.NEXT_PUBLIC_TWITTER_LINK,
     NEXT_PUBLIC_GITHUB_LINK: process.env.NEXT_PUBLIC_GITHUB_LINK,
     NEXT_PUBLIC_LINKEDIN_LINK: process.env.NEXT_PUBLIC_LINKEDIN_LINK,
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
