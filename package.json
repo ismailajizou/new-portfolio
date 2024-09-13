@@ -8,7 +8,6 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "postinstall": "npm rebuild argon2 --build-from-source",
     "pwd:hash": "node ./src/hash.js"
   },
   "dependencies": {
@@ -34,7 +33,7 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.4.0",
     "@uploadthing/react": "^6.6.0",
-    "argon2": "^0.40.3",
+    "argon2": "0.31.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
