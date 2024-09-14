@@ -1,4 +1,4 @@
-import { hash } from "argon2";
+import { hash } from "bcrypt";
 
 /**
  *
@@ -8,7 +8,7 @@ import { hash } from "argon2";
  * Hashes a password using Argon2
  */
 export async function hashPassword(password) {
-  const hashedPassword = await hash(password);
+  const hashedPassword = await hash(password, 10);
   return hashedPassword;
 }
 

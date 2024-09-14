@@ -1,6 +1,6 @@
 import { env } from "@/env";
 import connectMongo from "@/server/db";
-import { verify } from "argon2";
+import { compare } from "bcrypt";
 import NextAuth, { type DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
@@ -90,7 +90,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         if (!user || user.email !== email)
           throw new Error("Invalid credentials");
 
-        const isValid = await verify(user.password, password);
+        const isValid = await compare(password, user.password);
         if (!isValid) throw new Error("Invalid credentials");
         return {
           id: user._id.toString(),
