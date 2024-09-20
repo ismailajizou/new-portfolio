@@ -43,7 +43,7 @@ export const CAREER_EVENTS: TimelineEvent[] = [
   },
   {
     title: "Full Stack Developer and IT Coach - Ark-x Talent Factory",
-    date: "2022 - Present",
+    date: "2023 - Present",
     description:
       "I collaboratively contributed to the conception and development of internal applications, while effectively guiding individuals through coding challenges, particularly with MERN stack technologies. 🤝💡 Additionally, I played an active role in creating immersive learning experiences and skillfully led student projects, fostering collaboration and overcoming obstacles. 🏆🚀 With a passion for rapid learning, I enthusiastically helped individuals unlock their hidden potential. 🔓🌟",
   },
