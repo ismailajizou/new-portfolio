@@ -93,7 +93,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         const isValid = await compare(password, user.password);
         if (!isValid) throw new Error("Invalid credentials");
         return {
-          id: user._id.toString(),
+          id: user.id,
           email: user.email,
           name: user.name,
         };

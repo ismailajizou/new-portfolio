@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { type JSX, useEffect, useMemo, useState } from "react";
 import {
   Cloud,
   fetchSimpleIcons,
@@ -36,7 +36,7 @@ export const cloudProps: Omit<ICloud, "children"> = {
   },
 };
 
-export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
+export const renderCustomIcon = (icon: SimpleIcon, theme: string): JSX.Element => {
   const bgHex = theme === "light" ? "#f3f2ef" : "#080510";
   const fallbackHex = theme === "light" ? "#6e6e73" : "#ffffff";
   const minContrastRatio = theme === "dark" ? 2 : 1.2;
@@ -53,7 +53,7 @@ export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
       rel: undefined,
       onClick: (e) => e.preventDefault(),
     },
-  });
+  }) as JSX.Element;
 };
 
 export type DynamicCloudProps = {
@@ -73,13 +73,12 @@ export default function IconCloud({ iconSlugs }: DynamicCloudProps) {
   const renderedIcons = useMemo(() => {
     if (!data) return null;
 
-    return Object.values(data.simpleIcons).map((icon) =>
+    return Object.values(data.simpleIcons).map((icon: SimpleIcon): JSX.Element =>
       renderCustomIcon(icon, "dark"),
     );
   }, [data]);
 
   return (
-    // @ts-expect-error - `children` is required
     <Cloud {...cloudProps}>
       <>{renderedIcons}</>
     </Cloud>

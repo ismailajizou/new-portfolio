@@ -1,7 +1,6 @@
 import Footer from "@/components/footer/default-footer";
 import TestimonialSection from "@/components/home-section/testimonial.section";
 import Navbar from "@/components/navigation/navbar";
-// import Timeline from "@/components/timeline";
 import { BorderBeam } from "@/components/ui/border-beam";
 import ContactTerminal from "@/components/ui/contact-terminal";
 import IconCloud from "@/components/ui/icon-cloud";
@@ -10,29 +9,22 @@ import RevealSection from "@/components/ui/reveal-section";
 import Section from "@/components/ui/section";
 import { Timeline } from "@/components/ui/timeline";
 import WordRotate from "@/components/ui/word-rotate";
+import { env } from "@/env";
 import { CAREER_EVENTS, TECHNICAL_SKILLS } from "@/lib/constants";
-import connectMongo from "@/server/db";
-import Testimonial from "@/server/db/models/testimonial";
+import { type ITestimonial } from "@/server/db/models/testimonial";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function HomePage() {
-  await connectMongo();
-  const data = await Testimonial.find({ status: "APPROVED" });
-  const testimonials = data.map((testimonial) => ({
-    ...testimonial.toJSON(),
-    _id: testimonial._id.toString(),
-  }));
+  const data = await fetch(
+    env.NEXT_PUBLIC_URL + "/api/testimonials?status=APPROVED",
+  );
+  const testimonials = (await data.json()) as ITestimonial[];
   return (
     <div className="">
       <Navbar />
 
       <section className="relative" id="hero">
-        {/* <ParticlesBg /> */}
-        {/* {
-          // show only on prod
-          process.env.NODE_ENV === "production" && <ParticlesBg />
-        } */}
         <ParticlesBg />
         <div className="container relative flex flex-col-reverse items-center justify-between gap-8 py-8 md:my-6 md:flex-row md:py-24 lg:py-32">
           <div className="relative space-y-4 text-center md:text-left">
@@ -43,7 +35,6 @@ export default async function HomePage() {
             <p className="text-md md:text-xl">
               A passionate software Developer with an interest in
             </p>
-            {/* <p className="text-2xl font-semibold">Full Stack Developer</p> */}
             <WordRotate
               className="text-xl font-semibold md:text-2xl"
               words={[
@@ -101,12 +92,7 @@ export default async function HomePage() {
         <h2 className="text-center text-4xl font-bold">Technical Skills</h2>
 
         <div>
-          {/* {
-            // show only on prod
-            process.env.NODE_ENV === "production" && ( */}
           <IconCloud iconSlugs={TECHNICAL_SKILLS} />
-          {/* )
-          } */}
         </div>
       </Section>
       <TestimonialSection testimonials={testimonials} />

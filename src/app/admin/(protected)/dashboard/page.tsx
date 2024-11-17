@@ -1,12 +1,12 @@
-// "use client";
-
 import { ResizablePanel } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
 import AdminLayout from "@/components/admin-layout";
 import Contact from "@/server/db/models/contact";
 import Testimonial from "@/server/db/models/testimonial";
+import connectMongo from "@/server/db";
 
 const Page = async () => {
+  await connectMongo();
   const mailCount = await Contact.countDocuments().exec();
   const testimonialCount = await Testimonial.countDocuments().exec();
   return (

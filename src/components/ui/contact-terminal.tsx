@@ -64,8 +64,8 @@ const useTyping = ({
   mobileInputRef,
 }: {
   handleNext: (input: string) => void;
-  terminalRef: RefObject<HTMLElement>;
-  mobileInputRef: RefObject<HTMLInputElement>;
+  terminalRef: RefObject<HTMLElement | null>;
+  mobileInputRef: RefObject<HTMLInputElement | null>;
 }) => {
   const [focus, setFocus] = useState(false);
   const [cursor, setCursor] = useState<number>(0);
@@ -222,7 +222,7 @@ export const useScrollToBottom = ({
   wrapperRef,
 }: {
   changesToWatch: unknown
-  wrapperRef: RefObject<HTMLElement>
+  wrapperRef: RefObject<HTMLElement | null>
 }) => {
   useEffect(() => {
     if (!wrapperRef.current) return;
