@@ -1,11 +1,5 @@
 import { format } from "date-fns";
-import {
-  Forward,
-  MoreVertical,
-  Reply,
-  ReplyAll,
-  Trash2
-} from "lucide-react";
+import { Forward, MoreVertical, Reply, ReplyAll, Trash2 } from "lucide-react";
 
 import { removeContact } from "@/app/_actions/contact";
 import { type IContact } from "@/server/db/models/contact";

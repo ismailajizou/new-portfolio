@@ -29,7 +29,8 @@ export const writeTestimonial = async (data: TTestimonial) => {
         _id: testimonial._id.toString(),
       },
     };
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
     throw new Error("Failed to create testimonial");
   }
 };
@@ -56,7 +57,8 @@ export const publishTestimonial = async (id: string) => {
         _id: testimonial._id.toString(),
       },
     };
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
     throw new Error("Failed to publish testimonial");
   }
 };
@@ -76,14 +78,8 @@ export const rejectTestimonial = async (id: string) => {
     if (!testimonial) {
       throw new Error("Testimonial not found");
     }
-    // return {
-    //   message: "Testimonial rejected successfully",
-    //   data: {
-    //     ...testimonial.toJSON(),
-    //     _id: testimonial._id.toString(),
-    //   },
-    // };
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
     throw new Error("Failed to reject testimonial");
   }
   revalidatePath("/admin/testimonials");
@@ -103,7 +99,8 @@ export const deleteTestimonial = async (id: string) => {
     if (testimonial.image) {
       await utapi.deleteFiles(testimonial.image.split("/").at(-1)!);
     }
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
     throw new Error("Failed to delete testimonial");
   }
   revalidatePath("/admin/testimonials");

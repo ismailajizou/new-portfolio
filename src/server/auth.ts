@@ -35,7 +35,7 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  debug: env.NODE_ENV === "development", 
+  debug: env.NODE_ENV === "development",
   pages: {
     signIn: "/admin/login",
     signOut: "/admin",
@@ -93,7 +93,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         const isValid = await compare(password, user.password);
         if (!isValid) throw new Error("Invalid credentials");
         return {
-          id: user.id,
+          id: user.id as string,
           email: user.email,
           name: user.name,
         };

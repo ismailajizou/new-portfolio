@@ -27,11 +27,11 @@ export const contact = async (contact: Contact) => {
         _id: letter._id.toString(),
       },
     };
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
     throw new Error("Failed to send message");
   }
 };
-
 
 export const removeContact = async (id: string) => {
   try {
@@ -40,8 +40,9 @@ export const removeContact = async (id: string) => {
     if (!contact) {
       throw new Error("Contact not found");
     }
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
     throw new Error("Failed to delete contact");
   }
   revalidatePath("/admin/contacts");
-}
+};

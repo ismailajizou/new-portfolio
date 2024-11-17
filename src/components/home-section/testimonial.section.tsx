@@ -5,7 +5,6 @@ import TestimonialCard from "../ui/testimonial-card";
 import TestimonialForm from "../testimonial/form-modal";
 import Section from "../ui/section";
 
-
 const TestimonialSection = ({
   testimonials,
 }: {
@@ -17,18 +16,25 @@ const TestimonialSection = ({
 
       {testimonials.length ? (
         <div className="relative mb-8">
-          <Marquee pauseOnHover className="overflow-x-scroll md:overflow-x-hidden">
+          <Marquee
+            pauseOnHover
+            className="overflow-x-scroll md:overflow-x-hidden"
+          >
             {testimonials.map((t) => (
               <TestimonialCard key={t._id} testimonial={t} />
             ))}
           </Marquee>
-          <Marquee className="overflow-x-scroll md:overflow-x-hidden" reverse pauseOnHover>
+          <Marquee
+            className="overflow-x-scroll md:overflow-x-hidden"
+            reverse
+            pauseOnHover
+          >
             {testimonials.map((t) => (
               <TestimonialCard key={t._id} testimonial={t} />
             ))}
           </Marquee>
-          <div className="hidden md:block pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background" />
-          <div className="hidden md:block pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 bg-gradient-to-r from-white dark:from-background md:block" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-white dark:from-background md:block" />
         </div>
       ) : (
         <div className="my-10 flex flex-col items-center justify-center">

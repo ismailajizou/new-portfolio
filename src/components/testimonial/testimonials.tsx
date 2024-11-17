@@ -10,7 +10,6 @@ import { Separator } from "../ui/separator";
 import { TestimonialList } from "./testimonial-list";
 import { TestimonialDisplay } from "./testimonial-display";
 
-
 interface MailProps {
   data: ITestimonial[];
 }
@@ -41,7 +40,9 @@ export function Testimonials({ data }: MailProps) {
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={655}>
-        <TestimonialDisplay data={data.find((item) => item._id === mail) ?? null} />
+        <TestimonialDisplay
+          data={data.find((item) => item._id === mail) ?? null}
+        />
       </ResizablePanel>
     </>
   );

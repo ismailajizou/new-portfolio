@@ -10,7 +10,11 @@ interface MailListProps {
   setSelected: (mail: IContact["_id"]) => void;
 }
 
-export function MailList({ items, selectedMail: mail, setSelected }: MailListProps) {
+export function MailList({
+  items,
+  selectedMail: mail,
+  setSelected,
+}: MailListProps) {
   return (
     <ScrollArea className="h-ful">
       <div className="flex flex-col gap-2 p-4 pt-0">

@@ -8,7 +8,9 @@
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev --turbopack",
     "lint": "next lint",
     "start": "next start",
-    "pwd:hash": "node ./src/hash.js"
+    "format": "prettier --write .",
+    "pwd:hash": "node ./src/hash.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -63,15 +65,16 @@
   "devDependencies": {
     "@tanstack/react-query-devtools": "^5.60.5",
     "@types/bcrypt": "^5.0.2",
-    "@types/eslint": "^9.6.1",
+    "@types/eslint": "^8.10.1",
     "@types/node": "^22.9.0",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^8.14.0",
     "cross-env": "^7.0.3",
-    "eslint": "^9.15.0",
+    "eslint": "^8.57.1",
     "eslint-config-next": "15.0.3",
+    "husky": "^9.1.6",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",

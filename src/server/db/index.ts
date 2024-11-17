@@ -5,8 +5,8 @@ const cached: {
   connection: Mongoose | null;
   promise: Promise<Mongoose> | null;
 } = {
-    connection: null,
-    promise: null,
+  connection: null,
+  promise: null,
 };
 
 async function connectMongo() {

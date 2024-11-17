@@ -69,7 +69,7 @@ const TestimonialForm = () => {
       <DialogTrigger asChild>
         <Button variant="default">Write me something</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md overflow-y-scroll max-h-full">
+      <DialogContent className="max-h-full overflow-y-scroll sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Testimonial</DialogTitle>
         </DialogHeader>

@@ -160,7 +160,6 @@ const useTyping = ({
     }
   }, [mobileInputRef, terminalRef]);
 
-
   return {
     input,
     cursor,
@@ -221,8 +220,8 @@ export const useScrollToBottom = ({
   changesToWatch,
   wrapperRef,
 }: {
-  changesToWatch: unknown
-  wrapperRef: RefObject<HTMLElement | null>
+  changesToWatch: unknown;
+  wrapperRef: RefObject<HTMLElement | null>;
 }) => {
   useEffect(() => {
     if (!wrapperRef.current) return;
@@ -247,7 +246,7 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
   useScrollToBottom({
     changesToWatch: lines,
     wrapperRef: editorAreaRef,
-  })
+  });
 
   const handleCommands = (input: string) => {
     if (input === "") return;
@@ -417,7 +416,10 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
       className="mx-auto max-w-3xl overflow-hidden rounded-md border-2 border-card bg-card font-mono shadow-md"
     >
       <TitleBar title={title} />
-      <div className="h-96 overflow-y-scroll bg-gray-800/20 px-4 py-2 backdrop-blur-sm" ref={editorAreaRef}>
+      <div
+        className="h-96 overflow-y-scroll bg-gray-800/20 px-4 py-2 backdrop-blur-sm"
+        ref={editorAreaRef}
+      >
         <p>
           Welcome to my terminal, type{" "}
           <span className="text-green-500">contact</span> to contact me, or{" "}
@@ -439,7 +441,7 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
             <p className="text-green-500">${SPACE_CHAR}</p>
             {input.split("").map((char, i) =>
               isFocused && i === cursor ? (
-                <span key={i} className=" bg-green-500 text-gray-800">
+                <span key={i} className="bg-green-500 text-gray-800">
                   {char === " " ? SPACE_CHAR : char}
                 </span>
               ) : (

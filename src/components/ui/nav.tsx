@@ -22,7 +22,7 @@ interface NavProps {
 
 export function Nav({ links, isCollapsed }: NavProps) {
   const pathname = usePathname();
-  console.log(pathname)
+  console.log(pathname);
   return (
     <div
       data-collapsed={isCollapsed}
@@ -36,7 +36,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                 <Link
                   href={link.href}
                   className={cn(
-                    buttonVariants({ size: "icon", variant: 'ghost' }),
+                    buttonVariants({ size: "icon", variant: "ghost" }),
                     "h-9 w-9",
                     pathname === link.href &&
                       "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
@@ -60,7 +60,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
               key={index}
               href={link.href}
               className={cn(
-                buttonVariants({ size: "sm", variant: "ghost"}),
+                buttonVariants({ size: "sm", variant: "ghost" }),
                 pathname === link.href &&
                   "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
                 "justify-start",

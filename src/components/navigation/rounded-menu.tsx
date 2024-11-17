@@ -21,21 +21,21 @@ const Path = (props: ComponentProps<"path"> & MotionProps) => (
 
 const overlayVariants = {
   closed: {
-    clipPath: 'circle(0% at 100% 100%)',
+    clipPath: "circle(0% at 100% 100%)",
     transition: {
       type: "spring",
       stiffness: 400,
-      damping: 40
-    }
+      damping: 40,
+    },
   },
   open: {
-    clipPath: 'circle(150% at 100% 100%)',
+    clipPath: "circle(150% at 100% 100%)",
     transition: {
       type: "spring",
       stiffness: 20,
-      restDelta: 2
-    }
-  }
+      restDelta: 2,
+    },
+  },
 };
 
 const RoundedMenu = ({
@@ -59,7 +59,7 @@ const RoundedMenu = ({
             animate="open"
             exit="closed"
             variants={overlayVariants}
-            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+            className="fixed inset-0 z-30 bg-black bg-opacity-50"
             onClick={() => setIsOpen(false)}
           />
         )}

@@ -20,7 +20,6 @@ const AdminLayout = ({
   navCollapsedSize?: number;
   numberOfTestimonials: number;
   numberOfContacts: number;
-
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -33,7 +32,7 @@ const AdminLayout = ({
             sizes,
           )}`;
         }}
-        className="h-screen items-stretch flex overflow-hidden bg-background/95"
+        className="flex h-screen items-stretch overflow-hidden bg-background/95"
       >
         <ResizablePanel
           defaultSize={265}
