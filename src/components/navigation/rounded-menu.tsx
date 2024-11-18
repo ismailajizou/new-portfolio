@@ -1,18 +1,16 @@
 "use client";
-import { AnimatePresence, motion, type MotionProps } from "framer-motion";
+import { AnimatePresence, motion, type SVGMotionProps } from "framer-motion";
 import { type LucideProps } from "lucide-react";
 import {
-  type ComponentProps,
+  useState,
   type ForwardRefExoticComponent,
   type RefAttributes,
-  useState,
 } from "react";
 
-const Path = (props: ComponentProps<"path"> & MotionProps) => (
+const Path = (props: SVGMotionProps<SVGPathElement>) => (
   <motion.path
     fill="transparent"
     strokeWidth="3"
-    // stroke="hsl(0, 0%, 18%)"
     stroke="currentColor"
     strokeLinecap="round"
     {...props}
@@ -59,12 +57,14 @@ const RoundedMenu = ({
             animate="open"
             exit="closed"
             variants={overlayVariants}
+            // @ts-expect-error clipPath is not in the types
             className="fixed inset-0 z-30 bg-black bg-opacity-50"
             onClick={() => setIsOpen(false)}
           />
         )}
       </AnimatePresence>
       <motion.button
+        // @ts-expect-error animate is not in the types
         onClick={() => setIsOpen((s) => !s)}
         className="fixed bottom-4 right-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 md:hidden"
         animate={isOpen ? "open" : "closed"}
@@ -102,6 +102,7 @@ const RoundedMenu = ({
       {links.map((link, index) => (
         <motion.button
           key={index}
+          // @ts-expect-error animate is not in the types
           className="fixed z-40 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500 md:hidden"
           style={{
             right:

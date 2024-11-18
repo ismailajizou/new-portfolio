@@ -15,9 +15,13 @@ import { type ITestimonial } from "@/server/db/models/testimonial";
 import Image from "next/image";
 import Link from "next/link";
 
+
+
+
 export default async function HomePage() {
   const data = await fetch(
     env.NEXT_PUBLIC_URL + "/api/testimonials?status=APPROVED",
+    { cache: "no-cache" }
   );
   const testimonials = (await data.json()) as ITestimonial[];
   return (

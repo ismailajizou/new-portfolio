@@ -38,6 +38,7 @@ export default function WordRotate({
       <AnimatePresence mode="wait">
         <motion.h1
           key={words[index]}
+          // @ts-expect-error className is not in the types
           className={cn(className)}
           {...framerProps}
         >
