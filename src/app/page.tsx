@@ -15,13 +15,10 @@ import { type ITestimonial } from "@/server/db/models/testimonial";
 import Image from "next/image";
 import Link from "next/link";
 
-
-
-
 export default async function HomePage() {
   const data = await fetch(
     env.NEXT_PUBLIC_URL + "/api/testimonials?status=APPROVED",
-    { cache: "no-cache" }
+    { cache: "no-cache" },
   );
   const testimonials = (await data.json()) as ITestimonial[];
   return (
@@ -56,7 +53,7 @@ export default async function HomePage() {
               </Link>
               <Link
                 className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground ring-offset-background transition-colors hover:bg-secondary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 md:min-w-48"
-                href="/resume/en.pdf"
+                href={env.NEXT_PUBLIC_RESUME_LINK}
                 target="_blank"
               >
                 Resume

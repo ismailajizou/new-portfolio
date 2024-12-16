@@ -16,6 +16,7 @@ import {
   SquareUserRoundIcon,
 } from "lucide-react";
 import RoundedMenu from "./rounded-menu";
+import { env } from "@/env";
 
 const NAV_LINKS = [
   { label: "Home", href: "#hero", icon: HomeIcon },
@@ -57,7 +58,7 @@ export default function Navbar() {
         <Button
           className="hidden md:flex"
           onClick={() => {
-            window.open("/resume/en.pdf", "_blank");
+            window.open(env.NEXT_PUBLIC_RESUME_LINK, "_blank");
           }}
         >
           <SquareUserRoundIcon className="mr-2" />
@@ -67,7 +68,7 @@ export default function Navbar() {
           className="md:hidden"
           size={"icon"}
           onClick={() => {
-            window.open("/resume/en.pdf", "_blank");
+            window.open(env.NEXT_PUBLIC_RESUME_LINK, "_blank");
           }}
         >
           <SquareUserRoundIcon />
