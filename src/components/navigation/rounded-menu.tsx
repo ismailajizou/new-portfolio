@@ -1,5 +1,10 @@
 "use client";
-import { AnimatePresence, motion, type SVGMotionProps, type Variants } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  type SVGMotionProps,
+  type Variants,
+} from "framer-motion";
 import { type LucideProps } from "lucide-react";
 import {
   useState,
