@@ -1,5 +1,5 @@
 "use client";
-import { AnimatePresence, motion, type SVGMotionProps } from "framer-motion";
+import { AnimatePresence, motion, type SVGMotionProps, type Variants } from "framer-motion";
 import { type LucideProps } from "lucide-react";
 import {
   useState,
@@ -17,11 +17,11 @@ const Path = (props: SVGMotionProps<SVGPathElement>) => (
   />
 );
 
-const overlayVariants = {
+const overlayVariants: Variants = {
   closed: {
     clipPath: "circle(0% at 100% 100%)",
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 400,
       damping: 40,
     },
@@ -29,7 +29,7 @@ const overlayVariants = {
   open: {
     clipPath: "circle(150% at 100% 100%)",
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 20,
       restDelta: 2,
     },
@@ -57,14 +57,12 @@ const RoundedMenu = ({
             animate="open"
             exit="closed"
             variants={overlayVariants}
-            // @ts-expect-error clipPath is not in the types
             className="bg-opacity-50 fixed inset-0 z-30 bg-black"
             onClick={() => setIsOpen(false)}
           />
         )}
       </AnimatePresence>
       <motion.button
-        // @ts-expect-error animate is not in the types
         onClick={() => setIsOpen((s) => !s)}
         className="fixed right-4 bottom-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 md:hidden"
         animate={isOpen ? "open" : "closed"}
@@ -102,7 +100,6 @@ const RoundedMenu = ({
       {links.map((link, index) => (
         <motion.button
           key={index}
-          // @ts-expect-error animate is not in the types
           className="fixed z-40 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500 md:hidden"
           style={{
             right:
