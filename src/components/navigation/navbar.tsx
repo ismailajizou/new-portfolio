@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
     <div className="container flex items-center justify-between py-4">
       <div className="flex items-center space-x-4">
-        <p className="bg-gradient-to-r from-sky-500 via-blue-700 to-purple-500 bg-clip-text text-2xl font-bold text-transparent">
+        <p className="bg-linear-to-r from-sky-500 via-blue-700 to-purple-500 bg-clip-text text-2xl font-bold text-transparent">
           IA
         </p>
       </div>

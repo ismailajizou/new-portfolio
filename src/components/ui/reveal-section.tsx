@@ -36,7 +36,7 @@ export const RevealSection: FC<TextRevealByWordProps> = ({
     <div ref={targetRef} className={cn("relative z-0 h-[200vh]", className)}>
       <div
         className={
-          "sticky top-0 mx-auto grid h-[50%] w-full items-center justify-center justify-items-center gap-4 bg-transparent py-5 md:grid-cols-3 md:justify-items-start md:px-[1rem] md:py-[5rem]"
+          "sticky top-0 mx-auto grid h-[50%] w-full items-center justify-center justify-items-center gap-4 bg-transparent py-5 md:grid-cols-3 md:justify-items-start md:px-4 md:py-20"
         }
       >
         <motion.div

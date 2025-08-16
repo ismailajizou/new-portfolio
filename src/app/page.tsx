@@ -30,7 +30,7 @@ export default async function HomePage() {
         <div className="relative container flex flex-col-reverse items-center justify-between gap-8 py-8 md:my-6 md:flex-row md:py-24 lg:py-32">
           <div className="relative space-y-4 text-center md:text-left">
             <p className="text-md md:text-xl">Hi 👋, I&apos;m</p>
-            <p className="bg-gradient-to-r from-sky-500 via-blue-700 to-purple-500 bg-clip-text text-4xl font-bold tracking-widest text-transparent md:text-7xl">
+            <p className="bg-linear-to-r from-sky-500 via-blue-700 to-purple-500 bg-clip-text text-4xl font-bold tracking-widest text-transparent md:text-7xl">
               Ismail AJIZOU
             </p>
             <p className="text-md md:text-xl">
