@@ -295,7 +295,7 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
       setLines([
         ...lines,
         {
-          text: valid.error.errors[0]?.message ?? "Invalid input",
+          text: valid.error.message ?? "Invalid input",
           level: "error",
         },
         { text: STEPS[step]!.prompt, level: "prompt" },

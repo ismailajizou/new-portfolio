@@ -2,7 +2,6 @@
 
 import { Search } from "lucide-react";
 
-import { type Mail } from "@/data";
 import { useState } from "react";
 import { Input } from "./input";
 import { MailDisplay } from "./mail-display";

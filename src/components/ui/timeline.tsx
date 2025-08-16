@@ -66,7 +66,6 @@ export const Timeline = ({ data }: { data: TimelineEvent[] }) => {
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            // @ts-expect-error animate is not in the types
             className="absolute inset-x-0 top-0 w-[2px] rounded-full bg-linear-to-t from-purple-500 from-0% via-blue-500 via-10% to-transparent"
           />
         </div>
