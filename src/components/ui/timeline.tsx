@@ -44,7 +44,7 @@ export const Timeline = ({ data }: { data: TimelineEvent[] }) => {
                 {item.date}
               </h3>
             </div>
-            <div className="relative w-full pl-20 pr-4 md:pl-4">
+            <div className="relative w-full pr-4 pl-20 md:pl-4">
               <h3 className="mb-4 block text-left text-2xl font-bold text-neutral-500 md:hidden">
                 {item.date}
               </h3>
@@ -59,7 +59,7 @@ export const Timeline = ({ data }: { data: TimelineEvent[] }) => {
           style={{
             height: height + "px",
           }}
-          className="absolute left-8 top-0 w-[2px] overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] dark:via-neutral-700 md:left-8"
+          className="absolute top-0 left-8 w-[2px] overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] md:left-8 dark:via-neutral-700"
         >
           <motion.div
             style={{

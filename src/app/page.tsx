@@ -27,7 +27,7 @@ export default async function HomePage() {
 
       <section className="relative" id="hero">
         <ParticlesBg />
-        <div className="container relative flex flex-col-reverse items-center justify-between gap-8 py-8 md:my-6 md:flex-row md:py-24 lg:py-32">
+        <div className="relative container flex flex-col-reverse items-center justify-between gap-8 py-8 md:my-6 md:flex-row md:py-24 lg:py-32">
           <div className="relative space-y-4 text-center md:text-left">
             <p className="text-md md:text-xl">Hi 👋, I&apos;m</p>
             <p className="bg-gradient-to-r from-sky-500 via-blue-700 to-purple-500 bg-clip-text text-4xl font-bold tracking-widest text-transparent md:text-7xl">
@@ -47,12 +47,12 @@ export default async function HomePage() {
             <div className="flex justify-center gap-4 md:justify-start">
               <Link
                 href="#contact"
-                className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 md:min-w-48"
+                className="bg-primary text-primary-foreground ring-offset-background hover:bg-primary/90 focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 md:min-w-48"
               >
                 Get in touch
               </Link>
               <Link
-                className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground ring-offset-background transition-colors hover:bg-secondary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 md:min-w-48"
+                className="bg-secondary text-secondary-foreground ring-offset-background hover:bg-secondary/80 focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 md:min-w-48"
                 href={env.NEXT_PUBLIC_RESUME_LINK}
                 target="_blank"
               >

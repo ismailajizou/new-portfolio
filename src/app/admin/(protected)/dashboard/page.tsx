@@ -19,7 +19,7 @@ const Page = async () => {
           <h1 className="text-xl font-bold">Dashboard</h1>
         </div>
         <Separator />
-        <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60"></div>
+        <div className="bg-background/95 supports-[backdrop-filter]:bg-background/60 p-4 backdrop-blur"></div>
       </ResizablePanel>
     </AdminLayout>
   );

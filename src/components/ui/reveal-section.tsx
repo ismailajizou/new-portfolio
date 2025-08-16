@@ -58,7 +58,7 @@ export const RevealSection: FC<TextRevealByWordProps> = ({
 
         <p
           className={
-            "flex flex-wrap justify-center text-center text-lg font-bold text-black/20 dark:text-white/20 md:col-span-2 md:justify-start md:p-8 md:text-xl lg:p-10 lg:text-2xl xl:text-2xl"
+            "flex flex-wrap justify-center text-center text-lg font-bold text-black/20 md:col-span-2 md:justify-start md:p-8 md:text-xl lg:p-10 lg:text-2xl xl:text-2xl dark:text-white/20"
           }
         >
           {words.map((word, i) => {

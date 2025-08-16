@@ -58,7 +58,7 @@ const RoundedMenu = ({
             exit="closed"
             variants={overlayVariants}
             // @ts-expect-error clipPath is not in the types
-            className="fixed inset-0 z-30 bg-black bg-opacity-50"
+            className="bg-opacity-50 fixed inset-0 z-30 bg-black"
             onClick={() => setIsOpen(false)}
           />
         )}
@@ -66,7 +66,7 @@ const RoundedMenu = ({
       <motion.button
         // @ts-expect-error animate is not in the types
         onClick={() => setIsOpen((s) => !s)}
-        className="fixed bottom-4 right-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 md:hidden"
+        className="fixed right-4 bottom-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 md:hidden"
         animate={isOpen ? "open" : "closed"}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}

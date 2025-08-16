@@ -22,7 +22,7 @@ export function MailList({
           <button
             key={item._id}
             className={cn(
-              "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
+              "hover:bg-accent flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all",
               mail?._id === item._id && "bg-muted",
             )}
             onClick={() => setSelected(item._id)}
@@ -50,7 +50,7 @@ export function MailList({
               </div>
               <div className="text-xs font-medium">{item.email}</div>
             </div>
-            <div className="line-clamp-2 text-xs text-muted-foreground">
+            <div className="text-muted-foreground line-clamp-2 text-xs">
               {item.message.substring(0, 300)}
             </div>
             {/* {item.labels.length ? (

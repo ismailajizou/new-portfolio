@@ -413,7 +413,7 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
   return (
     <div
       ref={terminalRef}
-      className="mx-auto max-w-3xl overflow-hidden rounded-md border-2 border-card bg-card font-mono shadow-md"
+      className="border-card bg-card mx-auto max-w-3xl overflow-hidden rounded-md border-2 font-mono shadow-md"
     >
       <TitleBar title={title} />
       <div
