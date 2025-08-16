@@ -12,7 +12,7 @@ const Section = ({
   return (
     <section
       className={cn(
-        "relative container my-6 py-10 md:py-24 lg:py-32",
+        "relative container my-6 py-10 md:py-24 lg:py-32 mx-auto",
         className,
       )}
       id={id}

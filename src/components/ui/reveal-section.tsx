@@ -40,7 +40,6 @@ export const RevealSection: FC<TextRevealByWordProps> = ({
         }
       >
         <motion.div
-          // @ts-expect-error animate is not in the types
           className="relative h-52 w-52 overflow-hidden rounded-full md:h-96 md:w-96"
           style={{
             filter: grayscale,
@@ -89,7 +88,6 @@ const Word: FC<WordProps> = ({ children, progress, range }) => {
       <span className={"absolute opacity-30"}>{children}</span>
       <motion.span
         style={{ opacity: opacity }}
-        // @ts-expect-error animate is not in the types
         className={"text-black dark:text-white"}
       >
         {children}

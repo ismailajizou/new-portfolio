@@ -17,7 +17,7 @@ export default async function Image() {
     (
       // ImageResponse JSX element
 
-      <div
+      (<div
         style={{
           display: "flex",
           height: "100%",
@@ -44,7 +44,7 @@ export default async function Image() {
         >
           Ismail Ajizou
         </div>
-      </div>
+      </div>)
     ),
     // ImageResponse options
     {

@@ -22,7 +22,7 @@ const SOCIALS = [
 
 const Footer = () => {
   return (
-    <footer className="container py-8">
+    <footer className="container py-8 mx-auto">
       <div className="mb-4 flex justify-center gap-4">
         {SOCIALS.map((social, index) => (
           <Link

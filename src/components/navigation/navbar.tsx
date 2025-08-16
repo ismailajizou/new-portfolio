@@ -30,7 +30,7 @@ const NAV_LINKS = [
 ];
 export default function Navbar() {
   return (
-    <div className="container flex items-center justify-between py-4">
+    <div className="container mx-auto flex items-center justify-between py-4">
       <div className="flex items-center space-x-4">
         <p className="bg-linear-to-r from-sky-500 via-blue-700 to-purple-500 bg-clip-text text-2xl font-bold text-transparent">
           IA
@@ -41,12 +41,15 @@ export default function Navbar() {
         <NavigationMenuList className="">
           {NAV_LINKS.map((item) => (
             <NavigationMenuItem key={item.label}>
-              <Link href={item.href} passHref legacyBehavior>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink
+                className={navigationMenuTriggerStyle()}
+                asChild
+              >
+                <Link href={item.href} passHref>
                   <item.icon className="mr-0 md:mr-2" />
                   <p className="hidden md:flex">{item.label}</p>
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>

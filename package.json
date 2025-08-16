@@ -10,7 +10,7 @@
     "start": "next start",
     "format": "prettier --write .",
     "pwd:hash": "node ./src/hash.js",
-    "prepare": "husky"
+    "postinstall": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -29,12 +29,13 @@
     "@radix-ui/react-tooltip": "^1.1.4",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@tabler/icons-react": "^3.22.0",
+    "@tailwindcss/postcss": "^4.1.12",
     "@tanstack/react-query": "^5.60.5",
     "@tanstack/react-query-next-experimental": "^5.60.5",
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.5.0",
-    "@uploadthing/react": "^7.1.1",
+    "@uploadthing/react": "^7.3.2",
     "bcrypt": "^6.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -46,6 +47,7 @@
     "next": "15.4.6",
     "next-auth": "5.0.0-beta.25",
     "next-themes": "^0.4.3",
+    "postcss": "^8.5.6",
     "react": "19.1.1",
     "react-device-detect": "^2.2.3",
     "react-dom": "19.1.1",
@@ -58,7 +60,7 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "tsparticles": "^3.5.0",
-    "uploadthing": "^7.3.0",
+    "uploadthing": "^7.7.3",
     "zod": "^4.0.17"
   },
   "devDependencies": {
@@ -91,5 +93,6 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.34.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
