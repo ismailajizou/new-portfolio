@@ -17,7 +17,7 @@ export default function TestimonialCard({
 }) {
   return (
     <Card className="relative max-w-[16rem] bg-gray-800/10 backdrop-blur-[2px] md:max-w-sm">
-      <QuoteIcon className="absolute right-4 top-4 transform text-gray-500" />
+      <QuoteIcon className="absolute top-4 right-4 transform text-gray-500" />
 
       <CardHeader className="flex items-center gap-2 md:flex-row md:gap-4">
         <div>

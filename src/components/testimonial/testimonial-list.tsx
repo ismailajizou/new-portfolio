@@ -23,7 +23,7 @@ export function TestimonialList({
           <button
             key={item._id}
             className={cn(
-              "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
+              "hover:bg-accent flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all",
               mail?._id === item._id && "bg-muted",
             )}
             onClick={() => setSelected(item._id)}
@@ -55,7 +55,7 @@ export function TestimonialList({
               </div>
               <div className="text-xs font-medium">{`${item.title} @${item.company}`}</div>
             </div>
-            <div className="line-clamp-2 text-xs text-muted-foreground">
+            <div className="text-muted-foreground line-clamp-2 text-xs">
               {item.text.substring(0, 300)}
             </div>
           </button>

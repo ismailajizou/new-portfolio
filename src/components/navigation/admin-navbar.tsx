@@ -37,7 +37,7 @@ const Navbar = () => {
             },
           ].map((item) => (
             <NavigationMenuItem key={item.label}>
-              <Link href={item.href} passHref legacyBehavior>
+              <Link href={item.href} passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <item.icon className="mr-0 md:mr-2" />
                   <p className="hidden md:flex">{item.label}</p>

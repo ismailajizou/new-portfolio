@@ -41,7 +41,7 @@ const AdminLoginForm = () => {
   });
   return (
     <Form {...form}>
-      <div className="w-full max-w-lg rounded-md border-2 bg-card px-6 py-8 shadow-md">
+      <div className="bg-card w-full max-w-lg rounded-md border-2 px-6 py-8 shadow-md">
         <h1 className="p-4 text-center text-2xl font-bold">Admin Login</h1>
         <form
           className="w-full space-y-4"

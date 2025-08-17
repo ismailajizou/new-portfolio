@@ -32,7 +32,7 @@ const AdminLayout = ({
             sizes,
           )}`;
         }}
-        className="flex h-screen items-stretch overflow-hidden bg-background/95"
+        className="bg-background/95 flex h-screen items-stretch overflow-hidden"
       >
         <ResizablePanel
           defaultSize={265}

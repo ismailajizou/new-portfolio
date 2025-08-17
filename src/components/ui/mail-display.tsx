@@ -117,13 +117,13 @@ export function MailDisplay({ mail }: MailDisplayProps) {
               </div>
             </div>
             {mail.createdAt && (
-              <div className="ml-auto text-xs text-muted-foreground">
+              <div className="text-muted-foreground ml-auto text-xs">
                 {format(new Date(mail.createdAt), "PPpp")}
               </div>
             )}
           </div>
           <Separator />
-          <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
+          <div className="flex-1 p-4 text-sm whitespace-pre-wrap">
             {mail.message}
           </div>
           <Separator className="mt-auto" />
@@ -148,7 +148,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           </div>
         </div>
       ) : (
-        <div className="p-8 text-center text-muted-foreground">
+        <div className="text-muted-foreground p-8 text-center">
           No message selected
         </div>
       )}
