@@ -22,7 +22,7 @@ export const TECHNICAL_SKILLS = [
   "express",
   "nuxt",
   "vuedotjs",
-  "docker"
+  "docker",
 ];
 
 export const CAREER_EVENTS: TimelineEvent[] = [
