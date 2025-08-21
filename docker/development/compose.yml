@@ -1,0 +1,8 @@
+services:
+  next-app:
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    # image: next-app
+    ports:
+      - "3000:3000"

@@ -6,6 +6,8 @@ import { type NextConfig } from "next";
  */
 import "./src/env.js";
 
-const config: NextConfig = {};
+const config: NextConfig = {  
+    output: "standalone",
+};
 
 export default config;

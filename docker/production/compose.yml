@@ -1,0 +1,8 @@
+services:
+  next-app:
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+    container_name: portfolio
+    ports:
+      - "${PORT:-3000}:3000"
