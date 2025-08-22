@@ -20,6 +20,19 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # This will do the trick, use the corresponding env file for each environment.
 # COPY .env.production.sample .env.production
+# Build-time envs: inject public envs for Next.js client bundle and skip server-side validation
+ARG NEXT_PUBLIC_TWITTER_LINK
+ARG NEXT_PUBLIC_GITHUB_LINK
+ARG NEXT_PUBLIC_LINKEDIN_LINK
+ARG NEXT_PUBLIC_RESUME_LINK
+ARG NEXT_PUBLIC_URL
+ARG SKIP_ENV_VALIDATION=1
+ENV NEXT_PUBLIC_TWITTER_LINK=$NEXT_PUBLIC_TWITTER_LINK \
+    NEXT_PUBLIC_GITHUB_LINK=$NEXT_PUBLIC_GITHUB_LINK \
+    NEXT_PUBLIC_LINKEDIN_LINK=$NEXT_PUBLIC_LINKEDIN_LINK \
+    NEXT_PUBLIC_RESUME_LINK=$NEXT_PUBLIC_RESUME_LINK \
+    NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL \
+    SKIP_ENV_VALIDATION=$SKIP_ENV_VALIDATION
 RUN yarn build
 
 # 3. Production image, copy all the files and run next
