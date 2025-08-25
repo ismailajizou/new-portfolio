@@ -40,7 +40,8 @@ ENV MONGO_URI=$MONGO_URI \
     AUTH_SECRET=$AUTH_SECRET \
     AUTH_URL=$AUTH_URL \
     NEXT_PUBLIC_RESUME_LINK=$NEXT_PUBLIC_RESUME_LINK \
-    NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL \
+    NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
+
 RUN yarn build
 
 # 3. Production image, copy all the files and run next
