@@ -1,26 +1,23 @@
-# syntax=docker.io/docker/dockerfile:1
+##### DEPENDENCIES
 
-FROM node:22-alpine AS base
-
-# 1. Install dependencies only when needed
-FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-
+FROM --platform=linux/amd64 node:22-alpine AS deps
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* .yarnrc ./
-RUN yarn install --frozen-lockfile
 
-# 2. Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-# This will do the trick, use the corresponding env file for each environment.
-# COPY .env.production.sample .env.production
-# Build-time envs: inject public envs for Next.js client bundle and skip server-side validation
+COPY package.json yarn.lock* .yarnrc ./
+
+RUN \
+    if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then npm ci; \
+    elif [ -f pnpm-lock.yaml ]; then npm install -g pnpm && pnpm i; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
+
+##### BUILDER
+
+FROM --platform=linux/amd64 node:22-alpine AS builder
 ARG MONGO_URI
 ARG NEXT_PUBLIC_TWITTER_LINK
 ARG NEXT_PUBLIC_GITHUB_LINK
@@ -31,40 +28,36 @@ ARG AUTH_SECRET
 ARG AUTH_URL
 ARG NEXT_PUBLIC_RESUME_LINK
 ARG NEXT_PUBLIC_URL
-ENV MONGO_URI=$MONGO_URI \
-    NEXT_PUBLIC_TWITTER_LINK=$NEXT_PUBLIC_TWITTER_LINK \
-    NEXT_PUBLIC_GITHUB_LINK=$NEXT_PUBLIC_GITHUB_LINK \
-    NEXT_PUBLIC_LINKEDIN_LINK=$NEXT_PUBLIC_LINKEDIN_LINK \
-    UPLOADTHING_SECRET=$UPLOADTHING_SECRET \
-    UPLOADTHING_APP_ID=$UPLOADTHING_APP_ID \
-    AUTH_SECRET=$AUTH_SECRET \
-    AUTH_URL=$AUTH_URL \
-    NEXT_PUBLIC_RESUME_LINK=$NEXT_PUBLIC_RESUME_LINK \
-    NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
-RUN yarn build
+ENV NEXT_TELEMETRY_DISABLED 1
 
-# 3. Production image, copy all the files and run next
-FROM base AS runner
+RUN \
+    if [ -f yarn.lock ]; then SKIP_ENV_VALIDATION=1 yarn build; \
+    elif [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm run build; \
+    elif [ -f pnpm-lock.yaml ]; then npm install -g pnpm && SKIP_ENV_VALIDATION=1 pnpm run build; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
+
+##### RUNNER
+
+FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
 WORKDIR /app
 
-ENV NODE_ENV=production
+ENV NODE_ENV production
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+ENV NEXT_TELEMETRY_DISABLED 1
 
+COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-
-USER nextjs
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
 
 EXPOSE 3000
+ENV PORT 3000
 
-ENV PORT=3000
-
-CMD HOSTNAME='0.0.0.0' node server.js
+CMD ["server.js"]

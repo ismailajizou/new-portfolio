@@ -1,25 +1,20 @@
 services:
-  next-app:
+  app:
     build:
       context: ../../
       dockerfile: docker/production/Dockerfile
       args:
-        MONGO_URI: ${MONGO_URI}
         NEXT_PUBLIC_TWITTER_LINK: ${NEXT_PUBLIC_TWITTER_LINK}
         NEXT_PUBLIC_GITHUB_LINK: ${NEXT_PUBLIC_GITHUB_LINK}
         NEXT_PUBLIC_LINKEDIN_LINK: ${NEXT_PUBLIC_LINKEDIN_LINK}
         NEXT_PUBLIC_RESUME_LINK: ${NEXT_PUBLIC_RESUME_LINK}
         NEXT_PUBLIC_URL: ${NEXT_PUBLIC_URL}
-        UPLOADTHING_SECRET: ${UPLOADTHING_SECRET}
-        UPLOADTHING_APP_ID: ${UPLOADTHING_APP_ID}
-        AUTH_SECRET: ${AUTH_SECRET}
-        AUTH_URL: ${AUTH_URL}
-    container_name: portfolio
+    working_dir: /app
     ports:
       - "${PORT:-3000}:3000"
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - UPLOADTHING_SECRET=${UPLOADTHING_SECRET}
+      - UPLOADTHING_APP_ID=${UPLOADTHING_APP_ID}
+      - AUTH_SECRET=${AUTH_SECRET}
+      - AUTH_URL=${AUTH_URL}
