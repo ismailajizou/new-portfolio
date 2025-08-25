@@ -8,6 +8,7 @@ import "./src/env.js";
 
 const config: NextConfig = {
   output: "standalone",
+  transpilePackages: ["@t3-oss/env-nextjs", "@t3-oss/env-core"],
 };
 
 export default config;
