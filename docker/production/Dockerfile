@@ -11,7 +11,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* .yarnrc ./
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 # 2. Rebuild the source code only when needed
 FROM base AS builder
@@ -31,7 +31,6 @@ ARG AUTH_SECRET
 ARG AUTH_URL
 ARG NEXT_PUBLIC_RESUME_LINK
 ARG NEXT_PUBLIC_URL
-ARG SKIP_ENV_VALIDATION
 ENV MONGO_URI=$MONGO_URI \
     NEXT_PUBLIC_TWITTER_LINK=$NEXT_PUBLIC_TWITTER_LINK \
     NEXT_PUBLIC_GITHUB_LINK=$NEXT_PUBLIC_GITHUB_LINK \
@@ -42,7 +41,6 @@ ENV MONGO_URI=$MONGO_URI \
     AUTH_URL=$AUTH_URL \
     NEXT_PUBLIC_RESUME_LINK=$NEXT_PUBLIC_RESUME_LINK \
     NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL \
-    SKIP_ENV_VALIDATION=$SKIP_ENV_VALIDATION
 RUN yarn build
 
 # 3. Production image, copy all the files and run next
@@ -68,4 +66,4 @@ EXPOSE 3000
 
 ENV PORT=3000
 
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD ['HOSTNAME="0.0.0.0"', 'node', 'server.js']
