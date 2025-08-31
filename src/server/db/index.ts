@@ -31,14 +31,21 @@ async function connectMongo() {
   } catch (e) {
     cached.promise = null;
     console.error("❌ MongoDB connection error:", e);
-    
+
     // Enhanced error reporting
     if (e instanceof Error) {
-      if (e.message.includes('Authentication failed')) {
-        console.error("🔐 Check your MongoDB username, password, and authentication database");
-        console.error("💡 Ensure special characters in credentials are URL-encoded");
+      if (e.message.includes("Authentication failed")) {
+        console.error(
+          "🔐 Check your MongoDB username, password, and authentication database",
+        );
+        console.error(
+          "💡 Ensure special characters in credentials are URL-encoded",
+        );
       }
-      if (e.message.includes('ENOTFOUND') || e.message.includes('ECONNREFUSED')) {
+      if (
+        e.message.includes("ENOTFOUND") ||
+        e.message.includes("ECONNREFUSED")
+      ) {
         console.error("🌐 Check your MongoDB host and port");
       }
     }
