@@ -29,7 +29,6 @@ export const writeTestimonial = async (data: TTestimonial) => {
         _id: testimonial._id.toString(),
       },
     };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     console.log(e);
     throw new Error("Failed to create testimonial");
