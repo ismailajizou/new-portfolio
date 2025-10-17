@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock* .yarnrc ./
 
-RUN yarn --frozen-lockfile
+RUN yarn
 
 ##### BUILDER
 
