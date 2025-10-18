@@ -84,15 +84,15 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn format",
-      "yarn lint --fix"
+      "npm run format",
+      "npm run lint --fix"
     ],
     "**/*.{json,yaml,yml}": [
-      "yarn format"
+      "npm run format"
     ]
   },
   "ct3aMetadata": {
     "initVersion": "7.34.0"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "npm@10.9.2"
 }
