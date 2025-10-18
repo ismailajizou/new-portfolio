@@ -1,7 +1,7 @@
 ##### DEPENDENCIES
 
-FROM node:22-alpine AS deps
-RUN apk add --no-cache libc6-compat openssl
+FROM node:20-bookworm-slim AS deps
+RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
@@ -12,7 +12,7 @@ RUN npm install
 
 ##### BUILDER
 
-FROM node:22-alpine AS builder
+FROM node:20-bookworm-slim AS builder
 ARG MONGO_URI
 ARG NEXT_PUBLIC_TWITTER_LINK
 ARG NEXT_PUBLIC_GITHUB_LINK
