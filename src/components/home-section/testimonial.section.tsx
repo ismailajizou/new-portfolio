@@ -1,5 +1,5 @@
 "use client";
-import { type ITestimonial } from "@/server/db/models/testimonial";
+import { type Testimonial } from "@/server/db/schema";
 import Marquee from "../ui/marquee";
 import TestimonialCard from "../ui/testimonial-card";
 import TestimonialForm from "../testimonial/form-modal";
@@ -8,10 +8,10 @@ import Section from "../ui/section";
 const TestimonialSection = ({
   testimonials,
 }: {
-  testimonials: ITestimonial[];
+  testimonials: Testimonial[];
 }) => {
   return (
-    <Section id="testemonials">
+    <Section id="testimonials">
       <h2 className="mb-8 text-center text-4xl font-bold">Testimonials</h2>
 
       {testimonials.length ? (
@@ -21,7 +21,7 @@ const TestimonialSection = ({
             className="overflow-x-scroll md:overflow-x-hidden"
           >
             {testimonials.map((t) => (
-              <TestimonialCard key={t._id} testimonial={t} />
+              <TestimonialCard key={t.id} testimonial={t} />
             ))}
           </Marquee>
           <Marquee
@@ -30,7 +30,7 @@ const TestimonialSection = ({
             pauseOnHover
           >
             {testimonials.map((t) => (
-              <TestimonialCard key={t._id} testimonial={t} />
+              <TestimonialCard key={t.id} testimonial={t} />
             ))}
           </Marquee>
           <div className="dark:from-background pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 bg-linear-to-r from-white md:block" />

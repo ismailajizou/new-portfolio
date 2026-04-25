@@ -14,38 +14,36 @@ export const contentType = "image/png";
 // Image generation
 export default async function Image() {
   return new ImageResponse(
-    (
-      // ImageResponse JSX element
+    // ImageResponse JSX element
 
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        background: "black",
+        fontSize: 24,
+        fontWeight: 900,
+        textAlign: "center",
+        fontFamily: "Space Mono",
+        borderRadius: "10%",
+      }}
+    >
       <div
         style={{
-          display: "flex",
-          height: "100%",
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          background: "black",
-          fontSize: 24,
-          fontWeight: 900,
-          textAlign: "center",
-          fontFamily: "Space Mono",
-          borderRadius: "10%",
+          backgroundImage:
+            "linear-gradient(to right, rgb(14, 165, 233), rgb(29, 78, 216), rgb(168, 85, 247))",
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          color: "transparent",
         }}
       >
-        <div
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgb(14, 165, 233), rgb(29, 78, 216), rgb(168, 85, 247))",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-          }}
-        >
-          Ismail Ajizou
-        </div>
+        Ismail Ajizou
       </div>
-    ),
+    </div>,
     // ImageResponse options
     {
       // For convenience, we can re-use the exported icons size metadata

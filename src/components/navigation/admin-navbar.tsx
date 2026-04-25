@@ -4,12 +4,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "../ui/navigation-menu";
-import {
-  HomeIcon,
-  LogOutIcon,
-  MessagesSquareIcon,
-  MousePointer2Icon,
-} from "lucide-react";
+import { HomeIcon, LogOutIcon, MessagesSquareIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
@@ -29,11 +24,6 @@ const Navbar = () => {
               label: "Testimonials",
               href: "/admin/testimonials",
               icon: MessagesSquareIcon,
-            },
-            {
-              label: "Contacts",
-              href: "/admin/contacts",
-              icon: MousePointer2Icon,
             },
           ].map((item) => (
             <NavigationMenuItem key={item.label}>

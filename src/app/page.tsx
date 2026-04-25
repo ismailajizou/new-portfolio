@@ -2,8 +2,8 @@ import Footer from "@/components/footer/default-footer";
 import TestimonialSection from "@/components/home-section/testimonial.section";
 import Navbar from "@/components/navigation/navbar";
 import { BorderBeam } from "@/components/ui/border-beam";
-import ContactTerminal from "@/components/ui/contact-terminal";
-import IconCloud from "@/components/ui/icon-cloud";
+import { ContactSection } from "@/components/ui/contact-section";
+import IconCloudClient from "@/components/ui/icon-cloud-client";
 import ParticlesBg from "@/components/ui/particles-bg";
 import RevealSection from "@/components/ui/reveal-section";
 import Section from "@/components/ui/section";
@@ -11,7 +11,8 @@ import { Timeline } from "@/components/ui/timeline";
 import WordRotate from "@/components/ui/word-rotate";
 import { env } from "@/env";
 import { CAREER_EVENTS, TECHNICAL_SKILLS } from "@/lib/constants";
-import { type ITestimonial } from "@/server/db/models/testimonial";
+import { Testimonial } from "@/server/db/schema";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,7 +21,7 @@ export default async function HomePage() {
     env.NEXT_PUBLIC_URL + "/api/testimonials?status=APPROVED",
     { cache: "no-cache" },
   );
-  const testimonials = (await data.json()) as ITestimonial[];
+  const testimonials = (await data.json()) as Testimonial[];
   return (
     <div className="">
       <Navbar />
@@ -93,13 +94,13 @@ export default async function HomePage() {
         <h2 className="text-center text-4xl font-bold">Technical Skills</h2>
 
         <div>
-          <IconCloud iconSlugs={TECHNICAL_SKILLS} />
+          <IconCloudClient iconSlugs={TECHNICAL_SKILLS} />
         </div>
       </Section>
       <TestimonialSection testimonials={testimonials} />
 
       <Section id="contact">
-        <ContactTerminal />
+        <ContactSection />
       </Section>
 
       <Footer />

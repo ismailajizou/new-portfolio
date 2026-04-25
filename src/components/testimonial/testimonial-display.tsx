@@ -6,16 +6,16 @@ import {
   publishTestimonial,
   rejectTestimonial,
 } from "@/app/_actions/testimonials";
-import { type ITestimonial } from "@/server/db/models/testimonial";
 import { useMutation } from "@tanstack/react-query";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { useToast } from "../ui/use-toast";
+import { testimonials } from "@/server/db/schema";
 
 interface MailDisplayProps {
-  data: ITestimonial | null;
+  data: typeof testimonials.$inferSelect | null;
 }
 
 export function TestimonialDisplay({ data }: MailDisplayProps) {
@@ -58,7 +58,11 @@ export function TestimonialDisplay({ data }: MailDisplayProps) {
         <div className="flex items-center gap-2">
           <Tooltip>
             <TooltipTrigger asChild>
-              <form action={() => (data ? remove(data._id) : null)}>
+              <form
+                action={() => {
+                  if (data) remove(data.id);
+                }}
+              >
                 <Button variant="ghost" size="icon" disabled={!data}>
                   <Trash2 className="h-4 w-4" />
                   <span className="sr-only">Move to trash</span>
@@ -72,7 +76,11 @@ export function TestimonialDisplay({ data }: MailDisplayProps) {
           <div className="ml-auto flex items-center gap-2">
             <Tooltip>
               <TooltipTrigger asChild>
-                <form action={() => (data ? publish(data._id) : null)}>
+                <form
+                  action={() => {
+                    if (data) publish(data.id);
+                  }}
+                >
                   <Button variant="ghost" size="icon" disabled={!data}>
                     <Share className="h-4 w-4" />
                     <span className="sr-only">Publish</span>
@@ -88,7 +96,11 @@ export function TestimonialDisplay({ data }: MailDisplayProps) {
           <div className="flex items-center gap-2">
             <Tooltip>
               <TooltipTrigger asChild>
-                <form action={() => (data ? reject(data._id) : null)}>
+                <form
+                  action={() => {
+                    if (data) reject(data.id);
+                  }}
+                >
                   <Button variant="ghost" size="icon" disabled={!data}>
                     <EyeOff className="h-4 w-4" />
                     <span className="sr-only">Reject</span>
@@ -120,11 +132,7 @@ export function TestimonialDisplay({ data }: MailDisplayProps) {
           <div className="flex items-start p-4">
             <div className="flex items-start gap-4 text-sm">
               <Avatar>
-                <AvatarImage
-                  alt={data.name}
-                  src={data.image}
-                  className="object-cover"
-                />
+                <AvatarImage alt={data.name} className="object-cover" />
                 <AvatarFallback>
                   {data.name
                     .split(" ")

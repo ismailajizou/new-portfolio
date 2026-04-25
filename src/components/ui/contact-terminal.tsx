@@ -26,6 +26,11 @@ const STEPS = [
     validator: z.string().email(),
   },
   {
+    prompt: "What is the subject ?",
+    input: "text",
+    validator: z.string().min(3).max(100),
+  },
+  {
     prompt: "What is your message ?",
     input: "textarea",
     validator: z.string().min(10).max(500),
@@ -40,7 +45,8 @@ const STEPS = [
 const FIELDS = {
   name: 0,
   email: 1,
-  message: 2,
+  subject: 2,
+  message: 3,
 };
 
 const LEVELS = {
@@ -52,7 +58,12 @@ const LEVELS = {
 
 const SPACE_CHAR = "\u00A0";
 
-type Fields = { [k in keyof typeof FIELDS]: string };
+type Fields = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 type Line = {
   text: string;
   level: keyof typeof LEVELS;
@@ -240,8 +251,10 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
   const [fields, setFields] = useState<Fields>({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   useScrollToBottom({
     changesToWatch: lines,
@@ -315,12 +328,24 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
       setFields({
         name: "",
         email: "",
+        subject: "",
         message: "",
       });
+      setTurnstileToken(null);
       resetInput();
       return;
     }
     if (step === STEPS.length - 1 && input.trim().toLowerCase() === "y") {
+      if (!turnstileToken) {
+        setLines([
+          ...lines,
+          {
+            text: "CAPTCHA verification required. Please wait...",
+            level: "error",
+          },
+        ]);
+        return;
+      }
       setLines([
         ...lines,
         {
@@ -328,13 +353,18 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
           level: "info",
         },
       ]);
-      contactMe(fields);
+      contactMe({ ...fields, turnstileToken });
       return;
     }
-    setFields({
-      ...fields,
-      [Object.keys(FIELDS)[step] as keyof Fields]: input.trim(),
-    });
+    // Only save field values for steps 0-3 (name, email, subject, message)
+    // Step 4 is the confirmation step
+    if (step >= 0 && step < 4) {
+      const trimmedInput = input.trim();
+      if (step === 0) setFields({ ...fields, name: trimmedInput });
+      else if (step === 1) setFields({ ...fields, email: trimmedInput });
+      else if (step === 2) setFields({ ...fields, subject: trimmedInput });
+      else if (step === 3) setFields({ ...fields, message: trimmedInput });
+    }
     setLines([
       ...lines,
       {
@@ -369,8 +399,10 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
       setFields({
         name: "",
         email: "",
+        subject: "",
         message: "",
       });
+      setTurnstileToken(null);
       resetInput();
     },
     onError: (error) => {
@@ -384,8 +416,10 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
       setFields({
         name: "",
         email: "",
+        subject: "",
         message: "",
       });
+      setTurnstileToken(null);
       resetInput();
     },
   });

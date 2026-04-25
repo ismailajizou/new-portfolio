@@ -3,8 +3,11 @@
 import adminCredentialsSchema, {
   type TAdminCredentials,
 } from "@/validators/auth";
+import { signIn } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import {
   Form,
@@ -15,13 +18,13 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { useMutation } from "@tanstack/react-query";
-import { login } from "@/app/_actions/auth";
 import { cn } from "@/lib/utils";
 import { useToast } from "../ui/use-toast";
 
 const AdminLoginForm = () => {
   const { toast } = useToast();
+  const router = useRouter();
+  const [isPending, setIsPending] = useState(false);
   const form = useForm<TAdminCredentials>({
     resolver: zodResolver(adminCredentialsSchema),
     defaultValues: {
@@ -29,23 +32,33 @@ const AdminLoginForm = () => {
       password: "",
     },
   });
-  const { mutate, isPending } = useMutation({
-    mutationFn: login,
-    onError: (error) => {
+
+  const onSubmit = async (data: TAdminCredentials) => {
+    setIsPending(true);
+    const { error } = await signIn.email({
+      email: data.email,
+      password: data.password,
+    });
+    setIsPending(false);
+    if (error) {
       toast({
         title: "Error",
-        description: error.message,
+        description: error.message ?? "Invalid credentials",
         variant: "destructive",
       });
-    },
-  });
+      return;
+    }
+    router.push("/admin");
+    router.refresh();
+  };
+
   return (
     <Form {...form}>
       <div className="bg-card w-full max-w-lg rounded-md border-2 px-6 py-8 shadow-md">
         <h1 className="p-4 text-center text-2xl font-bold">Admin Login</h1>
         <form
           className="w-full space-y-4"
-          onSubmit={form.handleSubmit((d) => mutate(d))}
+          onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
             name="email"

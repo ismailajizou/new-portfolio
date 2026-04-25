@@ -2,12 +2,16 @@ import "../styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { Providers } from "./providers";
-import { extractRouterConfig } from "uploadthing/server";
-import { ourFileRouter } from "./api/uploadthing/core";
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { Toaster } from "@/components/ui/toaster";
 import { type Metadata } from "next";
 import { env } from "@/env";
+import { Inter, Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { TooltipProvider } from "@/components/ui/tooltip";
+
+const geistHeading = Geist({ subsets: ["latin"], variable: "--font-heading" });
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Ismail Ajizou - Portfolio",
@@ -21,19 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html
+      lang="en"
+      className={cn(
+        GeistSans.variable,
+        "font-sans",
+        inter.variable,
+        geistHeading.variable,
+      )}
+    >
       <body className="dark scroll-smooth">
-        <NextSSRPlugin
-          /**
-           * The `extractRouterConfig` will extract **only** the route configs
-           * from the router to prevent additional information from being
-           * leaked to the client. The data passed to the client is the same
-           * as if you were to fetch `/api/uploadthing` directly.
-           */
-          routerConfig={extractRouterConfig(ourFileRouter)}
-        />
         <Providers>
-          {children}
+          <TooltipProvider>{children}</TooltipProvider>
           <Toaster />
         </Providers>
       </body>

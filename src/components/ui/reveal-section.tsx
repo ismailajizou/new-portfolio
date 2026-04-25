@@ -19,7 +19,7 @@ export const RevealSection: FC<TextRevealByWordProps> = ({
   text,
   className,
 }) => {
-  const targetRef = useRef<HTMLDivElement>(null!);
+  const targetRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,

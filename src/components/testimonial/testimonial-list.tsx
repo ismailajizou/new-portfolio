@@ -1,14 +1,14 @@
 import { formatDistanceToNow } from "date-fns";
 
 import { cn } from "@/lib/utils";
-import { type ITestimonial } from "@/server/db/models/testimonial";
+import { type Testimonial } from "@/server/db/schema";
 import { ScrollArea } from "../ui/scroll-area";
 import { Badge } from "../ui/badge";
 
 interface MailListProps {
-  items: ITestimonial[];
-  selectedMail: ITestimonial | null;
-  setSelected: (mail: ITestimonial["_id"]) => void;
+  items: Testimonial[];
+  selectedMail: Testimonial | null;
+  setSelected: (mail: Testimonial["id"]) => void;
 }
 
 export function TestimonialList({
@@ -17,16 +17,16 @@ export function TestimonialList({
   setSelected,
 }: MailListProps) {
   return (
-    <ScrollArea className="h-ful">
+    <ScrollArea className="h-full">
       <div className="flex flex-col gap-2 p-4 pt-0">
         {items.map((item) => (
           <button
-            key={item._id}
+            key={item.id}
             className={cn(
               "hover:bg-accent flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all",
-              mail?._id === item._id && "bg-muted",
+              mail?.id === item.id && "bg-muted",
             )}
-            onClick={() => setSelected(item._id)}
+            onClick={() => setSelected(item.id)}
           >
             <div className="flex w-full flex-col gap-1">
               <div className="flex items-center">
@@ -43,7 +43,7 @@ export function TestimonialList({
                 <div
                   className={cn(
                     "ml-auto text-xs",
-                    mail?._id === item._id
+                    mail?.id === item.id
                       ? "text-foreground"
                       : "text-muted-foreground",
                   )}

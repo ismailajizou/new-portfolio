@@ -10,7 +10,7 @@ export interface TimelineEvent {
 
 export const Timeline = ({ data }: { data: TimelineEvent[] }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null!);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
   useEffect(() => {

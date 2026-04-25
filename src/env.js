@@ -8,10 +8,14 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
-    MONGO_URI: z.string(),
-    UPLOADTHING_SECRET: z.string(),
-    UPLOADTHING_APP_ID: z.string(),
-    AUTH_SECRET: z.string(),
+    DATABASE_URL: z.string(),
+    // UPLOADTHING_SECRET: z.string(),
+    // UPLOADTHING_APP_ID: z.string(),
+    BETTER_AUTH_SECRET: z.string(),
+    BETTER_AUTH_URL: z.string(),
+    RESEND_API_KEY: z.string(),
+    RESEND_FROM_EMAIL: z.email(),
+    CLOUDFLARE_TURNSTILE_SECRET_KEY: z.string(),
   },
 
   /**
@@ -25,6 +29,7 @@ export const env = createEnv({
     NEXT_PUBLIC_LINKEDIN_LINK: z.string(),
     NEXT_PUBLIC_URL: z.string(),
     NEXT_PUBLIC_RESUME_LINK: z.string(),
+    NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY: z.string(),
   },
 
   /**
@@ -33,16 +38,23 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    MONGO_URI: process.env.MONGO_URI,
-    UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
-    UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
-    AUTH_SECRET: process.env.AUTH_SECRET,
+    DATABASE_URL: process.env.DATABASE_URL,
+    // UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
+    // UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
+    BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+    BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    RESEND_FROM_EMAIL: process.env.RESEND_FROM_EMAIL,
+    CLOUDFLARE_TURNSTILE_SECRET_KEY:
+      process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
 
     NEXT_PUBLIC_TWITTER_LINK: process.env.NEXT_PUBLIC_TWITTER_LINK,
     NEXT_PUBLIC_GITHUB_LINK: process.env.NEXT_PUBLIC_GITHUB_LINK,
     NEXT_PUBLIC_LINKEDIN_LINK: process.env.NEXT_PUBLIC_LINKEDIN_LINK,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NEXT_PUBLIC_RESUME_LINK: process.env.NEXT_PUBLIC_RESUME_LINK,
+    NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY:
+      process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

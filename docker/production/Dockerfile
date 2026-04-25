@@ -6,9 +6,10 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 
-COPY package.json package-lock.json* ./
+COPY package.json yarn.lock ./
 
-RUN npm install
+RUN npm install -g yarn@1.22.22
+RUN yarn install
 
 ##### BUILDER
 
@@ -40,7 +41,7 @@ ENV AUTH_URL=${AUTH_URL}
 ENV NEXT_PUBLIC_RESUME_LINK=${NEXT_PUBLIC_RESUME_LINK}
 ENV NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
 
-RUN SKIP_ENV_VALIDATION=1 npm run build
+RUN SKIP_ENV_VALIDATION=1 yarn build
 
 ##### RUNNER
 

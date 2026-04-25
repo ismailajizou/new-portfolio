@@ -1,32 +1,40 @@
 "use server";
 
 import { auth } from "@/server/auth";
-import connectMongo from "@/server/db";
-import Testimonial from "@/server/db/models/testimonial";
-import { utapi } from "@/server/uploadthing";
+import { db } from "@/server/db";
+import { testimonials } from "@/server/db/schema";
+import { headers } from "next/headers";
 import {
   testimonialSchema,
   type TTestimonial,
 } from "@/validators/testimonials";
 import { revalidatePath } from "next/cache";
+import { eq } from "drizzle-orm";
 
 export const writeTestimonial = async (data: TTestimonial) => {
   try {
-    await connectMongo();
-    const { name, title, company, text, image } = testimonialSchema.parse(data);
-    const testimonial = await Testimonial.create({
-      name,
-      title,
-      company,
-      text,
-      image,
-      status: "PENDING",
-    });
+    const { name, title, company, text } = testimonialSchema.parse(data);
+    const [testimonial] = await db
+      .insert(testimonials)
+      .values({
+        name,
+        title,
+        company,
+        text,
+        status: "PENDING",
+      })
+      .returning();
     return {
       message: "Testimonial created successfully",
       data: {
-        ...testimonial.toJSON(),
-        _id: testimonial._id.toString(),
+        id: testimonial!.id,
+        name: testimonial!.name,
+        title: testimonial!.title,
+        company: testimonial!.company,
+        text: testimonial!.text,
+        status: testimonial!.status,
+        createdAt: testimonial!.createdAt,
+        updatedAt: testimonial!.updatedAt,
       },
     };
   } catch (e) {
@@ -36,25 +44,31 @@ export const writeTestimonial = async (data: TTestimonial) => {
 };
 
 export const publishTestimonial = async (id: string) => {
-  const session = await auth();
+  const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {
     throw new Error("Unauthorized");
   }
   try {
-    await connectMongo();
-    const testimonial = await Testimonial.findByIdAndUpdate(
-      id,
-      { status: "APPROVED" },
-      { new: true },
-    );
+    const [testimonial] = await db
+      .update(testimonials)
+      .set({ status: "APPROVED" })
+      .where(eq(testimonials.id, id))
+      .returning();
     if (!testimonial) {
       throw new Error("Testimonial not found");
     }
+    revalidatePath("/admin/testimonials");
     return {
       message: "Testimonial published successfully",
       data: {
-        ...testimonial.toJSON(),
-        _id: testimonial._id.toString(),
+        id: testimonial.id,
+        name: testimonial.name,
+        title: testimonial.title,
+        company: testimonial.company,
+        text: testimonial.text,
+        status: testimonial.status,
+        createdAt: testimonial.createdAt,
+        updatedAt: testimonial.updatedAt,
       },
     };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -64,17 +78,16 @@ export const publishTestimonial = async (id: string) => {
 };
 
 export const rejectTestimonial = async (id: string) => {
-  const session = await auth();
+  const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {
     throw new Error("Unauthorized");
   }
   try {
-    await connectMongo();
-    const testimonial = await Testimonial.findByIdAndUpdate(
-      id,
-      { status: "REJECTED" },
-      { new: true },
-    );
+    const [testimonial] = await db
+      .update(testimonials)
+      .set({ status: "REJECTED" })
+      .where(eq(testimonials.id, id))
+      .returning();
     if (!testimonial) {
       throw new Error("Testimonial not found");
     }
@@ -86,19 +99,21 @@ export const rejectTestimonial = async (id: string) => {
 };
 
 export const deleteTestimonial = async (id: string) => {
-  const session = await auth();
+  const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {
     throw new Error("Unauthorized");
   }
   try {
-    await connectMongo();
-    const testimonial = await Testimonial.findByIdAndDelete(id);
+    const [testimonial] = await db
+      .delete(testimonials)
+      .where(eq(testimonials.id, id))
+      .returning();
     if (!testimonial) {
       throw new Error("Testimonial not found");
     }
-    if (testimonial.image) {
-      await utapi.deleteFiles(testimonial.image.split("/").at(-1)!);
-    }
+    // if (testimonial.image) {
+    //   await utapi.deleteFiles(testimonial.image.split("/").at(-1)!);
+    // }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     throw new Error("Failed to delete testimonial");

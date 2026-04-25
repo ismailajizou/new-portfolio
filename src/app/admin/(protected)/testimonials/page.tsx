@@ -1,23 +1,21 @@
 import AdminLayout from "@/components/admin-layout";
 import { Testimonials } from "@/components/testimonial/testimonials";
-import connectMongo from "@/server/db";
-import Contact from "@/server/db/models/contact";
-import Testimonial from "@/server/db/models/testimonial";
+import { db } from "@/server/db";
+import { testimonials } from "@/server/db/schema";
+import { desc } from "drizzle-orm";
 
 const Page = async () => {
-  await connectMongo();
-  const mails = await Testimonial.find().sort({ createdAt: -1 }).exec();
+  const mails = await db
+    .select()
+    .from(testimonials)
+    .orderBy(desc(testimonials.createdAt));
   const data = mails.map((mail) => ({
-    ...mail.toObject(),
-    _id: mail._id.toString(),
+    ...mail,
+    _id: mail.id,
   }));
-  const contactsCount = await Contact.countDocuments().exec();
   return (
-    <AdminLayout
-      numberOfContacts={contactsCount}
-      numberOfTestimonials={data.length}
-    >
-      <Testimonials data={data} />
+    <AdminLayout numberOfTestimonials={data.length}>
+      <Testimonials data={data as any} />
     </AdminLayout>
   );
 };

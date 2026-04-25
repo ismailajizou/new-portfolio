@@ -2,7 +2,7 @@
 
 import { Search } from "lucide-react";
 
-import { type ITestimonial } from "@/server/db/models/testimonial";
+import { type Testimonial } from "@/server/db/schema";
 import { useState } from "react";
 import { Input } from "../ui/input";
 import { ResizableHandle, ResizablePanel } from "../ui/resizable";
@@ -11,11 +11,11 @@ import { TestimonialList } from "./testimonial-list";
 import { TestimonialDisplay } from "./testimonial-display";
 
 interface MailProps {
-  data: ITestimonial[];
+  data: Testimonial[];
 }
 
 export function Testimonials({ data }: MailProps) {
-  const [mail, setSelected] = useState<ITestimonial["_id"] | null>(null);
+  const [mail, setSelected] = useState<Testimonial["id"] | null>(null);
 
   return (
     <>
@@ -24,7 +24,7 @@ export function Testimonials({ data }: MailProps) {
           <h1 className="text-xl font-bold">Testimonial List</h1>
         </div>
         <Separator />
-        <div className="bg-background/95 supports-[backdrop-filter]:bg-background/60 p-4 backdrop-blur">
+        <div className="bg-background/95 supports-backdrop-filter:bg-background/60 p-4 backdrop-blur">
           <form>
             <div className="relative">
               <Search className="text-muted-foreground absolute top-2.5 left-2 h-4 w-4" />
@@ -34,14 +34,14 @@ export function Testimonials({ data }: MailProps) {
         </div>
         <TestimonialList
           items={data}
-          selectedMail={data.find((item) => item._id === mail) ?? null}
+          selectedMail={data.find((item) => item.id === mail) ?? null}
           setSelected={setSelected}
         />
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={655}>
         <TestimonialDisplay
-          data={data.find((item) => item._id === mail) ?? null}
+          data={data.find((item) => item.id === mail) ?? null}
         />
       </ResizablePanel>
     </>

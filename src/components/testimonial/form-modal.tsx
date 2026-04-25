@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { UploadDropzone } from "@/lib/uploadthing";
 import {
   testimonialSchema,
   type TTestimonial,
@@ -116,23 +115,6 @@ const TestimonialForm = () => {
                 )}
               />
             </div>
-            <UploadDropzone
-              appearance={{
-                button:
-                  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3",
-                container:
-                  "border border-dashed border-input bg-background hover:bg-accent hover:text-accent-foreground px-4 py-2",
-              }}
-              endpoint="imageUploader"
-              onClientUploadComplete={(res) => {
-                form.setValue("image", res[0]!.serverData.url);
-              }}
-              onUploadError={(error: Error) => {
-                form.setError("image", {
-                  message: error.message,
-                });
-              }}
-            />
             <FormField
               name="text"
               render={({ field }) => (

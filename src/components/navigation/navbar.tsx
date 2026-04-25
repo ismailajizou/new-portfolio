@@ -22,8 +22,8 @@ const NAV_LINKS = [
   { label: "Home", href: "#hero", icon: HomeIcon },
   { label: "About", href: "#about", icon: SquareUserIcon },
   {
-    label: "Testemonials",
-    href: "#testemonials",
+    label: "Testimonials",
+    href: "#testimonials",
     icon: MessagesSquareIcon,
   },
   { label: "Contact", href: "#contact", icon: MousePointer2Icon },

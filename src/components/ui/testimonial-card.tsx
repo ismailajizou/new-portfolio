@@ -6,14 +6,14 @@ import {
   CardTitle,
 } from "./card";
 
-import { type ITestimonial } from "@/server/db/models/testimonial";
+import { type Testimonial } from "@/server/db/schema";
 import { QuoteIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 
 export default function TestimonialCard({
   testimonial,
 }: {
-  testimonial: ITestimonial;
+  testimonial: Testimonial;
 }) {
   return (
     <Card className="relative max-w-[16rem] bg-gray-800/10 backdrop-blur-[2px] md:max-w-sm">
@@ -22,11 +22,7 @@ export default function TestimonialCard({
       <CardHeader className="flex items-center gap-2 md:flex-row md:gap-4">
         <div>
           <Avatar>
-            <AvatarImage
-              alt={testimonial.name}
-              src={testimonial.image}
-              className="object-cover"
-            />
+            <AvatarImage alt={testimonial.name} className="object-cover" />
             <AvatarFallback>
               {testimonial.name
                 .split(" ")

@@ -5,7 +5,7 @@ export const testimonialSchema = z.object({
   title: z.string().min(2).max(50),
   company: z.string().min(2).max(50),
   text: z.string().min(10).max(300),
-  image: z.string().optional(),
+  // image: z.string().optional(),
 });
 
 export type TTestimonial = z.infer<typeof testimonialSchema>;
