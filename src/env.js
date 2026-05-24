@@ -13,8 +13,8 @@ export const env = createEnv({
     // UPLOADTHING_APP_ID: z.string(),
     BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_URL: z.string(),
-    RESEND_API_KEY: z.string(),
-    RESEND_FROM_EMAIL: z.email(),
+    SMTP_USER: z.email(),
+    SMTP_PASS: z.string(),
     CLOUDFLARE_TURNSTILE_SECRET_KEY: z.string(),
   },
 
@@ -43,8 +43,8 @@ export const env = createEnv({
     // UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
-    RESEND_API_KEY: process.env.RESEND_API_KEY,
-    RESEND_FROM_EMAIL: process.env.RESEND_FROM_EMAIL,
+    SMTP_USER: process.env.SMTP_USER,
+    SMTP_PASS: process.env.SMTP_PASS,
     CLOUDFLARE_TURNSTILE_SECRET_KEY:
       process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
 

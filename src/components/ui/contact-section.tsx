@@ -44,7 +44,7 @@ type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export function ContactSection() {
   const { toast } = useToast();
-  // const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -69,7 +69,7 @@ export function ContactSection() {
         variant: "default",
         description: "Your message has been sent successfully!",
       });
-      // setTurnstileToken(null);
+      setTurnstileToken(null);
     },
     onError: () => {
       toast({
@@ -82,13 +82,13 @@ export function ContactSection() {
   });
 
   const onSubmit = (data: ContactFormData) => {
-    // if (!turnstileToken) {
-    //   form.setError("root", {
-    //     message: "Please complete the CAPTCHA verification",
-    //   });
-    //   return;
-    // }
-    submitContact(data);
+    if (!turnstileToken) {
+      form.setError("root", {
+        message: "Please complete the CAPTCHA verification",
+      });
+      return;
+    }
+    submitContact({ ...data, turnstileToken });
   };
 
   return (
@@ -191,7 +191,7 @@ export function ContactSection() {
                   />
 
                   {/* Cloudflare Turnstile CAPTCHA */}
-                  {/* <div className="pt-2">
+                  <div className="pt-2">
                     <Turnstile
                       siteKey={env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
                       onSuccess={setTurnstileToken}
@@ -202,7 +202,7 @@ export function ContactSection() {
                         size: "normal",
                       }}
                     />
-                  </div> */}
+                  </div>
 
                   {form.formState.errors.root && (
                     <p className="text-sm text-red-500">

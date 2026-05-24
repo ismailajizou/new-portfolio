@@ -1,7 +1,8 @@
 "use server";
 
-import { resend } from "./resend";
+import { transporter } from "./transporter";
 import { ContactNotificationEmail } from "./templates/contact-notification";
+import { ContactAcknowledgementEmail } from "./templates/contact-acknowledgement";
 import { env } from "@/env.js";
 
 interface SendContactNotificationParams {
@@ -17,22 +18,27 @@ export async function sendContactNotification({
   subject,
   message,
 }: SendContactNotificationParams) {
-  const { data, error } = await resend.emails.send({
-    from: env.RESEND_FROM_EMAIL,
-    to: [env.RESEND_FROM_EMAIL],
-    subject: `New contact from ${name}: ${subject}`,
-    react: ContactNotificationEmail({ name, email, subject, message }),
-    replyTo: email,
-    tags: [
-      { name: "category", value: "contact" },
-      { name: "source", value: "portfolio" },
-    ],
-  });
+  try {
+    // 1. Send notification to yourself
+    await transporter.sendMail({
+      from: env.SMTP_USER,
+      to: env.SMTP_USER,
+      replyTo: email,
+      subject: `New contact from ${name}: ${subject}`,
+      html: ContactNotificationEmail({ name, email, subject, message }),
+    });
 
-  if (error) {
+    // 2. Send acknowledgement to the person who contacted you
+    await transporter.sendMail({
+      from: env.SMTP_USER,
+      to: email,
+      subject: "Thanks for reaching out!",
+      html: ContactAcknowledgementEmail({ name }),
+    });
+
+    return { success: true };
+  } catch (error) {
     console.error("Failed to send email:", error);
-    return { success: false, error: error.message };
+    return { success: false, error: (error as Error).message };
   }
-
-  return { success: true, data };
 }

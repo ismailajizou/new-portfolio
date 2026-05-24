@@ -9,7 +9,7 @@ const contactSchema = z.object({
   email: z.email(),
   subject: z.string().min(3).max(100),
   message: z.string().min(10).max(500),
-  // turnstileToken: z.string(),
+  turnstileToken: z.string(),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
@@ -35,13 +35,13 @@ async function verifyTurnstileToken(token: string) {
 
 export const contact = async (contactData: ContactInput) => {
   try {
-    const { email, message, name, subject } = contactSchema.parse(contactData);
+    const { email, message, name, subject, turnstileToken } = contactSchema.parse(contactData);
 
     // Verify CAPTCHA
-    // const isValidCaptcha = await verifyTurnstileToken(turnstileToken);
-    // if (!isValidCaptcha) {
-    //   throw new Error("CAPTCHA verification failed. Please try again.");
-    // }
+    const isValidCaptcha = await verifyTurnstileToken(turnstileToken);
+    if (!isValidCaptcha) {
+      throw new Error("CAPTCHA verification failed. Please try again.");
+    }
 
     // Send email notification
     const result = await sendContactNotification({

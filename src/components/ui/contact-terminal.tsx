@@ -1,7 +1,9 @@
 "use client";
 
 import { contact } from "@/app/_actions/contact";
+import { env } from "@/env";
 import { useMutation } from "@tanstack/react-query";
+import { Turnstile } from "@marsidev/react-turnstile";
 import React, {
   type Dispatch,
   type RefObject,
@@ -472,6 +474,20 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
           ))}
           <div className="relative flex w-full flex-wrap">
             {mobileInput}
+            {isContact && step === 4 && (
+              <div className="my-4">
+                <Turnstile
+                  siteKey={env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onError={() => setTurnstileToken(null)}
+                  onExpire={() => setTurnstileToken(null)}
+                  options={{
+                    theme: "light",
+                    size: "normal",
+                  }}
+                />
+              </div>
+            )}
             <p className="text-green-500">${SPACE_CHAR}</p>
             {input.split("").map((char, i) =>
               isFocused && i === cursor ? (
