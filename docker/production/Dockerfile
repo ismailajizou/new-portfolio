@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN npm install -g yarn@1.22.22
+RUN npm install -g yarn@1.22.22 --force || true
 RUN yarn install
 
 ##### BUILDER
