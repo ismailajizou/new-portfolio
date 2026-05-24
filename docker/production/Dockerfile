@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 
 RUN npm install -g yarn@1.22.22 --force || true
-RUN yarn install
+RUN yarn install --network-timeout 300000
 
 ##### BUILDER
 
