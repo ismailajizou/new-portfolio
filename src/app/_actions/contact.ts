@@ -35,7 +35,8 @@ async function verifyTurnstileToken(token: string) {
 
 export const contact = async (contactData: ContactInput) => {
   try {
-    const { email, message, name, subject, turnstileToken } = contactSchema.parse(contactData);
+    const { email, message, name, subject, turnstileToken } =
+      contactSchema.parse(contactData);
 
     // Verify CAPTCHA
     const isValidCaptcha = await verifyTurnstileToken(turnstileToken);
