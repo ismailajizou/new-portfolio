@@ -4,7 +4,12 @@ import { contact, type ContactInput } from "@/app/_actions/contact";
 import { env } from "@/env";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { Turnstile } from "@marsidev/react-turnstile";
+import dynamic from "next/dynamic";
+
+const Turnstile = dynamic(
+  () => import("@marsidev/react-turnstile").then((mod) => mod.Turnstile),
+  { ssr: false },
+);
 import { QRCodeSVG } from "qrcode.react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -55,7 +60,6 @@ export function ContactSection() {
       message: "",
     },
   });
-
   const {
     mutate: submitContact,
     isPending,
@@ -194,11 +198,11 @@ export function ContactSection() {
                   <div className="pt-2">
                     <Turnstile
                       siteKey={env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
-                      onSuccess={setTurnstileToken}
+                      onSuccess={(token) => setTurnstileToken(token)}
                       onError={() => setTurnstileToken(null)}
                       onExpire={() => setTurnstileToken(null)}
                       options={{
-                        theme: "light",
+                        theme: "dark",
                         size: "normal",
                       }}
                     />
@@ -244,7 +248,7 @@ export function ContactSection() {
               </div>
               <div>
                 <p className="text-muted-foreground text-sm">Email</p>
-                <p className="font-medium">contact@ismail-ajizou.com</p>
+                <p className="font-medium">ismailajizou1@gmail.com</p>
               </div>
             </div>
 

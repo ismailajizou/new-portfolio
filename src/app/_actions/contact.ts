@@ -20,16 +20,19 @@ async function verifyTurnstileToken(token: string) {
     {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify({
+      body: new URLSearchParams({
         secret: env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
         response: token,
       }),
     },
   );
 
-  const data = (await response.json()) as { success: boolean };
+  const data = (await response.json()) as {
+    success: boolean;
+    "error-codes"?: string[];
+  };
   return data.success;
 }
 
