@@ -8,6 +8,8 @@ import { env } from "@/env";
 import { Inter, Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { DEFAULT_SCRIPT_ID, SCRIPT_URL } from "@marsidev/react-turnstile";
+import Script from "next/script";
 
 const geistHeading = Geist({ subsets: ["latin"], variable: "--font-heading" });
 
@@ -35,6 +37,11 @@ export default function RootLayout({
       )}
     >
       <body className="dark scroll-smooth">
+        <Script
+          id={DEFAULT_SCRIPT_ID}
+          src={SCRIPT_URL}
+          strategy="afterInteractive"
+        />
         <Providers>
           <TooltipProvider>{children}</TooltipProvider>
           <Toaster />

@@ -478,6 +478,7 @@ const ContactTerminal = ({ title = "Terminal" }: { title?: string }) => {
               <div className="my-4">
                 <Turnstile
                   siteKey={env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
+                  injectScript={false}
                   onSuccess={(token) => setTurnstileToken(token)}
                   onError={() => setTurnstileToken(null)}
                   onExpire={() => setTurnstileToken(null)}

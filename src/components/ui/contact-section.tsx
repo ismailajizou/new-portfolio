@@ -4,12 +4,7 @@ import { contact, type ContactInput } from "@/app/_actions/contact";
 import { env } from "@/env";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import dynamic from "next/dynamic";
-
-const Turnstile = dynamic(
-  () => import("@marsidev/react-turnstile").then((mod) => mod.Turnstile),
-  { ssr: false },
-);
+import { Turnstile } from "@marsidev/react-turnstile";
 import { QRCodeSVG } from "qrcode.react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -198,6 +193,7 @@ export function ContactSection() {
                   <div className="pt-2">
                     <Turnstile
                       siteKey={env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
+                      injectScript={false}
                       onSuccess={(token) => setTurnstileToken(token)}
                       onError={() => setTurnstileToken(null)}
                       onExpire={() => setTurnstileToken(null)}
