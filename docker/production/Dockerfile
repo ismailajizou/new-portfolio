@@ -55,5 +55,8 @@ COPY --from=builder /app/.next/static ./.next/static
 
 EXPOSE 3000
 ENV PORT 3000
+# Bind on all interfaces; Docker sets HOSTNAME to the container ID, which
+# resolves to a single network and breaks Traefik on dokploy-network
+ENV HOSTNAME 0.0.0.0
 
 CMD ["server.js"]
