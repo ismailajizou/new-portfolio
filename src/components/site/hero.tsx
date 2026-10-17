@@ -140,7 +140,7 @@ export function Hero({ portfolio }: { portfolio: Portfolio }) {
             width={1024}
             height={1024}
             preload
-            sizes="(min-width: 1024px) 272px, (min-width: 640px) 192px, 144px"
+            sizes="(min-width: 1024px) 544px, (min-width: 640px) 384px, 288px"
             className="relative size-full object-cover object-[46%_50%]"
           />
         </div>
