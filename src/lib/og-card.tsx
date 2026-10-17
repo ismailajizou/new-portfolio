@@ -15,9 +15,24 @@ async function loadFonts() {
     readFile(join(FONT_DIR, "GeistMono-Medium.ttf")),
   ]);
   return [
-    { name: "Geist", data: bold, weight: 700 as const, style: "normal" as const },
-    { name: "Geist", data: regular, weight: 400 as const, style: "normal" as const },
-    { name: "Geist Mono", data: mono, weight: 500 as const, style: "normal" as const },
+    {
+      name: "Geist",
+      data: bold,
+      weight: 700 as const,
+      style: "normal" as const,
+    },
+    {
+      name: "Geist",
+      data: regular,
+      weight: 400 as const,
+      style: "normal" as const,
+    },
+    {
+      name: "Geist Mono",
+      data: mono,
+      weight: 500 as const,
+      style: "normal" as const,
+    },
   ];
 }
 

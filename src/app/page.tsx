@@ -1,6 +1,10 @@
 import { PortfolioPage } from "@/components/site/portfolio-page";
 import { env } from "@/env";
-import { getPortfolio, getSettings, type Portfolio } from "@/server/cms/queries";
+import {
+  getPortfolio,
+  getSettings,
+  type Portfolio,
+} from "@/server/cms/queries";
 import { type Metadata } from "next";
 
 // Content comes from the backoffice, so the page is rendered per request.
@@ -9,8 +13,9 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   const [firstName, ...rest] = settings.name.split(/\s+/);
-  const twitterHandle = settings.twitterUrl
-    ?.match(/(?:twitter|x)\.com\/@?([\w]+)/i)?.[1];
+  const twitterHandle = settings.twitterUrl?.match(
+    /(?:twitter|x)\.com\/@?([\w]+)/i,
+  )?.[1];
   return {
     // Absolute so the root "%s | Name" template does not repeat the name.
     title: { absolute: settings.seoTitle },
@@ -38,8 +43,11 @@ export async function generateMetadata(): Promise<Metadata> {
 /** schema.org Person, so search engines can tie the page to the profiles. */
 function personJsonLd({ settings, stages, skillGroups }: Portfolio) {
   const current = stages.find((stage) => !stage.endDate);
-  const sameAs = [settings.linkedinUrl, settings.githubUrl, settings.twitterUrl]
-    .filter((url): url is string => Boolean(url));
+  const sameAs = [
+    settings.linkedinUrl,
+    settings.githubUrl,
+    settings.twitterUrl,
+  ].filter((url): url is string => Boolean(url));
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",

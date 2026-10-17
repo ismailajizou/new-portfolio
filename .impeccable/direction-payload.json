@@ -9,14 +9,30 @@
       "lineage": "CI/CD pipeline views: stages, jobs, statuses, job logs",
       "thesis": "Your career is shown as one pipeline run: each employer a stage, each shipped thing a passed job, and contacting you is the manual job at the end.",
       "palette": ["#0B6B3A", "#EEF2EE", "#10201A", "#F2A900", "#FF4D1F"],
-      "materials": ["status pills and connector lines", "job-log panels with real dates", "one deep green field owning the opening"],
+      "materials": [
+        "status pills and connector lines",
+        "job-log panels with real dates",
+        "one deep green field owning the opening"
+      ],
       "viewport": "Full-bleed green field: your name and 'Lead Full Stack Developer' set huge, and under it the pipeline graph running left to right (WeHELP, ARK-X, Piyes, Now) with job pills ticking to passed. The orange 'Run: contact' manual job sits at the end of the graph.",
       "risk": "Can read as dev-tool cosplay to a non-technical recruiter if the headline is not plain language.",
       "raised": [
-        {"from": "challenger-sewing", "raise": "Shipped work is drawn solid; in-progress work (AWS prep, Telegram bot in testing) is drawn dashed. Honest scale becomes a visual rule."},
-        {"from": "challenger-zine", "raise": "One loud colour is reserved for the action only: the orange manual job that contacts you or gets the CV."},
-        {"from": "challenger-specimen", "raise": "Hierarchy by scale contrast alone: a very large name against small mono job labels, no decoration."},
-        {"from": "challenger-quiz", "raise": "State accumulates: jobs a visitor opens stay marked as read, so the graph records their path."}
+        {
+          "from": "challenger-sewing",
+          "raise": "Shipped work is drawn solid; in-progress work (AWS prep, Telegram bot in testing) is drawn dashed. Honest scale becomes a visual rule."
+        },
+        {
+          "from": "challenger-zine",
+          "raise": "One loud colour is reserved for the action only: the orange manual job that contacts you or gets the CV."
+        },
+        {
+          "from": "challenger-specimen",
+          "raise": "Hierarchy by scale contrast alone: a very large name against small mono job labels, no decoration."
+        },
+        {
+          "from": "challenger-quiz",
+          "raise": "State accumulates: jobs a visitor opens stay marked as read, so the graph records their path."
+        }
       ]
     },
     {
@@ -26,7 +42,11 @@
       "lineage": "engineering documentation sites and well-kept READMEs",
       "thesis": "The portfolio as the docs page of a well-run project: sticky table of contents, plain sections, tables of facts.",
       "palette": ["#FBFBFA", "#16181D", "#2F5BEA", "#E5E7EB"],
-      "materials": ["sidebar table of contents", "definition tables", "inline code and links"],
+      "materials": [
+        "sidebar table of contents",
+        "definition tables",
+        "inline code and links"
+      ],
       "viewport": "Left rail with section links, right column opening with name, role, three proof lines and Contact / CV buttons.",
       "risk": "Also where most developer portfolios in this style land; clear but not memorable."
     },
@@ -115,8 +135,8 @@
       "hero": "https://impeccable.style/worlds/cards/light-shadow-caustics-indoor-weather-sun-hero.webp"
     }
   ],
-  "reroll": {"registers": ["safer", "bolder"]},
-  "buildPath": {"value": "code"},
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code" },
   "canon": true,
   "canonCard": {
     "label": "The category standard",
