@@ -1,6 +1,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MotionConfig } from "motion/react";
 import { useState } from "react";
 
 function makeQueryClient() {
@@ -18,7 +19,8 @@ export function Providers(props: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {props.children}
+      {/* Honour the OS setting: motion drops transforms, keeps opacity. */}
+      <MotionConfig reducedMotion="user">{props.children}</MotionConfig>
     </QueryClientProvider>
   );
 }

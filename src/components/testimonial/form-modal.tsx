@@ -50,8 +50,8 @@ const TestimonialForm = () => {
       setIsOpen(false);
       form.reset();
       toast({
-        title: "Testimonial Sent Successfully",
-        description: "I will review it and publish it soon. Thank you!",
+        title: "Reference sent",
+        description: "Thank you. It appears here once I have reviewed it.",
       });
     },
     onError: (error) => {
@@ -66,11 +66,13 @@ const TestimonialForm = () => {
   return (
     <Dialog open={isOpen} onOpenChange={(s) => setIsOpen(s)}>
       <DialogTrigger asChild>
-        <Button variant="default">Write me something</Button>
+        <Button variant="outline" size="lg" className="h-11 rounded-full px-4">
+          Leave a reference
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-h-full sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Testimonial</DialogTitle>
+          <DialogTitle>Leave a reference</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form
@@ -81,7 +83,7 @@ const TestimonialForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Fullname</FormLabel>
+                  <FormLabel>Full name</FormLabel>
                   <FormControl>
                     <Input placeholder="John Doe" {...field} />
                   </FormControl>
@@ -122,7 +124,7 @@ const TestimonialForm = () => {
                   <FormLabel>Testimonial</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us a little bit about yourself"
+                      placeholder="How we worked together and what it was like"
                       className="resize-none"
                       {...field}
                     />
@@ -135,7 +137,9 @@ const TestimonialForm = () => {
               )}
             />
             <DialogFooter>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit" size="lg" className="px-4">
+                Send for review
+              </Button>
             </DialogFooter>
           </form>
         </Form>

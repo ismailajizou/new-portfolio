@@ -1,0 +1,130 @@
+{
+  "title": "Choose the visual world",
+  "question": "The roll assigned Pipeline Run. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Pipeline Run",
+      "kicker": "THE ROLL",
+      "lineage": "CI/CD pipeline views: stages, jobs, statuses, job logs",
+      "thesis": "Your career is shown as one pipeline run: each employer a stage, each shipped thing a passed job, and contacting you is the manual job at the end.",
+      "palette": ["#0B6B3A", "#EEF2EE", "#10201A", "#F2A900", "#FF4D1F"],
+      "materials": ["status pills and connector lines", "job-log panels with real dates", "one deep green field owning the opening"],
+      "viewport": "Full-bleed green field: your name and 'Lead Full Stack Developer' set huge, and under it the pipeline graph running left to right (WeHELP, ARK-X, Piyes, Now) with job pills ticking to passed. The orange 'Run: contact' manual job sits at the end of the graph.",
+      "risk": "Can read as dev-tool cosplay to a non-technical recruiter if the headline is not plain language.",
+      "raised": [
+        {"from": "challenger-sewing", "raise": "Shipped work is drawn solid; in-progress work (AWS prep, Telegram bot in testing) is drawn dashed. Honest scale becomes a visual rule."},
+        {"from": "challenger-zine", "raise": "One loud colour is reserved for the action only: the orange manual job that contacts you or gets the CV."},
+        {"from": "challenger-specimen", "raise": "Hierarchy by scale contrast alone: a very large name against small mono job labels, no decoration."},
+        {"from": "challenger-quiz", "raise": "State accumulates: jobs a visitor opens stay marked as read, so the graph records their path."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "The README",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "engineering documentation sites and well-kept READMEs",
+      "thesis": "The portfolio as the docs page of a well-run project: sticky table of contents, plain sections, tables of facts.",
+      "palette": ["#FBFBFA", "#16181D", "#2F5BEA", "#E5E7EB"],
+      "materials": ["sidebar table of contents", "definition tables", "inline code and links"],
+      "viewport": "Left rail with section links, right column opening with name, role, three proof lines and Contact / CV buttons.",
+      "risk": "Also where most developer portfolios in this style land; clear but not memorable."
+    },
+    {
+      "id": "challenger-specimen",
+      "label": "Type Specimen",
+      "verdict": "declined",
+      "lineage": "interactive variable-font specimens",
+      "thesis": "Your name as one giant letterform that visitors reshape with sliders.",
+      "palette": ["#F7F7F5", "#0A0A0A", "#E4002B"],
+      "materials": ["variable font axes", "glyph grid"],
+      "viewport": "A giant 'A' with weight and width sliders, facts in tiny mono labels.",
+      "risk": "The toy is about type, not about what you built.",
+      "case": "Hiring leads do not identify with a foundry tool, and the sliders carry no career fact.",
+      "kept": "Hierarchy by scale contrast alone.",
+      "hero": "https://impeccable.style/worlds/cards/variable-font-specimen-hero.webp"
+    },
+    {
+      "id": "challenger-sewing",
+      "label": "Pattern Envelope",
+      "verdict": "declined",
+      "lineage": "home sewing pattern envelopes and tissue",
+      "thesis": "Projects as numbered pattern pieces laid on a cutting layout.",
+      "palette": ["#E9D9B0", "#141414", "#C8102E"],
+      "materials": ["tissue", "dashed cutting lines"],
+      "viewport": "Envelope front with three lettered views of the work.",
+      "risk": "A craft metaphor a CTO has to decode.",
+      "case": "Loses on both audience identification and clarity.",
+      "kept": "Committed path solid, alternatives dashed.",
+      "hero": "https://impeccable.style/worlds/cards/fashion-folded-worlds-sewing-pattern-envelope-hero.webp"
+    },
+    {
+      "id": "challenger-zine",
+      "label": "Paste-up Zine",
+      "verdict": "declined",
+      "lineage": "photocopied punk zines",
+      "thesis": "The career as a xeroxed flyer with ransom-note headlines.",
+      "palette": ["#FFFFFF", "#111111", "#FF2E93"],
+      "materials": ["xerox toner", "torn paper"],
+      "viewport": "Crooked cut-out headline, typewriter columns.",
+      "risk": "Legibility and trust drop for a hiring audience.",
+      "case": "Grit works against the reliability you need to prove.",
+      "kept": "One day-glo colour reserved for the action.",
+      "hero": "https://impeccable.style/worlds/cards/design-canon-punk-pasteup-table-hero.webp"
+    },
+    {
+      "id": "challenger-quiz",
+      "label": "Magazine Quiz",
+      "verdict": "declined",
+      "lineage": "nineties teen-magazine quiz spreads",
+      "thesis": "A quiz that tallies answers into a verdict about hiring you.",
+      "palette": ["#FAFAF7", "#FF3EA5", "#B6FF00", "#111111"],
+      "materials": ["halftone collage", "gel pen"],
+      "viewport": "Lettered checkbox rows over torn photos.",
+      "risk": "Tone is wrong for lead roles.",
+      "case": "Makes the visitor work before any proof appears.",
+      "kept": "State that accumulates as the visitor moves.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-teen-magazine-quiz-hero.webp"
+    },
+    {
+      "id": "challenger-vu",
+      "label": "VU Meter Bridge",
+      "verdict": "declined",
+      "lineage": "recording desk meter bridges",
+      "thesis": "Skills as a row of needles behind glass.",
+      "palette": ["#F1E9D2", "#111111", "#C1121F", "#5A3A22"],
+      "materials": ["meter glass", "walnut"],
+      "viewport": "Twenty identical meters leaning right.",
+      "risk": "Needle levels would be invented skill scores.",
+      "case": "Skill levels are not facts in the knowledge base, so the form forces a false claim.",
+      "kept": "Identical units repeated as a ruler.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-vu-meter-bridge-hero.webp"
+    },
+    {
+      "id": "challenger-sun",
+      "label": "Indoor Weather Sun",
+      "verdict": "declined",
+      "lineage": "monofrequency light installation",
+      "thesis": "One amber hall with a half sun at the far wall.",
+      "palette": ["#F2A20C", "#0A0A0A", "#FFD27A"],
+      "materials": ["haze", "mirror"],
+      "viewport": "Amber duotone horizon, name low on the line.",
+      "risk": "Atmosphere with no room for proof.",
+      "case": "Mood over evidence; fails the one-minute decision.",
+      "kept": "One colour owning the whole room.",
+      "hero": "https://impeccable.style/worlds/cards/light-shadow-caustics-indoor-weather-sun-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code"},
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "The developer portfolio everyone ships: dark hero, name, photo, project cards, skills grid, contact form.",
+    "palette": ["#0B0B0F", "#FFFFFF", "#6366F1"],
+    "materials": ["clean grid", "portrait photo"],
+    "viewport": "Name and role left, portrait right, two buttons.",
+    "risk": "Indistinguishable from other candidates by design."
+  },
+  "steer": true
+}

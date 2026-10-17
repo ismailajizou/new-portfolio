@@ -1,5 +1,24 @@
 import { db } from "./server/db";
-import { type Testimonial, testimonials } from "./server/db/schema";
+import {
+  DEFAULT_CERTIFICATIONS,
+  DEFAULT_EDUCATION,
+  DEFAULT_EVENTS,
+  DEFAULT_EXPERIENCES,
+  DEFAULT_INDEPENDENT_PROJECTS,
+  DEFAULT_SETTINGS,
+  DEFAULT_SKILLS,
+} from "./cms/default-content";
+import {
+  type Testimonial,
+  certifications,
+  education,
+  events,
+  experiences,
+  projects,
+  siteSettings,
+  skills,
+  testimonials,
+} from "./server/db/schema";
 
 async function seedTestimonials() {
   // Check if testimonials already exist
@@ -44,9 +63,74 @@ async function seedTestimonials() {
   console.log(`Seeded ${records.length} testimonials`);
 }
 
+// Fills the portfolio content tables once. Anything already edited in the
+// backoffice is left alone.
+async function seedContent() {
+  const [settings] = await db.select().from(siteSettings);
+  if (!settings) {
+    await db.insert(siteSettings).values({
+      id: "main",
+      ...DEFAULT_SETTINGS,
+      resumeUrl: process.env.NEXT_PUBLIC_RESUME_LINK || null,
+      twitterUrl: process.env.NEXT_PUBLIC_TWITTER_LINK || null,
+    });
+    console.log("Seeded site settings");
+  }
+
+  const existing = await db.select({ id: experiences.id }).from(experiences);
+  if (existing.length > 0) {
+    console.log("Content already seeded, skipping...");
+    return;
+  }
+
+  let projectOrder = 0;
+  for (const [
+    index,
+    { projects: jobs, ...experience },
+  ] of DEFAULT_EXPERIENCES.entries()) {
+    const [row] = await db
+      .insert(experiences)
+      .values({ ...experience, sortOrder: index + 1 })
+      .returning({ id: experiences.id });
+    for (const job of jobs) {
+      await db
+        .insert(projects)
+        .values({ ...job, experienceId: row!.id, sortOrder: ++projectOrder });
+    }
+  }
+  for (const job of DEFAULT_INDEPENDENT_PROJECTS) {
+    await db.insert(projects).values({ ...job, sortOrder: ++projectOrder });
+  }
+
+  let skillOrder = 0;
+  await db.insert(skills).values(
+    DEFAULT_SKILLS.flatMap(({ category, items }) =>
+      items.map((item) => ({
+        category,
+        name: typeof item === "string" ? item : item[0],
+        note: typeof item === "string" ? null : item[1],
+        sortOrder: ++skillOrder,
+      })),
+    ),
+  );
+  await db
+    .insert(education)
+    .values(DEFAULT_EDUCATION.map((row, i) => ({ ...row, sortOrder: i + 1 })));
+  await db
+    .insert(certifications)
+    .values(
+      DEFAULT_CERTIFICATIONS.map((row, i) => ({ ...row, sortOrder: i + 1 })),
+    );
+  await db
+    .insert(events)
+    .values(DEFAULT_EVENTS.map((row, i) => ({ ...row, sortOrder: i + 1 })));
+  console.log("Seeded portfolio content");
+}
+
 async function main() {
   try {
     await seedTestimonials();
+    await seedContent();
     console.log("Seeding completed successfully!");
     process.exit(0);
   } catch (error) {

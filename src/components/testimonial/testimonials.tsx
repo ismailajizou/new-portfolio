@@ -21,10 +21,10 @@ export function Testimonials({ data }: MailProps) {
     <>
       <ResizablePanel defaultSize={440} minSize={30}>
         <div className="flex items-center px-4 py-2">
-          <h1 className="text-xl font-bold">Testimonial List</h1>
+          <h1 className="font-heading text-xl font-semibold">Testimonials</h1>
         </div>
         <Separator />
-        <div className="bg-background/95 supports-backdrop-filter:bg-background/60 p-4 backdrop-blur">
+        <div className="p-4">
           <form>
             <div className="relative">
               <Search className="text-muted-foreground absolute top-2.5 left-2 h-4 w-4" />

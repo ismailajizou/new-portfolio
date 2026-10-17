@@ -1,0 +1,16 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Same mark as LogoMark in src/components/site/logo.tsx -->
+  <defs>
+    <linearGradient id="g" x1="6" y1="8" x2="26" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="8" fill="#05060b" stroke="#1b2033"/>
+  <g stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8.5 10.6V21.4" stroke-width="3.2"/>
+    <path d="M12.5 23L18 9L23.5 23" stroke-width="3.2"/>
+    <path d="M15.2 18H20.8" stroke-width="2.4"/>
+  </g>
+</svg>

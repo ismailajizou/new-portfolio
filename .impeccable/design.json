@@ -1,0 +1,515 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T00:00:00Z",
+  "title": "Design System: Ismail Ajizou Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "field": {
+        "role": "primary",
+        "displayName": "Deploy Green",
+        "canonical": "#0b6b3a",
+        "tonalRamp": [
+          "oklch(15.0% 0.052 153.7)",
+          "oklch(26.4% 0.068 153.7)",
+          "oklch(37.9% 0.083 153.7)",
+          "oklch(49.3% 0.099 153.7)",
+          "oklch(60.7% 0.113 153.7)",
+          "oklch(72.1% 0.097 153.7)",
+          "oklch(83.6% 0.082 153.7)",
+          "oklch(95.0% 0.066 153.7)"
+        ]
+      },
+      "field-deep": {
+        "role": "primary",
+        "displayName": "Field Deep",
+        "canonical": "#07502b",
+        "tonalRamp": [
+          "oklch(15.0% 0.042 154.3)",
+          "oklch(26.4% 0.055 154.3)",
+          "oklch(37.9% 0.067 154.3)",
+          "oklch(49.3% 0.080 154.3)",
+          "oklch(60.7% 0.091 154.3)",
+          "oklch(72.1% 0.078 154.3)",
+          "oklch(83.6% 0.066 154.3)",
+          "oklch(95.0% 0.053 154.3)"
+        ]
+      },
+      "field-ink": {
+        "role": "primary",
+        "displayName": "Field Ink",
+        "canonical": "#f1f8f2",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 149.9)",
+          "oklch(26.4% 0.006 149.9)",
+          "oklch(37.9% 0.008 149.9)",
+          "oklch(49.3% 0.009 149.9)",
+          "oklch(60.7% 0.011 149.9)",
+          "oklch(72.1% 0.009 149.9)",
+          "oklch(83.6% 0.008 149.9)",
+          "oklch(95.0% 0.006 149.9)"
+        ]
+      },
+      "field-muted": {
+        "role": "primary",
+        "displayName": "Field Muted",
+        "canonical": "#c2e3cb",
+        "tonalRamp": [
+          "oklch(15.0% 0.022 153.8)",
+          "oklch(26.4% 0.028 153.8)",
+          "oklch(37.9% 0.035 153.8)",
+          "oklch(49.3% 0.042 153.8)",
+          "oklch(60.7% 0.047 153.8)",
+          "oklch(72.1% 0.041 153.8)",
+          "oklch(83.6% 0.034 153.8)",
+          "oklch(95.0% 0.028 153.8)"
+        ]
+      },
+      "field-line": {
+        "role": "primary",
+        "displayName": "Field Line",
+        "canonical": "#3d8f62",
+        "tonalRamp": [
+          "oklch(15.0% 0.049 156.7)",
+          "oklch(26.4% 0.064 156.7)",
+          "oklch(37.9% 0.078 156.7)",
+          "oklch(49.3% 0.093 156.7)",
+          "oklch(60.7% 0.106 156.7)",
+          "oklch(72.1% 0.091 156.7)",
+          "oklch(83.6% 0.076 156.7)",
+          "oklch(95.0% 0.062 156.7)"
+        ]
+      },
+      "action": {
+        "role": "secondary",
+        "displayName": "Manual Orange",
+        "canonical": "#ff4d1f",
+        "tonalRamp": [
+          "oklch(15.0% 0.102 34.6)",
+          "oklch(26.4% 0.132 34.6)",
+          "oklch(37.9% 0.162 34.6)",
+          "oklch(49.3% 0.193 34.6)",
+          "oklch(60.7% 0.219 34.6)",
+          "oklch(72.1% 0.189 34.6)",
+          "oklch(83.6% 0.159 34.6)",
+          "oklch(95.0% 0.128 34.6)"
+        ]
+      },
+      "action-ink": {
+        "role": "secondary",
+        "displayName": "Action Ink",
+        "canonical": "#10201a",
+        "tonalRamp": [
+          "oklch(15.0% 0.011 168.3)",
+          "oklch(26.4% 0.015 168.3)",
+          "oklch(37.9% 0.018 168.3)",
+          "oklch(49.3% 0.022 168.3)",
+          "oklch(60.7% 0.025 168.3)",
+          "oklch(72.1% 0.021 168.3)",
+          "oklch(83.6% 0.018 168.3)",
+          "oklch(95.0% 0.014 168.3)"
+        ]
+      },
+      "progress": {
+        "role": "tertiary",
+        "displayName": "Running Amber",
+        "canonical": "#f2a900",
+        "tonalRamp": [
+          "oklch(15.0% 0.075 77.6)",
+          "oklch(26.4% 0.098 77.6)",
+          "oklch(37.9% 0.120 77.6)",
+          "oklch(49.3% 0.143 77.6)",
+          "oklch(60.7% 0.162 77.6)",
+          "oklch(72.1% 0.140 77.6)",
+          "oklch(83.6% 0.118 77.6)",
+          "oklch(95.0% 0.095 77.6)"
+        ]
+      },
+      "progress-ink": {
+        "role": "tertiary",
+        "displayName": "Amber Ink",
+        "canonical": "#6f4a00",
+        "tonalRamp": [
+          "oklch(15.0% 0.042 76.1)",
+          "oklch(26.4% 0.055 76.1)",
+          "oklch(37.9% 0.068 76.1)",
+          "oklch(49.3% 0.080 76.1)",
+          "oklch(60.7% 0.091 76.1)",
+          "oklch(72.1% 0.079 76.1)",
+          "oklch(83.6% 0.066 76.1)",
+          "oklch(95.0% 0.054 76.1)"
+        ]
+      },
+      "passed": {
+        "role": "tertiary",
+        "displayName": "Passed Green",
+        "canonical": "#0e7a40",
+        "tonalRamp": [
+          "oklch(15.0% 0.059 152.6)",
+          "oklch(26.4% 0.076 152.6)",
+          "oklch(37.9% 0.094 152.6)",
+          "oklch(49.3% 0.111 152.6)",
+          "oklch(60.7% 0.127 152.6)",
+          "oklch(72.1% 0.109 152.6)",
+          "oklch(83.6% 0.092 152.6)",
+          "oklch(95.0% 0.074 152.6)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Pale Sheet",
+        "canonical": "#eef2ee",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 145.5)",
+          "oklch(26.4% 0.004 145.5)",
+          "oklch(37.9% 0.005 145.5)",
+          "oklch(49.3% 0.006 145.5)",
+          "oklch(60.7% 0.007 145.5)",
+          "oklch(72.1% 0.006 145.5)",
+          "oklch(83.6% 0.005 145.5)",
+          "oklch(95.0% 0.004 145.5)"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Panel White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.4% 0.000 89.9)",
+          "oklch(37.9% 0.000 89.9)",
+          "oklch(49.3% 0.000 89.9)",
+          "oklch(60.7% 0.000 89.9)",
+          "oklch(72.1% 0.000 89.9)",
+          "oklch(83.6% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Green-Black Ink",
+        "canonical": "#10201a",
+        "tonalRamp": [
+          "oklch(15.0% 0.011 168.3)",
+          "oklch(26.4% 0.015 168.3)",
+          "oklch(37.9% 0.018 168.3)",
+          "oklch(49.3% 0.022 168.3)",
+          "oklch(60.7% 0.025 168.3)",
+          "oklch(72.1% 0.021 168.3)",
+          "oklch(83.6% 0.018 168.3)",
+          "oklch(95.0% 0.014 168.3)"
+        ]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#47584d",
+        "tonalRamp": [
+          "oklch(15.0% 0.013 156.7)",
+          "oklch(26.4% 0.017 156.7)",
+          "oklch(37.9% 0.020 156.7)",
+          "oklch(49.3% 0.024 156.7)",
+          "oklch(60.7% 0.027 156.7)",
+          "oklch(72.1% 0.024 156.7)",
+          "oklch(83.6% 0.020 156.7)",
+          "oklch(95.0% 0.016 156.7)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Rule Grey-Green",
+        "canonical": "#c9d4cb",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 151.1)",
+          "oklch(26.4% 0.010 151.1)",
+          "oklch(37.9% 0.013 151.1)",
+          "oklch(49.3% 0.015 151.1)",
+          "oklch(60.7% 0.017 151.1)",
+          "oklch(72.1% 0.015 151.1)",
+          "oklch(83.6% 0.012 151.1)",
+          "oklch(95.0% 0.010 151.1)"
+        ]
+      },
+      "input": {
+        "role": "neutral",
+        "displayName": "Control Edge",
+        "canonical": "#b4c2b7",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 152.1)",
+          "oklch(26.4% 0.013 152.1)",
+          "oklch(37.9% 0.016 152.1)",
+          "oklch(49.3% 0.019 152.1)",
+          "oklch(60.7% 0.021 152.1)",
+          "oklch(72.1% 0.019 152.1)",
+          "oklch(83.6% 0.016 152.1)",
+          "oklch(95.0% 0.013 152.1)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Hover Wash",
+        "canonical": "#e1e8e2",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 149.9)",
+          "oklch(26.4% 0.007 149.9)",
+          "oklch(37.9% 0.008 149.9)",
+          "oklch(49.3% 0.010 149.9)",
+          "oklch(60.7% 0.011 149.9)",
+          "oklch(72.1% 0.009 149.9)",
+          "oklch(83.6% 0.008 149.9)",
+          "oklch(95.0% 0.006 149.9)"
+        ]
+      },
+      "destructive": {
+        "role": "neutral",
+        "displayName": "Error Red",
+        "canonical": "#b42318",
+        "tonalRamp": [
+          "oklch(15.0% 0.084 29.5)",
+          "oklch(26.4% 0.109 29.5)",
+          "oklch(37.9% 0.134 29.5)",
+          "oklch(49.3% 0.159 29.5)",
+          "oklch(60.7% 0.180 29.5)",
+          "oklch(72.1% 0.156 29.5)",
+          "oklch(83.6% 0.131 29.5)",
+          "oklch(95.0% 0.106 29.5)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name, once, at the top of the field."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings; 1.875rem below 768px. The contact close runs one step larger."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Stage (employer) names and backoffice page titles."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Headline sentence, About paragraphs, stage summaries; capped at 46 to 68ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Highlights, job descriptions, testimonials; capped at 60 to 68ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Nav links, taglines, stack lists, form labels, buttons, backoffice rows."
+      },
+      "mono-meta": {
+        "displayName": "Mono meta",
+        "purpose": "Dates, year ranges, run summary, status lines, pipeline pill names."
+      },
+      "mono-job": {
+        "displayName": "Mono job",
+        "purpose": "Job name in a panel header."
+      },
+      "mono-log": {
+        "displayName": "Mono log",
+        "purpose": "Numbered log lines inside a job panel."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Easing for the connector wipe and the pill reveal."
+      },
+      {
+        "name": "stage-run",
+        "value": "stage-run 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards (clip-path: inset(0 100% 0 0) to inset(0))",
+        "purpose": "Stage connector wipes in toward the next node, delayed by (index + 1) x 260ms."
+      },
+      {
+        "name": "job-pass",
+        "value": "job-pass 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards (opacity 0.35, saturate(0), translateY(4px) to rest)",
+        "purpose": "A stage's pills rise from grey to full colour when the stage settles."
+      },
+      {
+        "name": "node-step",
+        "value": "260ms",
+        "purpose": "Time each stage node shows its spinner before revealing its final status; stages are staggered by the same step."
+      },
+      {
+        "name": "spin-slow",
+        "value": "spin 2.4s linear infinite",
+        "purpose": "The spinner on the current stage and its status line."
+      },
+      {
+        "name": "action-lift",
+        "value": "transform: translateY(-1px) on hover, 0 on active",
+        "purpose": "Hover response of orange action controls."
+      },
+      {
+        "name": "disclosure-chevron",
+        "value": "transform 200ms, rotate(180deg) when open",
+        "purpose": "Chevron on a job panel header."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration 0.01ms, animation-delay 0ms, transition-duration 0.01ms, scroll-behavior auto",
+        "purpose": "Under prefers-reduced-motion every node shows its final status immediately."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Action Button",
+      "kind": "button",
+      "refersTo": "button-action",
+      "description": "The orange manual-job control: top-bar contact button and the form's send button. Public page only.",
+      "html": "<a class=\"ds-btn-action\" href=\"#contact\"><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polygon points=\"10 8 16 12 10 16 10 8\"/></svg>Contact me</a>",
+      "css": ".ds-btn-action { display: inline-flex; align-items: center; gap: 0.375rem; height: 2.25rem; padding: 0 0.875rem; border-radius: 9999px; background: var(--action); color: var(--action-ink); font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: transform 150ms; } .ds-btn-action .ds-ico { width: 1rem; height: 1rem; } .ds-btn-action:hover { transform: translateY(-1px); } .ds-btn-action:active { transform: translateY(0); } .ds-btn-action:focus-visible { outline: 2px solid var(--field-ink); outline-offset: 2px; }"
+    },
+    {
+      "name": "Primary Button (backoffice)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Save and Add in the backoffice. Green, never orange.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Save</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; height: 2.25rem; padding: 0 1rem; border: 1px solid transparent; border-radius: var(--radius); background: var(--primary); color: var(--primary-foreground); font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: transform 150ms; } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent); } .ds-btn-primary:disabled { opacity: 0.5; pointer-events: none; }"
+    },
+    {
+      "name": "Pipeline Job Pills",
+      "kind": "chip",
+      "refersTo": "job-pill",
+      "description": "Job pills on the green field: shipped (solid), in progress (dashed amber) and the manual job (orange).",
+      "html": "<ul class=\"ds-pills\"><li><a class=\"ds-pill\" href=\"#\"><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg><span>piyes.com</span></a></li><li><a class=\"ds-pill ds-pill-progress\" href=\"#\"><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10.1 2.182a10 10 0 0 1 3.8 0\"/><path d=\"M13.9 21.818a10 10 0 0 1-3.8 0\"/><path d=\"M17.609 3.721a10 10 0 0 1 2.69 2.7\"/><path d=\"M2.182 13.9a10 10 0 0 1 0-3.8\"/><path d=\"M20.279 17.609a10 10 0 0 1-2.7 2.69\"/><path d=\"M21.818 10.1a10 10 0 0 1 0 3.8\"/><path d=\"M3.721 6.391a10 10 0 0 1 2.7-2.69\"/><path d=\"M6.391 20.279a10 10 0 0 1-2.69-2.7\"/></svg><span>Telegram RFQ bot</span></a></li><li><a class=\"ds-pill ds-pill-manual\" href=\"#\"><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polygon points=\"10 8 16 12 10 16 10 8\"/></svg><span>Contact me</span></a></li></ul>",
+      "css": ".ds-pills { list-style: none; margin: 0; padding: 1rem; display: flex; flex-direction: column; gap: 0.375rem; max-width: 11rem; background: var(--field); } .ds-pill { display: flex; align-items: flex-start; gap: 0.375rem; padding: 0.375rem 0.625rem; border: 1px solid var(--field-line); border-radius: var(--radius); background: var(--field-deep); color: var(--field-ink); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.75rem; line-height: 1.375; text-decoration: none; overflow-wrap: anywhere; transition: border-color 150ms; } .ds-pill .ds-ico { width: 0.875rem; height: 0.875rem; flex-shrink: 0; margin-top: 1px; color: var(--field-muted); } .ds-pill:hover { border-color: var(--field-ink); } .ds-pill:focus-visible { outline: 2px solid var(--field-ink); outline-offset: 2px; } .ds-pill-progress { border-style: dashed; border-color: var(--progress); } .ds-pill-progress .ds-ico { color: var(--progress); } .ds-pill-manual { border-color: transparent; background: var(--action); color: var(--action-ink); font-weight: 600; align-items: center; transition: transform 150ms; } .ds-pill-manual .ds-ico { color: currentColor; margin-top: 0; } .ds-pill-manual:hover { border-color: transparent; transform: translateY(-1px); }"
+    },
+    {
+      "name": "Job Panel",
+      "kind": "card",
+      "refersTo": "job-panel",
+      "description": "Disclosure panel for one shipped thing: status icon, mono job name, tagline, then description and a numbered log well.",
+      "html": "<details class=\"ds-job\" open><summary><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg><span class=\"ds-job-head\"><span class=\"ds-job-name\">ReparTrust</span><span class=\"ds-job-tag\">Parts-sourcing marketplace for workshops and suppliers</span></span><svg class=\"ds-ico ds-chev\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m6 9 6 6 6-6\"/></svg></summary><div class=\"ds-job-body\"><p>Workshops post a parts request and suppliers answer with quotes.</p><ol class=\"ds-log\"><li><span>1</span><span>MVP shipped in one month by two developers</span></li><li><span>2</span><span>Deployed on infrastructure we own</span></li></ol></div></details>",
+      "css": ".ds-job { max-width: 40rem; background: var(--card); color: var(--foreground); border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; } .ds-job summary { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.875rem 1rem; border-radius: var(--radius); cursor: pointer; list-style: none; } .ds-job summary::-webkit-details-marker { display: none; } .ds-job summary:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; } .ds-job summary > .ds-ico { width: 1.25rem; height: 1.25rem; flex-shrink: 0; margin-top: 2px; color: var(--passed); } .ds-job .ds-chev { width: 1rem; height: 1rem; margin-top: 4px; color: var(--muted-foreground); transition: transform 200ms; } .ds-job[open] .ds-chev { transform: rotate(180deg); } .ds-job-head { flex: 1; min-width: 0; } .ds-job-name { display: block; font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.9375rem; font-weight: 600; } .ds-job-tag { display: block; font-size: 0.875rem; color: var(--muted-foreground); } .ds-job-body { padding: 1rem; border-top: 1px solid var(--border); } .ds-job-body p { margin: 0 0 1rem; line-height: 1.625; } .ds-log { list-style: none; margin: 0; padding: 0.625rem 0.75rem; background: var(--background); border-radius: calc(var(--radius) - 0.125rem); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.8125rem; } .ds-log li { display: flex; gap: 0.75rem; padding: 0.25rem 0; line-height: 1.5rem; } .ds-log li span:first-child { width: 1rem; flex-shrink: 0; text-align: right; font-size: 0.75rem; color: var(--muted-foreground); font-variant-numeric: tabular-nums; user-select: none; }"
+    },
+    {
+      "name": "Skill Chips",
+      "kind": "chip",
+      "refersTo": "skill-chip",
+      "description": "Neutral capsules for skills; dashed amber for a skill still being studied.",
+      "html": "<ul class=\"ds-chips\"><li class=\"ds-chip\">Docker</li><li class=\"ds-chip\">GitLab CI/CD</li><li class=\"ds-chip ds-chip-studying\">AWS <span>(studying)</span></li></ul>",
+      "css": ".ds-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.375rem; } .ds-chip { padding: 0.25rem 0.75rem; border: 1px solid var(--input); border-radius: 9999px; background: var(--card); color: var(--foreground); font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; line-height: 1.43; } .ds-chip-studying { border-style: dashed; border-color: var(--progress); color: var(--progress-ink); } .ds-chip-studying span { font-size: 0.75rem; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labelled field with a help line; used on the contact form (2.5rem) and in the backoffice (2.25rem).",
+      "html": "<div class=\"ds-field\"><label for=\"ds-f1\">Name <span>(required)</span></label><input id=\"ds-f1\" class=\"ds-input\" value=\"Telegram RFQ bot\"><p>Shown on the pipeline pill, so keep it short.</p></div>",
+      "css": ".ds-field { display: grid; gap: 0.375rem; max-width: 28rem; font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; color: var(--foreground); } .ds-field label { font-size: 0.875rem; font-weight: 500; } .ds-field label span { font-weight: 400; color: var(--muted-foreground); } .ds-field p { margin: 0; font-size: 0.875rem; color: var(--muted-foreground); } .ds-input { height: 2.5rem; padding: 0.25rem 0.625rem; border: 1px solid var(--input); border-radius: var(--radius); background: var(--card); color: var(--foreground); font: inherit; font-size: 0.875rem; caret-color: var(--passed); transition: border-color 150ms, box-shadow 150ms; } .ds-input:hover { border-color: var(--muted-foreground); } .ds-input:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent); }"
+    },
+    {
+      "name": "Top Bar",
+      "kind": "nav",
+      "refersTo": "button-action",
+      "description": "Sticky bar on the green field: mono repo-path wordmark, section links, orange contact button.",
+      "html": "<header class=\"ds-bar\"><a class=\"ds-bar-mark\" href=\"#\">ismail-ajizou<span> / portfolio</span></a><nav><a href=\"#\">About</a><a href=\"#\">Experience</a><a href=\"#\">Stack</a></nav><a class=\"ds-bar-cta\" href=\"#\"><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polygon points=\"10 8 16 12 10 16 10 8\"/></svg>Contact me</a></header>",
+      "css": ".ds-bar { display: flex; align-items: center; gap: 1.5rem; height: 3.5rem; padding: 0 1.25rem; background: var(--field); color: var(--field-ink); border-bottom: 1px solid var(--field-line); font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; } .ds-bar-mark { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.875rem; font-weight: 500; color: inherit; text-decoration: none; white-space: nowrap; } .ds-bar-mark span { color: var(--field-muted); } .ds-bar nav { margin-left: auto; display: flex; gap: 1.25rem; font-size: 0.875rem; } .ds-bar nav a { color: var(--field-muted); text-decoration: none; text-underline-offset: 4px; transition: color 150ms; } .ds-bar nav a:hover { color: var(--field-ink); text-decoration: underline; } .ds-bar a:focus-visible { outline: 2px solid var(--field-ink); outline-offset: 2px; } .ds-bar-cta { display: inline-flex; align-items: center; gap: 0.375rem; height: 2.25rem; padding: 0 0.875rem; border-radius: 9999px; background: var(--action); color: var(--action-ink); font-size: 0.875rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: transform 150ms; } .ds-bar-cta .ds-ico { width: 1rem; height: 1rem; } .ds-bar-cta:hover { transform: translateY(-1px); }"
+    },
+    {
+      "name": "Backoffice Nav Item",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Sidebar rows; the current item is filled green, awaiting-review counts use an amber wash.",
+      "html": "<nav class=\"ds-side\"><a class=\"ds-side-item\" href=\"#\">Experience</a><a class=\"ds-side-item\" aria-current=\"page\" href=\"#\">Projects</a><a class=\"ds-side-item\" href=\"#\">Testimonials<span class=\"ds-side-badge\">2</span></a></nav>",
+      "css": ".ds-side { display: flex; flex-direction: column; gap: 0.25rem; width: 14rem; padding: 0.5rem; background: var(--card); border: 1px solid var(--border); font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; } .ds-side-item { display: flex; align-items: center; gap: 0.625rem; height: 2.25rem; padding: 0 0.625rem; border-radius: calc(var(--radius) - 0.125rem); color: var(--foreground); font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: background-color 150ms; } .ds-side-item:hover { background: var(--muted); } .ds-side-item[aria-current=page] { background: var(--primary); color: var(--primary-foreground); } .ds-side-item:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; } .ds-side-badge { margin-left: auto; padding: 0.125rem 0.375rem; border-radius: 9999px; background: color-mix(in srgb, var(--progress) 25%, transparent); color: var(--progress-ink); font-size: 0.75rem; line-height: 1; font-variant-numeric: tabular-nums; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Pipeline Run",
+    "overview": "The site borrows the run view of a CI/CD tool and uses it to tell a career. Employers are stages in time order, each shipped thing is a job with a status icon and a log you can open, and the final stage is a manual job the visitor triggers. The borrowed form is doing real work: status is the one visual vocabulary, so a hiring lead reads \"done\", \"current\" and \"in progress\" from icon and stroke before reading a word.\n\nTwo fields carry the page. A saturated deploy green opens and closes it, edge to edge, holding the sticky top bar, the name, the pipeline graph and the contact close. Between them the body is a pale green-grey sheet with white panels and near-black green ink. Colour is rationed: green is the place, amber means unfinished, orange means \"your move\", and nothing else is tinted. The surfaces are flat, corners are small, and there are no shadows, gradients or decorative images.\n\nThe backoffice lives in the same world at lower volume. It drops the green field entirely, keeps the pale sheet, white panels, the same three typefaces and the same amber \"in progress\" mark, and spends green only on the current nav item, the save button and switches. Orange never appears there.",
+    "keyCharacteristics": [
+      "Full-bleed green field at the top and the bottom; pale sheet in between.",
+      "Status icons (check, spinner, dashed ring, play) are the system's only iconographic language on the public page.",
+      "Solid stroke means finished; dashed stroke means not finished yet.",
+      "One orange, reserved for the action the visitor is asked to take.",
+      "Hierarchy by scale: a 6rem name against 0.75rem mono metadata, with little in between.",
+      "Flat surfaces separated by 1px lines and tonal steps, never by shadow."
+    ],
+    "rules": [
+      {
+        "name": "The Manual Job Rule",
+        "body": "Orange marks the action the visitor is being asked to take, and only that. It is never a status, a highlight or a decoration, and it does not appear in the backoffice.",
+        "section": "colors"
+      },
+      {
+        "name": "The Unfinished Is Amber Rule",
+        "body": "Amber always travels with a dashed stroke and means \"not finished yet\": a job in progress, a skill still being studied, a certification being prepared, testimonials waiting for review. The one exception in the build is the text-selection highlight.",
+        "section": "colors"
+      },
+      {
+        "name": "The Field Is A Place Rule",
+        "body": "Deploy Green is a full-width ground, not a tint. On the public page it appears as an edge-to-edge band or not at all; small green elements on the light sheet use Passed Green.",
+        "section": "colors"
+      },
+      {
+        "name": "The Machine Voice Rule",
+        "body": "Geist Mono is for text the pipeline would print: identifiers, job names, dates, counts, status and log lines. Sentences a person wrote are set in Geist, headings in Bricolage Grotesque.",
+        "section": "typography"
+      },
+      {
+        "name": "The Scale Not Weight Rule",
+        "body": "Display faces stay at 600 (500 for the role line). Emphasis comes from the jump in size between levels, not from heavier weights, capitals or letterspacing; nothing in the build is uppercased or tracked out.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Run Rule",
+        "body": "Surfaces are separated by tone and by 1px lines. If a new element seems to need a shadow to read, change its fill by one tonal step instead.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Final State First Rule",
+        "body": "Animation only ever delays or reveals content that is already in the markup in its finished state. Nothing depends on an animation finishing to become visible or correct.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Solid Or Dashed Rule",
+        "body": "A dashed outline is a claim that something is unfinished or absent. Never dash a border for texture, and never draw an unfinished thing with a solid amber fill.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do open and close a public page with the full-bleed Deploy Green field (#0b6b3a) and keep everything between on the pale sheet (#eef2ee) with white panels.",
+      "Do express state with the four status icons and with stroke style: solid for finished, dashed for unfinished.",
+      "Do pair amber borders with Amber Ink (#6f4a00) for any text on light surfaces; amber itself is a border and icon colour only.",
+      "Do keep orange (#ff4d1f) for controls that ask the visitor to act, with dark ink (#10201a) on top and a play icon in front.",
+      "Do set identifiers, dates, counts and log lines in Geist Mono at 0.75rem to 0.9375rem, and everything a person wrote in Geist.",
+      "Do separate surfaces with 1px rules and one-step tonal changes; keep corners at 0.45rem, 0.325rem when nested.",
+      "Do use the shared 72rem container and the label-column plus content-column split (17rem or 12rem beside a fluid column, 3rem gap) for new sections.",
+      "Do make every animated element correct in its final state without the animation, and honour reduced motion.",
+      "Do keep the backoffice on the pale sheet with white panels, green for the current item and for saving, and written labels beside every state."
+    ],
+    "donts": [
+      "Don't use orange for status, emphasis, links or anything in the backoffice.",
+      "Don't use a dashed outline as decoration, or show an unfinished item with a solid outline.",
+      "Don't put Deploy Green behind a card, a badge or a partial-width block on the public page; it is a full-width field.",
+      "Don't add shadows, gradients, blur or glass to layout surfaces.",
+      "Don't set sentences or headings in Geist Mono, and don't uppercase or letterspace labels.",
+      "Don't add heavier display weights; go up a size instead.",
+      "Don't introduce a fifth status, a second accent colour or coloured tags for technologies; skills are neutral chips.",
+      "Don't rely on colour alone for state: every status has an icon and a text label."
+    ]
+  }
+}

@@ -5,6 +5,9 @@ import {
   varchar,
   serial,
   pgEnum,
+  integer,
+  boolean,
+  jsonb,
 } from "drizzle-orm/pg-core";
 
 // Enums
@@ -30,6 +33,111 @@ export const testimonials = pgTable("testimonials", {
   updatedAt: timestamp("updated_at", { withTimezone: true })
     .defaultNow()
     .notNull(),
+});
+
+// Portfolio content (edited from the backoffice)
+export const workStatusEnum = pgEnum("work_status", ["SHIPPED", "IN_PROGRESS"]);
+
+const contentColumns = {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  sortOrder: integer("sort_order").notNull().default(0),
+  published: boolean("published").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+};
+
+export const siteSettings = pgTable("site_settings", {
+  id: text("id").primaryKey().default("main"),
+  name: varchar("name", { length: 255 }).notNull(),
+  role: varchar("role", { length: 255 }).notNull(),
+  headline: text("headline").notNull(),
+  about: text("about").notNull(),
+  location: varchar("location", { length: 255 }).notNull(),
+  availability: text("availability"),
+  contactHeading: varchar("contact_heading", { length: 120 }),
+  responseTime: varchar("response_time", { length: 120 }),
+  email: varchar("email", { length: 255 }).notNull(),
+  resumeUrl: text("resume_url"),
+  portraitUrl: text("portrait_url"),
+  githubUrl: text("github_url"),
+  linkedinUrl: text("linkedin_url"),
+  twitterUrl: text("twitter_url"),
+  seoTitle: varchar("seo_title", { length: 255 }).notNull(),
+  seoDescription: text("seo_description").notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+export const experiences = pgTable("experiences", {
+  ...contentColumns,
+  company: varchar("company", { length: 255 }).notNull(),
+  role: varchar("role", { length: 255 }).notNull(),
+  location: varchar("location", { length: 255 }),
+  employmentType: varchar("employment_type", { length: 255 }),
+  // "YYYY-MM"; a null end date means the role is current
+  startDate: varchar("start_date", { length: 7 }).notNull(),
+  endDate: varchar("end_date", { length: 7 }),
+  summary: text("summary"),
+  highlights: jsonb("highlights").$type<string[]>().notNull().default([]),
+  stack: jsonb("stack").$type<string[]>().notNull().default([]),
+  url: text("url"),
+});
+
+export const projects = pgTable("projects", {
+  ...contentColumns,
+  experienceId: text("experience_id").references(() => experiences.id, {
+    onDelete: "set null",
+  }),
+  name: varchar("name", { length: 255 }).notNull(),
+  tagline: varchar("tagline", { length: 255 }),
+  description: text("description"),
+  highlights: jsonb("highlights").$type<string[]>().notNull().default([]),
+  stack: jsonb("stack").$type<string[]>().notNull().default([]),
+  url: text("url"),
+  imageUrl: text("image_url"),
+  status: workStatusEnum("status").notNull().default("SHIPPED"),
+});
+
+export const skills = pgTable("skills", {
+  ...contentColumns,
+  name: varchar("name", { length: 255 }).notNull(),
+  category: varchar("category", { length: 255 }).notNull(),
+  note: varchar("note", { length: 255 }),
+});
+
+export const education = pgTable("education", {
+  ...contentColumns,
+  institution: varchar("institution", { length: 255 }).notNull(),
+  degree: varchar("degree", { length: 255 }).notNull(),
+  field: varchar("field", { length: 255 }),
+  startDate: varchar("start_date", { length: 7 }),
+  endDate: varchar("end_date", { length: 7 }),
+  description: text("description"),
+});
+
+export const certifications = pgTable("certifications", {
+  ...contentColumns,
+  name: varchar("name", { length: 255 }).notNull(),
+  issuer: varchar("issuer", { length: 255 }).notNull(),
+  date: varchar("date", { length: 7 }),
+  url: text("url"),
+  status: workStatusEnum("status").notNull().default("SHIPPED"),
+});
+
+export const events = pgTable("events", {
+  ...contentColumns,
+  name: varchar("name", { length: 255 }).notNull(),
+  year: varchar("year", { length: 32 }).notNull(),
+  location: varchar("location", { length: 255 }),
+  description: text("description"),
+  url: text("url"),
 });
 
 // Better Auth tables
@@ -114,3 +222,10 @@ export const verification = pgTable("verification", {
 // Types
 export type Testimonial = typeof testimonials.$inferSelect;
 export type NewTestimonial = typeof testimonials.$inferInsert;
+export type SiteSettings = typeof siteSettings.$inferSelect;
+export type Experience = typeof experiences.$inferSelect;
+export type Project = typeof projects.$inferSelect;
+export type Skill = typeof skills.$inferSelect;
+export type Education = typeof education.$inferSelect;
+export type Certification = typeof certifications.$inferSelect;
+export type PortfolioEvent = typeof events.$inferSelect;

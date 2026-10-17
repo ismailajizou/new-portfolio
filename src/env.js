@@ -16,6 +16,14 @@ export const env = createEnv({
     SMTP_USER: z.email(),
     SMTP_PASS: z.string(),
     CLOUDFLARE_TURNSTILE_SECRET_KEY: z.string(),
+    // S3-compatible storage for images uploaded from the backoffice.
+    // Optional: without it the backoffice still accepts pasted image links.
+    S3_ENDPOINT: z.string().optional(),
+    S3_REGION: z.string().optional(),
+    S3_BUCKET: z.string().optional(),
+    S3_ACCESS_KEY_ID: z.string().optional(),
+    S3_SECRET_ACCESS_KEY: z.string().optional(),
+    S3_PUBLIC_URL: z.string().optional(),
   },
 
   /**
@@ -47,6 +55,12 @@ export const env = createEnv({
     SMTP_PASS: process.env.SMTP_PASS,
     CLOUDFLARE_TURNSTILE_SECRET_KEY:
       process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+    S3_ENDPOINT: process.env.S3_ENDPOINT,
+    S3_REGION: process.env.S3_REGION,
+    S3_BUCKET: process.env.S3_BUCKET,
+    S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
+    S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
+    S3_PUBLIC_URL: process.env.S3_PUBLIC_URL,
 
     NEXT_PUBLIC_TWITTER_LINK: process.env.NEXT_PUBLIC_TWITTER_LINK,
     NEXT_PUBLIC_GITHUB_LINK: process.env.NEXT_PUBLIC_GITHUB_LINK,

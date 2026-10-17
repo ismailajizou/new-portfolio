@@ -1,75 +1,85 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
 
-export interface TimelineEvent {
-  date: string;
-  title: string;
-  description: string;
+import { cn } from "@/lib/utils";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
+import * as React from "react";
+
+export type TimelineEntry = {
+  id: string;
+  /** Sticky label on the left, e.g. the date range. */
+  title: React.ReactNode;
+  /** Set for the entry that is still running; its node pulses. */
+  live?: boolean;
+  content: React.ReactNode;
+};
+
+/** Emerald node for the running entry; rings a few times once it is seen. */
+function LiveNode() {
+  const ref = React.useRef<HTMLSpanElement>(null);
+  const seen = useInView(ref, { once: true, margin: "0px 0px -30% 0px" });
+  return (
+    <span ref={ref} className="relative flex size-3.5">
+      {seen ? (
+        <span className="bg-passed animate-pulse-ring absolute inset-0 rounded-full motion-reduce:hidden" />
+      ) : null}
+      <span className="bg-passed border-passed relative size-3.5 rounded-full border" />
+    </span>
+  );
 }
 
-export const Timeline = ({ data }: { data: TimelineEvent[] }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height);
-    }
-  }, [ref]);
-
+/**
+ * Aceternity "Timeline": a rail that fills with the signal gradient as the
+ * reader scrolls, with a sticky label beside each entry.
+ */
+export function Timeline({
+  data,
+  className,
+}: {
+  data: TimelineEntry[];
+  className?: string;
+}) {
+  const ref = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 10%", "end 50%"],
+    target: ref,
+    offset: ["start 70%", "end 60%"],
   });
-
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
   return (
-    <div className="w-full md:px-10" ref={containerRef}>
-      <div ref={ref} className="relative mx-auto max-w-7xl pb-20">
-        {data.map((item, index) => (
-          <div
-            key={index}
-            className="flex justify-start pt-10 md:gap-10 md:pt-40"
+    <div ref={ref} className={cn("relative", className)}>
+      <ol>
+        {data.map((entry) => (
+          <li
+            key={entry.id}
+            className="relative flex justify-start pt-10 md:gap-10 md:pt-24 first:md:pt-10"
           >
-            <div className="sticky top-40 z-40 flex max-w-xs flex-col items-center self-start md:w-full md:flex-row lg:max-w-sm">
-              <div className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full bg-white md:left-3">
-                <div className="h-4 w-4 rounded-full border border-neutral-300 bg-neutral-200 p-2" />
-              </div>
-              <h3 className="hidden text-xl font-bold text-neutral-500 md:block md:pl-20 md:text-5xl">
-                {item.date}
-              </h3>
+            <div className="sticky top-28 z-30 flex max-w-xs flex-col items-center self-start md:w-full md:flex-row lg:max-w-sm">
+              <span className="bg-background absolute left-3 flex size-10 items-center justify-center rounded-full md:left-3">
+                {entry.live ? (
+                  <LiveNode />
+                ) : (
+                  <span className="border-signal-2/60 bg-surface relative size-3.5 rounded-full border" />
+                )}
+              </span>
+              <div className="hidden md:block md:pl-20">{entry.title}</div>
             </div>
-            <div className="relative w-full pr-4 pl-20 md:pl-4">
-              <h3 className="mb-4 block text-left text-2xl font-bold text-neutral-500 md:hidden">
-                {item.date}
-              </h3>
-              <h4 className="mb-4 text-xl font-bold text-neutral-500 md:text-2xl">
-                {item.title}
-              </h4>
-              <p className="">{item.description}</p>
+            <div className="relative w-full pr-0 pl-16 md:pl-4">
+              <div className="mb-4 md:hidden">{entry.title}</div>
+              {entry.content}
             </div>
-          </div>
+          </li>
         ))}
-        <div
-          style={{
-            height: height + "px",
-          }}
-          className="absolute top-0 left-8 w-[2px] overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-200 to-transparent to-99% mask-[linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] md:left-8 dark:via-neutral-700"
-        >
-          <motion.div
-            style={{
-              height: heightTransform,
-              opacity: opacityTransform,
-            }}
-            className="absolute inset-x-0 top-0 w-[2px] rounded-full bg-linear-to-t from-purple-500 from-0% via-blue-500 via-10% to-transparent"
-          />
-        </div>
+      </ol>
+      <div
+        aria-hidden
+        className="absolute top-0 bottom-0 left-8 w-px overflow-hidden bg-linear-to-b from-transparent via-[var(--hairline)] to-transparent [mask-image:linear-gradient(to_bottom,transparent_0%,#000_6%,#000_94%,transparent_100%)]"
+      >
+        <motion.div
+          style={{ height, opacity }}
+          className="from-signal-1 via-signal-2 to-signal-3 absolute inset-x-0 top-0 w-px rounded-full bg-linear-to-b"
+        />
       </div>
     </div>
   );
-};
+}
